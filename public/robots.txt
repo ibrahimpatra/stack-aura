@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://stackauradigital.web.app
+
+# Sitemaps
+Sitemap: https://stackauradigital.web.app/sitemap.xml

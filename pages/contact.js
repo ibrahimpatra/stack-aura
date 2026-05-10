@@ -1,0 +1,62 @@
+import Navbar from '../components/ui/Navbar';
+import Footer from '../components/ui/Footer';
+import SEOHead from '../components/ui/SEOHead';
+import ContactSection from '../components/sections/ContactSection';
+import { useScrollReveal } from '../lib/useScrollReveal';
+import { pageSEO, SITE } from '../lib/seo';
+import { Clock, MessageCircle, Mail } from 'lucide-react';
+
+export default function Contact() {
+  useScrollReveal();
+  const seo = pageSEO({
+    title: 'Contact Stackaura Digital | Get a Free Quote',
+    description: 'Contact Stackaura Digital for professional web development, mobile app development, and SEO services. Get a free quote for your project. Based in Kuwait, available worldwide.',
+    path: '/contact',
+    extraKeywords: ['contact web developer kuwait', 'get a quote web development', 'hire web developer kuwait', 'free quote website'],
+  });
+
+  return (
+    <>
+      <SEOHead {...seo} />
+      <div style={{ background: '#080C14', minHeight: '100vh' }}>
+        <Navbar />
+
+        <section className="pt-32 pb-16 px-6 grid-bg" style={{ borderBottom: '1px solid #1A2236' }}>
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="section-label mb-5 reveal" style={{ background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.15)', color: '#93C5FD' }}>
+              <span style={{ fontFamily: 'JetBrains Mono,monospace' }}>// contact us</span>
+            </div>
+            <h1 className="font-bold mb-4 reveal delay-1" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(2.5rem,6vw,4rem)', color: '#E2E8F0', lineHeight: 1.1 }}>
+              Start Your Project Today
+            </h1>
+            <p className="text-lg reveal delay-2" style={{ color: '#64748B', fontFamily: 'DM Sans,sans-serif', maxWidth: 500, margin: '0 auto' }}>
+              Tell us what you need. We'll get back to you within 24 hours with a plan and a quote.
+            </p>
+          </div>
+        </section>
+
+        {/* Quick info cards */}
+        <div className="max-w-7xl mx-auto px-6 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            {[
+              { icon: <Clock size={18} />, title: '24hr Response', desc: 'We reply to all inquiries within one business day.', color: '#3B82F6' },
+              { icon: <MessageCircle size={18} />, title: 'WhatsApp Available', desc: 'Prefer to chat? Reach us directly on WhatsApp.', color: '#10B981' },
+              { icon: <Mail size={18} />, title: 'Free Consultation', desc: 'First call is free — we\'ll scope your project together.', color: '#8B5CF6' },
+            ].map((c, i) => (
+              <div key={c.title} className={`card p-5 reveal delay-${i + 1}`}>
+                <div className="w-9 h-9 rounded-lg flex items-center justify-center mb-3" style={{ background: `${c.color}15`, color: c.color }}>{c.icon}</div>
+                <h3 className="font-bold text-sm mb-1" style={{ fontFamily: 'Syne,sans-serif', color: '#E2E8F0' }}>{c.title}</h3>
+                <p className="text-xs" style={{ color: '#64748B', fontFamily: 'DM Sans,sans-serif' }}>{c.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <ContactSection full />
+        <Footer />
+      </div>
+    </>
+  );
+}
+
+export async function getServerSideProps() { return { props: {} }; }
