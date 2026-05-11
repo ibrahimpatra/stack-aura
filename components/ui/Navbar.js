@@ -41,19 +41,20 @@ export default function Navbar() {
     <nav
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
       style={{
-        background: scrolled ? 'rgba(8,12,20,0.96)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(26,34,54,0.7)' : '1px solid transparent',
+        background: scrolled ? 'rgba(255,255,255,0.97)' : 'rgba(255,255,255,0.95)',
+        backdropFilter: 'blur(20px)',
+        borderBottom: scrolled ? '1px solid #DDE1EA' : '1px solid transparent',
+        boxShadow: scrolled ? '0 2px 20px rgba(0,1,41,0.06)' : 'none',
       }}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <div onClick={logoClick} className="cursor-pointer flex items-center gap-2.5 select-none">
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg,#3B82F6,#06B6D4)' }}>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: '#DB333D' }}>
             <span className="text-white font-bold text-sm" style={{ fontFamily: 'Syne,sans-serif' }}>S</span>
           </div>
-          <span className="font-bold text-base text-white" style={{ fontFamily: 'Syne,sans-serif' }}>
-            Stackaura <span className="grad-blue">Digital</span>
+          <span className="font-bold text-base" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>
+            Stackaura <span style={{ color: '#DB333D' }}>Digital</span>
           </span>
         </div>
 
@@ -66,20 +67,20 @@ export default function Navbar() {
               <Link
                 href={item.href}
                 className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm transition-colors"
-                style={{ color: isActive(item.href) ? '#3B82F6' : '#94A3B8', fontFamily: 'DM Sans,sans-serif' }}
+                style={{ color: isActive(item.href) ? '#DB333D' : '#4B5563', fontFamily: 'DM Sans,sans-serif', fontWeight: isActive(item.href) ? 600 : 400 }}
               >
                 {item.label}
                 {item.dropdown && <ChevronDown size={13} />}
               </Link>
               {item.dropdown && dropdown === item.href && (
                 <div className="absolute top-full left-0 pt-2 w-56" style={{ zIndex: 100 }}>
-                  <div className="rounded-xl p-2 shadow-2xl" style={{ background: '#0D1220', border: '1px solid #1A2236' }}>
+                  <div className="rounded-xl p-2 shadow-xl" style={{ background: '#FFFFFF', border: '1px solid #DDE1EA' }}>
                     {item.dropdown.map((d) => (
                       <Link key={d.href} href={d.href}
                         className="flex items-center px-3 py-2 rounded-lg text-sm transition-colors"
-                        style={{ color: '#64748B', fontFamily: 'DM Sans,sans-serif' }}
-                        onMouseEnter={(e) => { e.currentTarget.style.color = '#E2E8F0'; e.currentTarget.style.background = '#1A2236'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.color = '#64748B'; e.currentTarget.style.background = 'transparent'; }}>
+                        style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}
+                        onMouseEnter={(e) => { e.currentTarget.style.color = '#000129'; e.currentTarget.style.background = '#F0EFF2'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.color = '#6B7280'; e.currentTarget.style.background = 'transparent'; }}>
                         {d.label}
                       </Link>
                     ))}
@@ -94,23 +95,23 @@ export default function Navbar() {
           <Link href="/contact" className="btn-primary text-sm px-5 py-2.5">Get a Quote</Link>
         </div>
 
-        <button className="md:hidden text-white p-2" onClick={() => setMenuOpen(!menuOpen)}>
+        <button className="md:hidden p-2" style={{ color: '#000129' }} onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
       {/* Mobile */}
       {menuOpen && (
-        <div className="md:hidden px-6 pb-6 flex flex-col gap-1" style={{ background: 'rgba(8,12,20,0.98)', backdropFilter: 'blur(20px)' }}>
+        <div className="md:hidden px-6 pb-6 flex flex-col gap-1" style={{ background: '#FFFFFF', borderTop: '1px solid #F0EFF2' }}>
           {NAV.map((item) => (
             <div key={item.href}>
-              <Link href={item.href} className="block py-3 text-sm border-b" style={{ color: '#94A3B8', borderColor: '#1A2236', fontFamily: 'DM Sans,sans-serif' }}>
+              <Link href={item.href} className="block py-3 text-sm border-b" style={{ color: '#4B5563', borderColor: '#F0EFF2', fontFamily: 'DM Sans,sans-serif' }}>
                 {item.label}
               </Link>
               {item.dropdown && (
                 <div className="pl-4">
                   {item.dropdown.map((d) => (
-                    <Link key={d.href} href={d.href} className="block py-2 text-xs" style={{ color: '#475569', fontFamily: 'DM Sans,sans-serif' }}>
+                    <Link key={d.href} href={d.href} className="block py-2 text-xs" style={{ color: '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}>
                       → {d.label}
                     </Link>
                   ))}

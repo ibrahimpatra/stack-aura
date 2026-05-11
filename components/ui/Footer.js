@@ -5,17 +5,17 @@ import { SITE, SERVICES } from '../../lib/seo';
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer style={{ background: '#080C14', borderTop: '1px solid #1A2236' }}>
+    <footer style={{ background: '#000129', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg,#3B82F6,#06B6D4)' }}>
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: '#DB333D' }}>
                 <span className="text-white font-bold text-sm" style={{ fontFamily: 'Syne,sans-serif' }}>S</span>
               </div>
-              <span className="font-bold text-base text-white" style={{ fontFamily: 'Syne,sans-serif' }}>Stackaura <span className="grad-blue">Digital</span></span>
+              <span className="font-bold text-base text-white" style={{ fontFamily: 'Syne,sans-serif' }}>Stackaura <span style={{ color: '#DB333D' }}>Digital</span></span>
             </div>
-            <p className="text-sm leading-relaxed mb-5" style={{ color: '#475569', maxWidth: '300px', fontFamily: 'DM Sans,sans-serif' }}>
+            <p className="text-sm leading-relaxed mb-5" style={{ color: '#8B93B8', maxWidth: '300px', fontFamily: 'DM Sans,sans-serif' }}>
               Professional web development, mobile apps, and SEO services. Building digital products that perform worldwide.
             </p>
             <div className="flex gap-3">
@@ -28,9 +28,9 @@ export default function Footer() {
               ].map((s, i) => (
                 <a key={i} href={s.href}
                   className="w-9 h-9 rounded-lg flex items-center justify-center transition-all"
-                  style={{ background: '#1A2236', color: '#475569' }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = '#1E3A5F'; e.currentTarget.style.color = '#3B82F6'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = '#1A2236'; e.currentTarget.style.color = '#475569'; }}>
+                  style={{ background: 'rgba(255,255,255,0.07)', color: '#8B93B8' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = '#DB333D'; e.currentTarget.style.color = '#FFFFFF'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.07)'; e.currentTarget.style.color = '#8B93B8'; }}>
                   {s.icon}
                 </a>
               ))}
@@ -38,13 +38,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-semibold text-sm mb-4" style={{ fontFamily: 'Syne,sans-serif' }}>Services</h4>
+            <h4 className="font-semibold text-sm mb-4 text-white" style={{ fontFamily: 'Syne,sans-serif' }}>Services</h4>
             <ul className="space-y-2.5">
               {SERVICES.map((s) => (
                 <li key={s.slug}>
-                  <Link href={`/services/${s.slug}`} className="text-sm transition-colors" style={{ color: '#475569', fontFamily: 'DM Sans,sans-serif' }}
-                    onMouseEnter={(e) => (e.target.style.color = '#94A3B8')}
-                    onMouseLeave={(e) => (e.target.style.color = '#475569')}>
+                  <Link href={`/services/${s.slug}`} className="text-sm transition-colors" style={{ color: '#8B93B8', fontFamily: 'DM Sans,sans-serif' }}
+                    onMouseEnter={(e) => (e.target.style.color = '#FFFFFF')}
+                    onMouseLeave={(e) => (e.target.style.color = '#8B93B8')}>
                     {s.label}
                   </Link>
                 </li>
@@ -53,7 +53,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-semibold text-sm mb-4" style={{ fontFamily: 'Syne,sans-serif' }}>Company</h4>
+            <h4 className="font-semibold text-sm mb-4 text-white" style={{ fontFamily: 'Syne,sans-serif' }}>Company</h4>
             <ul className="space-y-2.5">
               {[
                 { label: 'About Us', href: '/about' },
@@ -63,9 +63,9 @@ export default function Footer() {
                 { label: 'Get a Quote', href: '/contact' },
               ].map((l) => (
                 <li key={l.label}>
-                  <Link href={l.href} className="text-sm transition-colors" style={{ color: '#475569', fontFamily: 'DM Sans,sans-serif' }}
-                    onMouseEnter={(e) => (e.target.style.color = '#94A3B8')}
-                    onMouseLeave={(e) => (e.target.style.color = '#475569')}>
+                  <Link href={l.href} className="text-sm transition-colors" style={{ color: '#8B93B8', fontFamily: 'DM Sans,sans-serif' }}
+                    onMouseEnter={(e) => (e.target.style.color = '#FFFFFF')}
+                    onMouseLeave={(e) => (e.target.style.color = '#8B93B8')}>
                     {l.label}
                   </Link>
                 </li>
@@ -74,13 +74,13 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 gap-3" style={{ borderTop: '1px solid #1A2236' }}>
-          <p className="text-xs" style={{ color: '#1F2937', fontFamily: 'DM Sans,sans-serif' }}>
+        <div className="flex flex-col md:flex-row items-center justify-between pt-8 gap-3" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+          <p className="text-xs" style={{ color: '#4B5573', fontFamily: 'DM Sans,sans-serif' }}>
             © {year} Stackaura Digital. All rights reserved. | Kuwait & Worldwide
           </p>
-          <a href={SITE.url} className="text-xs flex items-center gap-1" style={{ color: '#1F2937', fontFamily: 'DM Sans,sans-serif' }}>
-            Developed by <span style={{ color: '#3B82F6' }} className="ml-1">Stackaura Digital</span>
-            <ArrowUpRight size={11} style={{ color: '#3B82F6' }} />
+          <a href={SITE.url} className="text-xs flex items-center gap-1" style={{ color: '#4B5573', fontFamily: 'DM Sans,sans-serif' }}>
+            Developed by <span style={{ color: '#DB333D' }} className="ml-1">Stackaura Digital</span>
+            <ArrowUpRight size={11} style={{ color: '#DB333D' }} />
           </a>
         </div>
       </div>

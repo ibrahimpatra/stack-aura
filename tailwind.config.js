@@ -4,18 +4,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bg: '#080C14',
-        surface: '#0D1220',
-        border: '#1A2236',
-        accent: '#3B82F6',
-        cyan: '#06B6D4',
-        purple: '#8B5CF6',
-        muted: '#64748B',
-      },
-      fontFamily: {
-        display: ['Syne', 'sans-serif'],
-        body: ['DM Sans', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        navy: '#000129',
+        red: '#DB333D',
+        offwhite: '#F0EFF2',
+        border: '#DDE1EA',
       },
     },
   },

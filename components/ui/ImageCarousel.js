@@ -12,7 +12,7 @@ export default function ImageCarousel({ images = [], title = '' }) {
 
   return (
     <>
-      <div className="relative rounded-2xl overflow-hidden" style={{ border: '1px solid #1A2236', background: '#080C14' }}>
+      <div className="relative rounded-2xl overflow-hidden" style={{ border: '1px solid #1A2236', background: '#000129' }}>
         {/* Main image */}
         <div className="relative" style={{ paddingBottom: '56.25%' }}>
           <img
@@ -35,12 +35,12 @@ export default function ImageCarousel({ images = [], title = '' }) {
           <>
             <button onClick={prev}
               className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-lg transition-all"
-              style={{ background: 'rgba(8,12,20,0.8)', color: '#E2E8F0' }}>
+              style={{ background: 'rgba(8,12,20,0.8)', color: '#FFFFFF' }}>
               <ChevronLeft size={18} />
             </button>
             <button onClick={next}
               className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-lg transition-all"
-              style={{ background: 'rgba(8,12,20,0.8)', color: '#E2E8F0' }}>
+              style={{ background: 'rgba(8,12,20,0.8)', color: '#FFFFFF' }}>
               <ChevronRight size={18} />
             </button>
           </>
@@ -52,7 +52,7 @@ export default function ImageCarousel({ images = [], title = '' }) {
             {images.map((_, i) => (
               <button key={i} onClick={() => setCurrent(i)}
                 className="rounded-full transition-all"
-                style={{ width: i === current ? '20px' : '6px', height: '6px', background: i === current ? '#3B82F6' : '#1A2236' }}
+                style={{ width: i === current ? '20px' : '6px', height: '6px', background: i === current ? '#DB333D' : 'rgba(255,255,255,0.15)' }}
               />
             ))}
           </div>
@@ -64,7 +64,7 @@ export default function ImageCarousel({ images = [], title = '' }) {
             {images.map((img, i) => (
               <button key={i} onClick={() => setCurrent(i)}
                 className="flex-shrink-0 rounded-lg overflow-hidden transition-all"
-                style={{ width: '72px', height: '48px', border: `2px solid ${i === current ? '#3B82F6' : '#1A2236'}` }}>
+                style={{ width: '72px', height: '48px', border: `2px solid ${i === current ? '#DB333D' : 'rgba(255,255,255,0.15)'}` }}>
                 <img src={img} alt={`thumb ${i + 1}`} className="w-full h-full object-cover"
                   onError={(e) => { e.target.src = 'https://via.placeholder.com/72x48/0D1220/3B82F6?text=img'; }} />
               </button>
@@ -79,7 +79,7 @@ export default function ImageCarousel({ images = [], title = '' }) {
           className="fixed inset-0 z-50 flex items-center justify-center p-4"
           style={{ background: 'rgba(0,0,0,0.95)' }}
           onClick={() => setLightbox(false)}>
-          <button className="absolute top-4 right-4 p-2 rounded-lg" style={{ background: '#1A2236', color: '#E2E8F0' }}>
+          <button className="absolute top-4 right-4 p-2 rounded-lg" style={{ background: 'rgba(255,255,255,0.15)', color: '#FFFFFF' }}>
             <X size={20} />
           </button>
           <img src={images[current]} alt={title}
@@ -90,12 +90,12 @@ export default function ImageCarousel({ images = [], title = '' }) {
             <>
               <button onClick={(e) => { e.stopPropagation(); prev(); }}
                 className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-xl"
-                style={{ background: 'rgba(13,18,32,0.9)', color: '#E2E8F0' }}>
+                style={{ background: 'rgba(13,18,32,0.9)', color: '#FFFFFF' }}>
                 <ChevronLeft size={22} />
               </button>
               <button onClick={(e) => { e.stopPropagation(); next(); }}
                 className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-xl"
-                style={{ background: 'rgba(13,18,32,0.9)', color: '#E2E8F0' }}>
+                style={{ background: 'rgba(13,18,32,0.9)', color: '#FFFFFF' }}>
                 <ChevronRight size={22} />
               </button>
             </>

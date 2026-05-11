@@ -12,7 +12,7 @@ const SERVICE_DATA = {
     headline: 'Custom Web Development',
     subheadline: 'Professional websites and web apps built for performance, SEO, and growth.',
     description: 'We build custom websites and web applications using Next.js, React, and Firebase. Every site is server-side rendered (SSR) for maximum SEO performance, mobile-responsive, and built to scale. Whether you need a business website, e-commerce platform, or a full web app — we deliver.',
-    color: '#3B82F6',
+    color: '#DB333D',
     keywords: ['custom website development', 'web development kuwait', 'next.js developer', 'react developer kuwait', 'professional web development', 'build your website', 'website development company'],
     features: ['Next.js & React development', 'Server-side rendering (SSR)', 'Firebase or PostgreSQL backend', 'Mobile-responsive design', 'SEO optimisation built-in', 'Admin dashboard & CMS', 'Payment gateway integration', 'Google Analytics setup'],
     process: ['Discovery & requirements', 'Wireframes & design', 'Frontend development', 'Backend & database', 'SEO & performance', 'Testing & QA', 'Launch & handover'],
@@ -26,7 +26,7 @@ const SERVICE_DATA = {
     headline: 'Mobile App Development',
     subheadline: 'iOS and Android apps built with React Native — native performance, one codebase.',
     description: 'We develop cross-platform mobile applications using React Native and Expo. Your app runs natively on both iOS and Android from a single codebase, reducing cost and development time without sacrificing performance.',
-    color: '#06B6D4',
+    color: '#000129',
     keywords: ['mobile app development kuwait', 'ios app developer', 'android app developer', 'react native developer', 'cross platform app development'],
     features: ['Cross-platform iOS & Android', 'React Native & Expo', 'Firebase real-time backend', 'Push notifications', 'Offline support', 'App Store & Play Store submission', 'In-app purchases', 'Analytics integration'],
     process: ['App concept & scoping', 'UI/UX design', 'React Native development', 'API & backend integration', 'Testing on real devices', 'App Store submission', 'Post-launch support'],
@@ -39,7 +39,7 @@ const SERVICE_DATA = {
     headline: 'SEO Optimisation',
     subheadline: 'Rank higher on Google and get found by customers searching for your business.',
     description: 'Our SEO service covers everything from technical audits to structured data implementation, sitemap generation, keyword strategy, and content optimisation. We\'ve helped businesses in Kuwait rank on Google\'s first page within weeks.',
-    color: '#8B5CF6',
+    color: '#000129',
     keywords: ['seo optimisation kuwait', 'google ranking kuwait', 'local seo kuwait', 'seo expert kuwait', 'technical seo', 'website seo service'],
     features: ['Technical SEO audit', 'Structured data (Schema.org)', 'XML sitemap generation', 'robots.txt optimisation', 'Core Web Vitals', 'Google Search Console setup', 'Keyword research & strategy', 'Google Business Profile setup'],
     process: ['SEO audit of current site', 'Keyword research', 'Technical fixes', 'On-page optimisation', 'Structured data setup', 'Sitemap & robots.txt', 'Search Console submission', 'Monthly reporting'],
@@ -52,7 +52,7 @@ const SERVICE_DATA = {
     headline: 'Custom Software Development',
     subheadline: 'Tailored solutions built exactly for your business needs — APIs, integrations, and more.',
     description: 'Sometimes off-the-shelf software doesn\'t cut it. We build custom backends, REST APIs, third-party integrations, payment systems, automation tools, and dashboards designed precisely for your workflow.',
-    color: '#10B981',
+    color: '#DB333D',
     keywords: ['custom software development', 'custom web application', 'api development kuwait', 'backend development', 'stripe integration kuwait', 'custom development'],
     features: ['REST API development', 'Third-party integrations', 'Stripe payment integration', 'Admin dashboards', 'Automation & webhooks', 'Database design', 'Firebase & cloud functions', 'CRM integrations'],
     process: ['Requirements analysis', 'Architecture planning', 'Backend development', 'API documentation', 'Frontend integration', 'Testing & security', 'Deployment & monitoring'],
@@ -95,10 +95,10 @@ export default function ServicePage({ slug }) {
   const data = SERVICE_DATA[slug];
 
   if (!service || !data) return (
-    <div style={{ background: '#080C14', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div className="text-center">
-        <p className="text-xl mb-4" style={{ fontFamily: 'Syne,sans-serif', color: '#E2E8F0' }}>Service not found</p>
-        <Link href="/services" style={{ color: '#3B82F6' }}>← All Services</Link>
+        <p className="text-xl mb-4" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>Service not found</p>
+        <Link href="/services" style={{ color: '#DB333D' }}>← All Services</Link>
       </div>
     </div>
   );
@@ -115,14 +115,14 @@ export default function ServicePage({ slug }) {
   return (
     <>
       <SEOHead {...seo} />
-      <div style={{ background: '#080C14', minHeight: '100vh' }}>
+      <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
         <Navbar />
 
         {/* Hero */}
         <section className="pt-32 pb-16 px-6 grid-bg" style={{ borderBottom: '1px solid #1A2236' }}>
           <div className="max-w-4xl mx-auto">
             <Link href="/services" className="inline-flex items-center gap-2 text-sm mb-8 reveal"
-              style={{ color: '#475569', fontFamily: 'DM Sans,sans-serif' }}>
+              style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
               <ArrowLeft size={15} /> All Services
             </Link>
             <div className="flex items-center gap-3 mb-5 reveal">
@@ -132,10 +132,10 @@ export default function ServicePage({ slug }) {
               </div>
               <span className="text-sm font-medium" style={{ color: data.color, fontFamily: 'DM Sans,sans-serif' }}>{service.label}</span>
             </div>
-            <h1 className="font-bold mb-4 reveal delay-1" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(2.2rem,5vw,3.5rem)', color: '#E2E8F0', lineHeight: 1.15 }}>
+            <h1 className="font-bold mb-4 reveal delay-1" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(2.2rem,5vw,3.5rem)', color: '#000129', lineHeight: 1.15 }}>
               {data.headline}
             </h1>
-            <p className="text-lg mb-6 reveal delay-2" style={{ color: '#64748B', fontFamily: 'DM Sans,sans-serif', maxWidth: 560 }}>
+            <p className="text-lg mb-6 reveal delay-2" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif', maxWidth: 560 }}>
               {data.subheadline}
             </p>
             <div className="flex flex-wrap gap-3 reveal delay-3">
@@ -150,40 +150,40 @@ export default function ServicePage({ slug }) {
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Main */}
             <div className="lg:col-span-2">
-              <p className="text-base leading-relaxed mb-10 reveal" style={{ color: '#94A3B8', fontFamily: 'DM Sans,sans-serif', fontSize: '1.05rem' }}>
+              <p className="text-base leading-relaxed mb-10 reveal" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif', fontSize: '1.05rem' }}>
                 {data.description}
               </p>
 
               {/* Features */}
-              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#E2E8F0' }}>What's Included</h2>
+              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#000129' }}>What's Included</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-12 reveal delay-1">
                 {data.features.map((f) => (
-                  <div key={f} className="flex items-start gap-2.5 p-3 rounded-xl" style={{ background: '#0D1220', border: '1px solid #1A2236' }}>
+                  <div key={f} className="flex items-start gap-2.5 p-3 rounded-xl" style={{ background: '#F0EFF2', border: '1px solid #1A2236' }}>
                     <CheckCircle2 size={15} style={{ color: data.color, flexShrink: 0, marginTop: 1 }} />
-                    <span className="text-sm" style={{ color: '#94A3B8', fontFamily: 'DM Sans,sans-serif' }}>{f}</span>
+                    <span className="text-sm" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>{f}</span>
                   </div>
                 ))}
               </div>
 
               {/* Process */}
-              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#E2E8F0' }}>Our Process</h2>
+              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#000129' }}>Our Process</h2>
               <div className="space-y-3 mb-12 reveal delay-1">
                 {data.process.map((step, i) => (
-                  <div key={step} className="flex items-center gap-4 p-4 rounded-xl" style={{ background: '#0D1220', border: '1px solid #1A2236' }}>
+                  <div key={step} className="flex items-center gap-4 p-4 rounded-xl" style={{ background: '#F0EFF2', border: '1px solid #1A2236' }}>
                     <div className="w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center flex-shrink-0"
                       style={{ background: `${data.color}20`, color: data.color, fontFamily: 'JetBrains Mono,monospace' }}>{i + 1}</div>
-                    <span className="text-sm" style={{ color: '#94A3B8', fontFamily: 'DM Sans,sans-serif' }}>{step}</span>
+                    <span className="text-sm" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>{step}</span>
                   </div>
                 ))}
               </div>
 
               {/* FAQ */}
-              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#E2E8F0' }}>FAQ</h2>
+              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#000129' }}>FAQ</h2>
               <div className="space-y-4 reveal delay-1">
                 {data.faq.map((f) => (
-                  <div key={f.q} className="p-5 rounded-xl" style={{ background: '#0D1220', border: '1px solid #1A2236' }}>
-                    <h3 className="font-bold text-sm mb-2" style={{ fontFamily: 'Syne,sans-serif', color: '#E2E8F0' }}>{f.q}</h3>
-                    <p className="text-sm" style={{ color: '#64748B', fontFamily: 'DM Sans,sans-serif' }}>{f.a}</p>
+                  <div key={f.q} className="p-5 rounded-xl" style={{ background: '#F0EFF2', border: '1px solid #1A2236' }}>
+                    <h3 className="font-bold text-sm mb-2" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>{f.q}</h3>
+                    <p className="text-sm" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>{f.a}</p>
                   </div>
                 ))}
               </div>
@@ -193,24 +193,24 @@ export default function ServicePage({ slug }) {
             <div>
               {/* CTA Card */}
               <div className="card p-6 mb-6 reveal" style={{ position: 'sticky', top: '100px' }}>
-                <h3 className="font-bold mb-2" style={{ fontFamily: 'Syne,sans-serif', color: '#E2E8F0' }}>Ready to Start?</h3>
-                <p className="text-sm mb-5" style={{ color: '#64748B', fontFamily: 'DM Sans,sans-serif' }}>Get a free consultation and quote for your {service.label.toLowerCase()} project.</p>
+                <h3 className="font-bold mb-2" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>Ready to Start?</h3>
+                <p className="text-sm mb-5" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>Get a free consultation and quote for your {service.label.toLowerCase()} project.</p>
                 <Link href="/contact" className="btn-primary w-full justify-center mb-3">Get a Free Quote</Link>
                 <Link href="/projects" className="btn-ghost w-full justify-center">See Our Work</Link>
               </div>
 
               {/* Other services */}
               <div className="reveal delay-2">
-                <h4 className="font-bold text-sm mb-4" style={{ fontFamily: 'Syne,sans-serif', color: '#E2E8F0' }}>Other Services</h4>
+                <h4 className="font-bold text-sm mb-4" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>Other Services</h4>
                 <div className="space-y-2">
                   {otherServices.map((s) => (
                     <Link key={s.slug} href={`/services/${s.slug}`}
                       className="flex items-center gap-3 p-3 rounded-xl transition-colors block"
-                      style={{ background: '#0D1220', border: '1px solid #1A2236' }}
-                      onMouseEnter={(e) => e.currentTarget.style.borderColor = '#3B82F6'}
-                      onMouseLeave={(e) => e.currentTarget.style.borderColor = '#1A2236'}>
+                      style={{ background: '#F0EFF2', border: '1px solid #1A2236' }}
+                      onMouseEnter={(e) => e.currentTarget.style.borderColor = '#DB333D'}
+                      onMouseLeave={(e) => e.currentTarget.style.borderColor = '#DDE1EA'}>
                       <span className="text-lg">{s.icon}</span>
-                      <span className="text-sm" style={{ color: '#94A3B8', fontFamily: 'DM Sans,sans-serif' }}>{s.label}</span>
+                      <span className="text-sm" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>{s.label}</span>
                     </Link>
                   ))}
                 </div>

@@ -34,7 +34,7 @@ export default function Home({ projects, posts, projectClients }) {
   return (
     <>
       <SEOHead {...seo} structuredData={structuredData} />
-      <div style={{ background: '#080C14' }}>
+      <div style={{ background: '#FFFFFF' }}>
         <Navbar />
         <Hero />
         <TechMarquee />
