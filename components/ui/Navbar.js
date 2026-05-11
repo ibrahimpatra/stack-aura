@@ -5,6 +5,7 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 import { SERVICES } from '../../lib/seo';
 
 const NAV = [
+  { label: 'Main', href: '/' },
   { label: 'Services', href: '/services', dropdown: SERVICES.map((s) => ({ label: s.label, href: `/services/${s.slug}` })) },
   { label: 'Projects', href: '/projects' },
   { label: 'About', href: '/about' },
@@ -30,9 +31,24 @@ export default function Navbar() {
 
   const logoClick = () => {
     logoClicks.current++;
+
     clearTimeout(logoTimer.current);
-    logoTimer.current = setTimeout(() => (logoClicks.current = 0), 1500);
-    if (logoClicks.current >= 3) { logoClicks.current = 0; router.push('/login'); }
+
+    // Triple click → login
+    if (logoClicks.current >= 3) {
+      logoClicks.current = 0;
+      router.push('/login');
+      return;
+    }
+
+    // Single click timeout
+    logoTimer.current = setTimeout(() => {
+      if (logoClicks.current === 1) {
+        router.push('/');
+      }
+
+      logoClicks.current = 0;
+    }, 400);
   };
 
   const isActive = (href) => router.asPath === href || router.asPath.startsWith(href + '/');
