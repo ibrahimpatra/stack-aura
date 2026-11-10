@@ -15,7 +15,7 @@ export default function BlogPreview({ posts = [] }) {
         <div className="flex items-end justify-between mb-14">
           <div className="reveal">
             <div className="section-label mb-4" style={{ background: 'rgba(219,51,61,0.08)', border: '1px solid rgba(219,51,61,0.15)', color: '#DB333D' }}>
-              <span style={{ fontFamily: 'JetBrains Mono,monospace' }}>// blog</span>
+              <span style={{ fontFamily: 'DM Sans,sans-serif' }}>Blog</span>
             </div>
             <h2 className="font-bold" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(1.8rem,4vw,2.8rem)', color: '#000129' }}>Latest Articles</h2>
           </div>
@@ -32,13 +32,13 @@ export default function BlogPreview({ posts = [] }) {
                   style={{ background: `${post.tagColor}10`, color: post.tagColor, fontFamily: 'DM Sans,sans-serif', border: `1px solid ${post.tagColor}20` }}>
                   {post.tag}
                 </span>
-                <span className="flex items-center gap-1 text-xs" style={{ color: '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}>
+                <span className="flex items-center gap-1 text-xs" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
                   <Clock size={11} /> {post.readTime}
                 </span>
               </div>
               <h3 className="font-bold mb-2 leading-snug text-base" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>{post.title}</h3>
-              <p className="text-sm mb-4 leading-relaxed" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>{post.excerpt}</p>
-              <span className="flex items-center gap-1 text-xs" style={{ color: '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}>
+              <p className="text-sm mb-4 leading-relaxed" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>{post.excerpt}</p>
+              <span className="flex items-center gap-1 text-xs" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
                 <Calendar size={11} /> {post.date}
               </span>
             </Link>

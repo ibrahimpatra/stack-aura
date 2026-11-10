@@ -13,6 +13,8 @@ export default function Document() {
     areaServed: 'Worldwide',
     priceRange: '$$',
     email: SITE.email,
+    logo: `${SITE.url}/logo.png`,
+    image: `${SITE.url}/og/og-default.png`,
     sameAs: [`https://twitter.com/stackauradigital`, `https://linkedin.com/company/stackaura-digital`],
   };
 
@@ -20,7 +22,11 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <meta name="theme-color" content="#080C14" />
+        <link rel="icon" href="/favicon.ico" sizes="48x48" />
+        <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <meta name="theme-color" content="#000129" />
         <meta name="robots" content="index, follow" />
         <meta name="author" content={SITE.name} />
         <meta name="keywords" content={CORE_KEYWORDS.join(', ')} />

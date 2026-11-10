@@ -28,15 +28,15 @@ export default function Projects({ projects, projectClients }) {
       <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
         <Navbar />
 
-        <section className="pt-32 pb-16 px-6 grid-bg" style={{ borderBottom: '1px solid #1A2236' }}>
+        <section className="pt-32 pb-16 px-6 grid-bg" style={{ borderBottom: '1px solid #DDE1EA' }}>
           <div className="max-w-4xl mx-auto text-center">
             <div className="section-label mb-5 reveal" style={{ background: 'rgba(219,51,61,0.08)', border: '1px solid rgba(219,51,61,0.15)', color: '#DB333D' }}>
-              <span style={{ fontFamily: 'JetBrains Mono,monospace' }}>// our work</span>
+              <span style={{ fontFamily: 'DM Sans,sans-serif' }}>Our work</span>
             </div>
             <h1 className="font-bold mb-4 reveal delay-1" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(2.5rem,6vw,4rem)', color: '#000129', lineHeight: 1.1 }}>
               Projects We've Built
             </h1>
-            <p className="text-lg reveal delay-2" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif', maxWidth: 500, margin: '0 auto' }}>
+            <p className="text-lg reveal delay-2" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif', maxWidth: 500, margin: '0 auto' }}>
               Real products, real clients, measurable results.
             </p>
           </div>
@@ -52,7 +52,7 @@ export default function Projects({ projects, projectClients }) {
                   style={{
                     background: filter === tag ? 'rgba(59,130,246,0.15)' : '#F0EFF2',
                     border: `1px solid ${filter === tag ? '#DB333D' : '#DDE1EA'}`,
-                    color: filter === tag ? '#DB333D' : '#6B7280',
+                    color: filter === tag ? '#DB333D' : '#4B5563',
                     fontFamily: 'DM Sans,sans-serif',
                   }}>
                   {tag}
@@ -63,8 +63,8 @@ export default function Projects({ projects, projectClients }) {
 
           {filtered.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-lg mb-2" style={{ color: '#9CA3AF', fontFamily: 'Syne,sans-serif' }}>No projects yet.</p>
-              <p className="text-sm" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>Add your first project from the admin panel.</p>
+              <p className="text-lg mb-2" style={{ color: '#6B7280', fontFamily: 'Syne,sans-serif' }}>No projects yet.</p>
+              <p className="text-sm" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>Add your first project from the admin panel.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -79,12 +79,12 @@ export default function Projects({ projects, projectClients }) {
                     </div>
                   )}
                   <div className="p-5">
-                    {p.client && <span className="text-xs block mb-1" style={{ color: '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}>Client: <span style={{ color: '#DB333D' }}>{p.client}</span></span>}
+                    {p.client && <span className="text-xs block mb-1" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>Client: <span style={{ color: '#DB333D' }}>{p.client}</span></span>}
                     <div className="flex items-start justify-between mb-2">
                       <h2 className="font-bold" style={{ fontFamily: 'Syne,sans-serif', color: '#000129', fontSize: '1rem' }}>{p.title}</h2>
-                      <ArrowUpRight size={15} style={{ color: '#9CA3AF', flexShrink: 0 }} />
+                      <ArrowUpRight size={15} style={{ color: '#6B7280', flexShrink: 0 }} />
                     </div>
-                    <p className="text-xs mb-3 leading-relaxed" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
+                    <p className="text-xs mb-3 leading-relaxed" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>
                       {(p.excerpt || p.description || '').slice(0, 100)}...
                     </p>
                     <div className="flex flex-wrap gap-1.5">

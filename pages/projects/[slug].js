@@ -61,7 +61,7 @@ export default function ProjectPage({ project }) {
         <div className="max-w-5xl mx-auto px-6 pt-28 pb-16">
           {/* Back */}
           <Link href="/projects" className="inline-flex items-center gap-2 text-sm mb-8 reveal"
-            style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
+            style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>
             <ArrowLeft size={15} /> All Projects
           </Link>
 
@@ -78,16 +78,16 @@ export default function ProjectPage({ project }) {
               {project.title}
             </h1>
             {project.excerpt && (
-              <p className="text-lg" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif', lineHeight: 1.7 }}>
+              <p className="text-lg" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif', lineHeight: 1.7 }}>
                 {project.excerpt}
               </p>
             )}
           </div>
 
           {/* Meta bar */}
-          <div className="flex flex-wrap items-center gap-4 mb-8 pb-6 reveal delay-2" style={{ borderBottom: '1px solid #1A2236' }}>
+          <div className="flex flex-wrap items-center gap-4 mb-8 pb-6 reveal delay-2" style={{ borderBottom: '1px solid #DDE1EA' }}>
             {project.tags?.map((t) => <span key={t} className="tag flex items-center gap-1"><Tag size={10} />{t}</span>)}
-            {project.date && <span className="flex items-center gap-1 text-xs" style={{ color: '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}><Calendar size={11} />{project.date}</span>}
+            {project.date && <span className="flex items-center gap-1 text-xs" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}><Calendar size={11} />{project.date}</span>}
             <div className="flex gap-3 ml-auto">
               {project.liveUrl && (
                 <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-primary text-xs px-4 py-2">
@@ -122,7 +122,7 @@ export default function ProjectPage({ project }) {
                   <h2 className="font-bold mb-4" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.3rem', color: '#000129' }}>Key Features</h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {project.features.map((f) => (
-                      <div key={f} className="flex items-start gap-2.5 p-3 rounded-xl" style={{ background: '#F0EFF2', border: '1px solid #1A2236' }}>
+                      <div key={f} className="flex items-start gap-2.5 p-3 rounded-xl" style={{ background: '#F0EFF2', border: '1px solid #DDE1EA' }}>
                         <CheckCircle2 size={14} style={{ color: '#DB333D', flexShrink: 0, marginTop: 1 }} />
                         <span className="text-sm" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>{f}</span>
                       </div>
@@ -154,19 +154,19 @@ export default function ProjectPage({ project }) {
                 <div className="space-y-3">
                   {project.client && (
                     <div>
-                      <span className="text-xs" style={{ color: '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}>Client</span>
+                      <span className="text-xs" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>Client</span>
                       <p className="text-sm font-medium" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>{project.client}</p>
                     </div>
                   )}
                   {project.date && (
                     <div>
-                      <span className="text-xs" style={{ color: '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}>Completed</span>
+                      <span className="text-xs" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>Completed</span>
                       <p className="text-sm font-medium" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>{project.date}</p>
                     </div>
                   )}
                   {project.tags?.length > 0 && (
                     <div>
-                      <span className="text-xs mb-2 block" style={{ color: '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}>Technologies</span>
+                      <span className="text-xs mb-2 block" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>Technologies</span>
                       <div className="flex flex-wrap gap-1.5">
                         {project.tags.map((t) => <span key={t} className="tag">{t}</span>)}
                       </div>
@@ -180,7 +180,7 @@ export default function ProjectPage({ project }) {
           </div>
 
           {/* Nav between projects */}
-          <div className="mt-16 pt-8 flex items-center justify-between reveal" style={{ borderTop: '1px solid #1A2236' }}>
+          <div className="mt-16 pt-8 flex items-center justify-between reveal" style={{ borderTop: '1px solid #DDE1EA' }}>
             <Link href="/projects" className="btn-ghost"><ArrowLeft size={15} /> All Projects</Link>
             <Link href="/contact" className="btn-primary">Start a Project</Link>
           </div>

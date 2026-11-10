@@ -5,6 +5,7 @@ import SEOHead from '../components/ui/SEOHead';
 import Hero from '../components/sections/Hero';
 import TechMarquee from '../components/sections/TechMarquee';
 import ServicesSection from '../components/sections/ServicesSection';
+import HowItWorks from '../components/sections/HowItWorks';
 import ProjectsSection from '../components/sections/ProjectsSection';
 import AboutSection from '../components/sections/AboutSection';
 import BlogPreview from '../components/sections/BlogPreview';
@@ -39,6 +40,7 @@ export default function Home({ projects, posts, projectClients }) {
         <Hero />
         <TechMarquee />
         <ServicesSection />
+        <HowItWorks />
         <ProjectsSection projects={projects} />
         <AboutSection />
         <BlogPreview posts={posts} />

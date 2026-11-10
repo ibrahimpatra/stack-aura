@@ -58,7 +58,7 @@ export default function Login() {
           </div>
           <div className="card p-8">
             <h1 className="font-bold text-xl mb-2 text-center" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>Admin Login</h1>
-            <p className="text-xs text-center mb-6" style={{ color: '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}>
+            <p className="text-xs text-center mb-6" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
               Use the email & password you created in Firebase Auth
             </p>
             {error && (
@@ -68,15 +68,15 @@ export default function Login() {
             )}
             <form onSubmit={submit} className="space-y-4">
               <div>
-                <label className="text-xs mb-1.5 block" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>Email</label>
+                <label className="text-xs mb-1.5 block" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>Email</label>
                 <input type="email" required className="input" placeholder="admin@stackaura.com"
                   value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
               </div>
               <div className="relative">
-                <label className="text-xs mb-1.5 block" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>Password</label>
+                <label className="text-xs mb-1.5 block" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>Password</label>
                 <input type={show ? 'text' : 'password'} required className="input pr-10" placeholder="••••••••"
                   value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
-                <button type="button" onClick={() => setShow(!show)} className="absolute right-3 bottom-3" style={{ color: '#9CA3AF' }}>
+                <button type="button" onClick={() => setShow(!show)} className="absolute right-3 bottom-3" style={{ color: '#6B7280' }}>
                   {show ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
               </div>
@@ -85,7 +85,7 @@ export default function Login() {
               </button>
             </form>
             <div className="mt-6 p-3 rounded-xl" style={{ background: '#F0EFF2', border: '1px solid #DDE1EA' }}>
-              <p className="text-xs" style={{ color: '#6B7280', fontFamily: 'JetBrains Mono,monospace', lineHeight: 1.6 }}>
+              <p className="text-xs" style={{ color: '#4B5563', fontFamily: 'JetBrains Mono,monospace', lineHeight: 1.6 }}>
                 Also set in .env.local:<br />
                 NEXT_PUBLIC_ADMIN_EMAIL=your@email.com
               </p>

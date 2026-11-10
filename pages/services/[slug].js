@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Navbar from '../../components/ui/Navbar';
 import Footer from '../../components/ui/Footer';
 import SEOHead from '../../components/ui/SEOHead';
+import SiteImage from '../../components/ui/SiteImage';
 import ContactSection from '../../components/sections/ContactSection';
 import { useScrollReveal } from '../../lib/useScrollReveal';
 import { pageSEO, SERVICES } from '../../lib/seo';
@@ -9,82 +10,82 @@ import { CheckCircle2, ArrowRight, ArrowLeft } from 'lucide-react';
 
 const SERVICE_DATA = {
   'web-development': {
-    headline: 'Custom Web Development',
-    subheadline: 'Professional websites and web apps built for performance, SEO, and growth.',
-    description: 'We build custom websites and web applications using Next.js, React, and Firebase. Every site is server-side rendered (SSR) for maximum SEO performance, mobile-responsive, and built to scale. Whether you need a business website, e-commerce platform, or a full web app — we deliver.',
+    headline: 'Website Development in Kuwait',
+    subheadline: 'A professional website that looks great, loads fast and helps customers find you.',
+    description: 'We build your business website from start to finish. It works perfectly on phones, tablets and computers, loads quickly, and is set up so Google can find it. Whether you need a simple company website, an online store or a custom web application, we build it to grow with your business.',
     color: '#DB333D',
     keywords: ['custom website development', 'web development kuwait', 'next.js developer', 'react developer kuwait', 'professional web development', 'build your website', 'website development company'],
-    features: ['Next.js & React development', 'Server-side rendering (SSR)', 'Firebase or PostgreSQL backend', 'Mobile-responsive design', 'SEO optimisation built-in', 'Admin dashboard & CMS', 'Payment gateway integration', 'Google Analytics setup'],
-    process: ['Discovery & requirements', 'Wireframes & design', 'Frontend development', 'Backend & database', 'SEO & performance', 'Testing & QA', 'Launch & handover'],
+    features: ['Modern, good-looking design', 'Works on phones and computers', 'Easy for Google to find (SEO)', 'Online store and payments', 'Admin area to update your content', 'Contact forms and WhatsApp button', 'Visitor statistics (Google Analytics)', 'Fast loading speed'],
+    process: ['We talk about your business and goals', 'We plan the pages and design', 'We build your website', 'We add your content and set up Google', 'We test everything carefully', 'We launch your website', 'We train you and stay available for help'],
     faq: [
-      { q: 'How long does a website take?', a: 'Most websites take 2–4 weeks from kickoff to launch, depending on complexity.' },
-      { q: 'Do you use WordPress?', a: 'We build with Next.js and React for superior performance and SEO. Far better than WordPress for business sites.' },
-      { q: 'Will my site rank on Google?', a: 'Yes — every site includes SSR, structured data, sitemaps, and technical SEO from day one.' },
+      { q: 'How long does a website take?', a: 'Most websites are ready in 2–4 weeks, depending on how many pages and features you need.' },
+      { q: 'Can I update the website myself?', a: 'Yes. We can add an easy admin area so you can change text, photos and products without any technical skills.' },
+      { q: 'Will my website show on Google?', a: 'Yes. Every website we build is set up for Google from day one, so people can find you.' },
     ],
   },
   'mobile-apps': {
-    headline: 'Mobile App Development',
-    subheadline: 'iOS and Android apps built with React Native — native performance, one codebase.',
-    description: 'We develop cross-platform mobile applications using React Native and Expo. Your app runs natively on both iOS and Android from a single codebase, reducing cost and development time without sacrificing performance.',
+    headline: 'Mobile App Development in Kuwait',
+    subheadline: 'One app that works on both iPhone and Android, built for your business.',
+    description: 'We build mobile apps for iPhone and Android at the same time, which saves you money and time. Your customers can order, book, chat or shop right from their phone, and we help you publish the app on the App Store and Google Play.',
     color: '#000129',
     keywords: ['mobile app development kuwait', 'ios app developer', 'android app developer', 'react native developer', 'cross platform app development'],
-    features: ['Cross-platform iOS & Android', 'React Native & Expo', 'Firebase real-time backend', 'Push notifications', 'Offline support', 'App Store & Play Store submission', 'In-app purchases', 'Analytics integration'],
-    process: ['App concept & scoping', 'UI/UX design', 'React Native development', 'API & backend integration', 'Testing on real devices', 'App Store submission', 'Post-launch support'],
+    features: ['Works on iPhone and Android', 'Simple, easy-to-use screens', 'Notifications to your customers', 'Customer accounts and login', 'Online payments', 'Works even with weak internet', 'We publish it on the App Store and Google Play', 'Usage statistics'],
+    process: ['We talk about your app idea', 'We design the screens', 'We build the app', 'We connect it to your data', 'We test it on real phones', 'We publish it in the app stores', 'We support you after launch'],
     faq: [
-      { q: 'Do you build native or cross-platform?', a: 'We use React Native which gives native performance on both iOS and Android from one codebase.' },
-      { q: 'Can you submit to the App Store?', a: 'Yes — we handle the full App Store and Google Play submission process.' },
+      { q: 'Do I need two separate apps?', a: 'No. We build one app that works on both iPhone and Android, which saves you time and money.' },
+      { q: 'Can you publish the app for me?', a: 'Yes. We handle the full App Store and Google Play process for you.' },
     ],
   },
   'seo-optimisation': {
-    headline: 'SEO Optimisation',
-    subheadline: 'Rank higher on Google and get found by customers searching for your business.',
-    description: 'Our SEO service covers everything from technical audits to structured data implementation, sitemap generation, keyword strategy, and content optimisation. We\'ve helped businesses in Kuwait rank on Google\'s first page within weeks.',
+    headline: 'SEO – Rank Higher on Google in Kuwait',
+    subheadline: 'Help more customers find your business when they search on Google.',
+    description: 'SEO means making your website easier for Google to understand, so it shows higher in search results. We check your website, find what is holding it back, fix it, and choose the right words your customers type into Google.',
     color: '#000129',
     keywords: ['seo optimisation kuwait', 'google ranking kuwait', 'local seo kuwait', 'seo expert kuwait', 'technical seo', 'website seo service'],
-    features: ['Technical SEO audit', 'Structured data (Schema.org)', 'XML sitemap generation', 'robots.txt optimisation', 'Core Web Vitals', 'Google Search Console setup', 'Keyword research & strategy', 'Google Business Profile setup'],
-    process: ['SEO audit of current site', 'Keyword research', 'Technical fixes', 'On-page optimisation', 'Structured data setup', 'Sitemap & robots.txt', 'Search Console submission', 'Monthly reporting'],
+    features: ['Full check of your website', 'Finding the words customers search', 'Fixing problems that hurt your ranking', 'Better page titles and descriptions', 'Images that appear in Google Images', 'Google Search Console setup', 'Google Business Profile setup', 'Monthly progress reports'],
+    process: ['We check your current website', 'We research what customers search for', 'We fix the technical problems', 'We improve your pages and images', 'We submit your website to Google', 'We track results every month'],
     faq: [
-      { q: 'How long before I see results?', a: 'Technical SEO improvements can show results in 2–6 weeks. Full ranking improvements typically take 2–4 months.' },
-      { q: 'Do you guarantee first page ranking?', a: 'No ethical SEO agency guarantees rankings — but our technical approach consistently delivers results.' },
+      { q: 'How long before I see results?', a: 'Small improvements can show in 2–6 weeks. Bigger ranking improvements usually take 2–4 months.' },
+      { q: 'Do you promise first place on Google?', a: 'No honest company can promise that. But our careful, proven approach gives you the best chance to rank higher.' },
     ],
   },
   'custom-development': {
     headline: 'Custom Software Development',
-    subheadline: 'Tailored solutions built exactly for your business needs — APIs, integrations, and more.',
-    description: 'Sometimes off-the-shelf software doesn\'t cut it. We build custom backends, REST APIs, third-party integrations, payment systems, automation tools, and dashboards designed precisely for your workflow.',
+    subheadline: 'Special tools built exactly for the way your business works.',
+    description: 'Sometimes ready-made software does not fit. We build custom systems for you: online payments, booking and ordering, customer dashboards, and connections between the tools you already use. You tell us the problem, we build the solution.',
     color: '#DB333D',
     keywords: ['custom software development', 'custom web application', 'api development kuwait', 'backend development', 'stripe integration kuwait', 'custom development'],
-    features: ['REST API development', 'Third-party integrations', 'Stripe payment integration', 'Admin dashboards', 'Automation & webhooks', 'Database design', 'Firebase & cloud functions', 'CRM integrations'],
-    process: ['Requirements analysis', 'Architecture planning', 'Backend development', 'API documentation', 'Frontend integration', 'Testing & security', 'Deployment & monitoring'],
+    features: ['Online payment setup', 'Booking and ordering systems', 'Dashboards to see your business numbers', 'Connect your existing tools', 'Automatic emails and messages', 'Safe and secure data storage', 'Customer login areas', 'Reports and exports'],
+    process: ['We learn how your business works', 'We plan the solution', 'We build it step by step', 'We connect it to your tools', 'We test security and speed', 'We launch and monitor it'],
     faq: [
-      { q: 'What if I already have a frontend?', a: 'No problem — we can build just the backend API and integrate with your existing frontend.' },
-      { q: 'Can you integrate with my existing tools?', a: 'Yes — we integrate with most CRMs, payment gateways, email services, and third-party APIs.' },
+      { q: 'I already have a website. Can you add features?', a: 'Yes. We can add new features to your current website without rebuilding everything.' },
+      { q: 'Can it connect with the tools I already use?', a: 'In most cases, yes. We connect with payment services, email tools, customer systems and more.' },
     ],
   },
   'ui-ux-design': {
-    headline: 'UI/UX Design',
-    subheadline: 'Beautiful, user-focused interfaces that convert visitors into customers.',
-    description: 'Good design is not just about looks — it\'s about guiding users to take action. We design interfaces in Figma that are clean, intuitive, and conversion-optimised, then bring them to life in code.',
-    color: '#F59E0B',
+    headline: 'UI/UX Design in Kuwait',
+    subheadline: 'Simple, beautiful design that turns visitors into customers.',
+    description: 'Good design is not only about looks. It makes your website easy to understand and guides visitors to contact you or buy. We design clean, modern pages that match your brand, show you how it will look first, and then build it.',
+    color: '#B45309',
     keywords: ['ui ux design kuwait', 'web design kuwait', 'figma design', 'website design', 'app design kuwait', 'user interface design'],
-    features: ['Figma UI design', 'Wireframing & prototyping', 'Design systems', 'Mobile-first approach', 'Component libraries', 'User flow mapping', 'Brand consistency', 'Handoff-ready assets'],
-    process: ['Brand & goal discovery', 'Wireframes', 'High-fidelity mockups', 'Prototype & review', 'Design system docs', 'Developer handoff', 'Implementation support'],
+    features: ['Modern design that fits your brand', 'Easy menus and clear pages', 'Designs for phone and computer', 'You see everything before we build', 'Colors, fonts and style guide', 'Clear buttons that get more enquiries', 'Design files given to you', 'We can build it too'],
+    process: ['We learn your brand and goals', 'We sketch the pages', 'We create the full design', 'You review and we adjust', 'We prepare the files for building', 'We help while it is built'],
     faq: [
-      { q: 'Do you deliver Figma files?', a: 'Yes — all design files are fully handed over to you in Figma format.' },
-      { q: 'Can you design and build?', a: 'Absolutely — most of our projects include both design and development as a package.' },
+      { q: 'Do I get the design files?', a: 'Yes. You receive all design files, and they are yours to keep.' },
+      { q: 'Can you design and build my website?', a: 'Yes. Most clients choose both, so design and building fit together perfectly.' },
     ],
   },
   maintenance: {
-    headline: 'Website Maintenance & Support',
-    subheadline: 'Keep your site running perfectly with ongoing care, updates, and technical support.',
-    description: 'A website isn\'t a one-time project — it needs regular updates, security patches, and monitoring. Our maintenance plans keep your site fast, secure, and up to date so you can focus on your business.',
-    color: '#EF4444',
+    headline: 'Website Care & Support',
+    subheadline: 'We keep your website safe, fast and working, so you can focus on your business.',
+    description: 'A website needs regular care, just like a car. We update it, protect it from security problems, watch that it stays online, and fix issues quickly. You get peace of mind and a website that always works.',
+    color: '#B91C1C',
     keywords: ['website maintenance kuwait', 'web support services', 'site updates kuwait', 'website care plan', 'technical support web'],
-    features: ['Monthly security updates', 'Performance monitoring', 'Uptime monitoring (99.9%)', 'Content updates', 'Bug fixes & patches', 'Firebase & hosting management', 'Monthly reports', 'Priority support'],
-    process: ['Site audit & onboarding', 'Monitoring setup', 'Monthly update schedule', 'Regular security scans', 'Performance reports', 'On-demand fixes', 'Quarterly review'],
+    features: ['Regular updates', 'Security protection', 'We watch that your site stays online', 'Backups of your website', 'Text and photo changes', 'Fixing bugs and errors', 'Monthly report', 'Fast support when you need help'],
+    process: ['We check your website', 'We set up monitoring and backups', 'We update it every month', 'We scan for security problems', 'We send you a monthly report', 'We fix any issue quickly'],
     faq: [
-      { q: 'What sites do you maintain?', a: 'Any site we\'ve built, and most sites built with Next.js, React, or WordPress.' },
-      { q: 'What\'s included in monthly updates?', a: 'Security patches, dependency updates, content changes, performance checks, and a monthly report.' },
+      { q: 'Which websites do you look after?', a: 'Any website we built, and most other websites too.' },
+      { q: 'What is included each month?', a: 'Updates, security checks, backups, small content changes, speed checks and a simple monthly report.' },
     ],
   },
 };
@@ -119,10 +120,10 @@ export default function ServicePage({ slug }) {
         <Navbar />
 
         {/* Hero */}
-        <section className="pt-32 pb-16 px-6 grid-bg" style={{ borderBottom: '1px solid #1A2236' }}>
+        <section className="pt-32 pb-16 px-6 grid-bg" style={{ borderBottom: '1px solid #DDE1EA' }}>
           <div className="max-w-4xl mx-auto">
             <Link href="/services" className="inline-flex items-center gap-2 text-sm mb-8 reveal"
-              style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
+              style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>
               <ArrowLeft size={15} /> All Services
             </Link>
             <div className="flex items-center gap-3 mb-5 reveal">
@@ -135,11 +136,11 @@ export default function ServicePage({ slug }) {
             <h1 className="font-bold mb-4 reveal delay-1" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(2.2rem,5vw,3.5rem)', color: '#000129', lineHeight: 1.15 }}>
               {data.headline}
             </h1>
-            <p className="text-lg mb-6 reveal delay-2" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif', maxWidth: 560 }}>
+            <p className="text-lg mb-6 reveal delay-2" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif', maxWidth: 560 }}>
               {data.subheadline}
             </p>
             <div className="flex flex-wrap gap-3 reveal delay-3">
-              <Link href="/contact" className="btn-primary">Get a Quote <ArrowRight size={15} /></Link>
+              <Link href="/contact" className="btn-primary">Get a Free Quote <ArrowRight size={15} /></Link>
               <Link href="/projects" className="btn-ghost">See Our Work</Link>
             </div>
           </div>
@@ -150,40 +151,41 @@ export default function ServicePage({ slug }) {
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Main */}
             <div className="lg:col-span-2">
-              <p className="text-base leading-relaxed mb-10 reveal" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif', fontSize: '1.05rem' }}>
+              <SiteImage id={slug} rounded={20} style={{ marginBottom: 28 }} />
+              <p className="text-base leading-relaxed mb-10 reveal" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif', fontSize: '1.2rem' }}>
                 {data.description}
               </p>
 
               {/* Features */}
-              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#000129' }}>What's Included</h2>
+              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#000129' }}>What You Get</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-12 reveal delay-1">
                 {data.features.map((f) => (
-                  <div key={f} className="flex items-start gap-2.5 p-3 rounded-xl" style={{ background: '#F0EFF2', border: '1px solid #1A2236' }}>
-                    <CheckCircle2 size={15} style={{ color: data.color, flexShrink: 0, marginTop: 1 }} />
+                  <div key={f} className="flex items-start gap-2.5 p-3 rounded-xl" style={{ background: '#F0EFF2', border: '1px solid #DDE1EA' }}>
+                    <CheckCircle2 size={20} style={{ color: data.color, flexShrink: 0, marginTop: 1 }} />
                     <span className="text-sm" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>{f}</span>
                   </div>
                 ))}
               </div>
 
               {/* Process */}
-              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#000129' }}>Our Process</h2>
+              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#000129' }}>How It Works</h2>
               <div className="space-y-3 mb-12 reveal delay-1">
                 {data.process.map((step, i) => (
-                  <div key={step} className="flex items-center gap-4 p-4 rounded-xl" style={{ background: '#F0EFF2', border: '1px solid #1A2236' }}>
-                    <div className="w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center flex-shrink-0"
-                      style={{ background: `${data.color}20`, color: data.color, fontFamily: 'JetBrains Mono,monospace' }}>{i + 1}</div>
+                  <div key={step} className="flex items-center gap-4 p-4 rounded-xl" style={{ background: '#F0EFF2', border: '1px solid #DDE1EA' }}>
+                    <div className="w-9 h-9 rounded-full text-sm font-bold flex items-center justify-center flex-shrink-0"
+                      style={{ background: `${data.color}20`, color: data.color, fontFamily: 'DM Sans,sans-serif' }}>{i + 1}</div>
                     <span className="text-sm" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>{step}</span>
                   </div>
                 ))}
               </div>
 
               {/* FAQ */}
-              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#000129' }}>FAQ</h2>
+              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#000129' }}>Common Questions</h2>
               <div className="space-y-4 reveal delay-1">
                 {data.faq.map((f) => (
-                  <div key={f.q} className="p-5 rounded-xl" style={{ background: '#F0EFF2', border: '1px solid #1A2236' }}>
+                  <div key={f.q} className="p-5 rounded-xl" style={{ background: '#F0EFF2', border: '1px solid #DDE1EA' }}>
                     <h3 className="font-bold text-sm mb-2" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>{f.q}</h3>
-                    <p className="text-sm" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>{f.a}</p>
+                    <p className="text-sm" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>{f.a}</p>
                   </div>
                 ))}
               </div>
@@ -194,7 +196,7 @@ export default function ServicePage({ slug }) {
               {/* CTA Card */}
               <div className="card p-6 mb-6 reveal" style={{ position: 'sticky', top: '100px' }}>
                 <h3 className="font-bold mb-2" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>Ready to Start?</h3>
-                <p className="text-sm mb-5" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>Get a free consultation and quote for your {service.label.toLowerCase()} project.</p>
+                <p className="text-sm mb-5" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>Get a free chat and a clear price for your project.</p>
                 <Link href="/contact" className="btn-primary w-full justify-center mb-3">Get a Free Quote</Link>
                 <Link href="/projects" className="btn-ghost w-full justify-center">See Our Work</Link>
               </div>
@@ -206,7 +208,7 @@ export default function ServicePage({ slug }) {
                   {otherServices.map((s) => (
                     <Link key={s.slug} href={`/services/${s.slug}`}
                       className="flex items-center gap-3 p-3 rounded-xl transition-colors block"
-                      style={{ background: '#F0EFF2', border: '1px solid #1A2236' }}
+                      style={{ background: '#F0EFF2', border: '1px solid #DDE1EA' }}
                       onMouseEnter={(e) => e.currentTarget.style.borderColor = '#DB333D'}
                       onMouseLeave={(e) => e.currentTarget.style.borderColor = '#DDE1EA'}>
                       <span className="text-lg">{s.icon}</span>
