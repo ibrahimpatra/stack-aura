@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://stackauradigital.web.app',
+  siteUrl: 'https://stackaura.cc',
   generateRobotsTxt: true,
   changefreq: 'weekly',
   priority: 0.7,
