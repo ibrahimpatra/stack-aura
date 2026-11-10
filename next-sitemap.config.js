@@ -1,5 +1,5 @@
 const IMAGES = require('./lib/images.json');
-const SITE_URL = 'https://stackaura.cc';
+const SITE_URL = 'https://www.stackaura.cc';
 
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
