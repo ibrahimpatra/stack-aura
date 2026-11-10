@@ -1,20 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../lib/AuthContext';
-import { Save, ArrowLeft, Eye, Image } from 'lucide-react';
+import { Save, ArrowLeft, Eye, Image, X } from 'lucide-react';
+import TagPicker from '../../components/admin/TagPicker';
+import ImageUploader from '../../components/admin/ImageUploader';
+import { figureHtml } from '../../lib/media';
 
 function slugify(t) { return t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''); }
-
-const TAGS = [
-  { label: 'Web Dev', color: '#DB333D' },
-  { label: 'SEO', color: '#8B5CF6' },
-  { label: 'Mobile', color: '#06B6D4' },
-  { label: 'Backend', color: '#10B981' },
-  { label: 'Business', color: '#F59E0B' },
-  { label: 'Design', color: '#EF4444' },
-];
 
 export default function BlogEditor() {
   const { user, loading } = useAuth();
@@ -23,11 +17,10 @@ export default function BlogEditor() {
 
   const [form, setForm] = useState({
     title: '', slug: '', excerpt: '', content: '',
-    tag: 'Web Dev', tagColor: '#DB333D', readTime: '5 min read', coverImage: '',
+    tags: [], tag: '', tagColor: '#DB333D', readTime: '5 min read', coverImage: '', coverAlt: '',
   });
   const [saving, setSaving] = useState(false);
   const [preview, setPreview] = useState(false);
-  const [imgUploading, setImgUploading] = useState(false);
   const [message, setMessage] = useState('');
 
   useEffect(() => { if (!loading && !user) router.push('/login'); }, [user, loading, router]);
@@ -39,7 +32,7 @@ export default function BlogEditor() {
         const { db } = await import('../../lib/firebase');
         const { doc, getDoc } = await import('firebase/firestore');
         const snap = await getDoc(doc(db, 'posts', id));
-        if (snap.exists()) setForm({ ...form, ...snap.data() });
+        if (snap.exists()) { const d = snap.data(); setForm({ ...form, ...d, tags: d.tags?.length ? d.tags : (d.tag ? [d.tag] : []) }); }
       } catch {}
     })();
   }, [id, user]);
@@ -47,17 +40,13 @@ export default function BlogEditor() {
   const up = (k) => (v) => setForm((f) => ({ ...f, [k]: v }));
   const handleTitle = (v) => setForm((f) => ({ ...f, title: v, slug: f.slug || slugify(v) }));
 
-  const uploadImage = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    setImgUploading(true);
-    try {
-      const data = new FormData(); data.append('image', file);
-      const res = await fetch(`https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_KEY}`, { method: 'POST', body: data });
-      const json = await res.json();
-      if (json.data?.url) up('coverImage')(json.data.url);
-    } catch { alert('Upload failed.'); }
-    setImgUploading(false);
+  const contentRef = useRef(null);
+  const [showInsert, setShowInsert] = useState(false);
+  const insertIntoContent = (img) => {
+    const el = contentRef.current; const html = figureHtml(img);
+    const pos = el ? el.selectionStart : form.content.length;
+    setForm((f) => ({ ...f, content: f.content.slice(0, pos) + html + f.content.slice(pos) }));
+    setShowInsert(false);
   };
 
   const save = async () => {
@@ -66,7 +55,7 @@ export default function BlogEditor() {
     try {
       const { db } = await import('../../lib/firebase');
       const { collection, addDoc, doc, updateDoc, serverTimestamp } = await import('firebase/firestore');
-      const payload = { ...form, updatedAt: serverTimestamp() };
+      const payload = { ...form, tag: form.tags[0] || '', tagColor: '#DB333D', updatedAt: serverTimestamp() };
       if (id) {
         await updateDoc(doc(db, 'posts', id), payload);
         setMessage('Post updated!');
@@ -85,22 +74,22 @@ export default function BlogEditor() {
 
   return (
     <>
-      <Head><title>{id ? 'Edit Post' : 'New Post'} | Stackaura Admin</title><meta name="robots" content="noindex" /></Head>
-      <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
+      <Head><title>{id ? 'Edit Post' : 'New Post'} | stackaura.cc Admin</title><meta name="robots" content="noindex" /></Head>
+      <div className="light-ui" style={{ background: '#FFFFFF', minHeight: '100vh' }}>
         {/* Top bar */}
         <div className="px-6 py-4 flex items-center justify-between sticky top-0 z-50" style={{ background: '#F0EFF2', borderBottom: '1px solid #1A2236' }}>
           <div className="flex items-center gap-3">
-            <Link href="/admin" className="flex items-center gap-1.5 text-xs" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
+            <Link href="/admin" className="flex items-center gap-1.5 text-xs" style={{ color: '#6B7280', fontFamily: 'IBM Plex Sans,sans-serif' }}>
               <ArrowLeft size={13} /> Dashboard
             </Link>
             <span style={{ color: '#DDE1EA' }}>|</span>
             <span className="text-xs font-medium" style={{ color: '#4B5563', fontFamily: 'Syne,sans-serif' }}>{id ? 'Edit Post' : 'New Post'}</span>
           </div>
           <div className="flex items-center gap-3">
-            {message && <span className="text-xs" style={{ color: '#10B981', fontFamily: 'DM Sans,sans-serif' }}>{message}</span>}
+            {message && <span className="text-xs" style={{ color: '#10B981', fontFamily: 'IBM Plex Sans,sans-serif' }}>{message}</span>}
             <button onClick={() => setPreview(!preview)}
               className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg"
-              style={{ background: '#DDE1EA', color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>
+              style={{ background: '#DDE1EA', color: '#4B5563', fontFamily: 'IBM Plex Sans,sans-serif' }}>
               <Eye size={13} /> {preview ? 'Edit' : 'Preview'}
             </button>
             <button onClick={save} disabled={saving} className="btn-primary text-xs px-4 py-2" style={{ opacity: saving ? 0.7 : 1 }}>
@@ -113,8 +102,8 @@ export default function BlogEditor() {
           {preview ? (
             <div className="prose-custom">
               <h1 style={{ fontFamily: 'Syne,sans-serif', fontSize: '2rem', color: '#000129', fontWeight: 700, marginBottom: '1rem' }}>{form.title || 'Untitled'}</h1>
-              <p style={{ color: '#6B7280', marginBottom: '2rem', fontFamily: 'DM Sans,sans-serif' }}>{form.excerpt}</p>
-              {form.coverImage && <img src={form.coverImage} alt="" className="rounded-xl mb-8 w-full" />}
+              <p style={{ color: '#6B7280', marginBottom: '2rem', fontFamily: 'IBM Plex Sans,sans-serif' }}>{form.excerpt}</p>
+              {form.coverImage && <img src={form.coverImage} alt={form.coverAlt} className="rounded-xl mb-8 w-full" />}
               <div dangerouslySetInnerHTML={{ __html: form.content }} />
             </div>
           ) : (
@@ -127,50 +116,41 @@ export default function BlogEditor() {
 
               {/* Slug */}
               <div className="flex items-center gap-2">
-                <span className="text-xs" style={{ color: '#9CA3AF', fontFamily: 'JetBrains Mono,monospace' }}>slug:</span>
+                <span className="text-xs" style={{ color: '#9CA3AF', fontFamily: 'IBM Plex Mono,monospace' }}>slug:</span>
                 <input type="text" value={form.slug} onChange={(e) => up('slug')(slugify(e.target.value))}
                   className="flex-1 text-xs bg-transparent outline-none"
-                  style={{ color: '#DB333D', fontFamily: 'JetBrains Mono,monospace' }} />
+                  style={{ color: '#DB333D', fontFamily: 'IBM Plex Mono,monospace' }} />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {/* Tags */}
-                <div>
-                  <label className="text-xs mb-2 block" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>Tag</label>
-                  <div className="flex flex-wrap gap-2">
-                    {TAGS.map((t) => (
-                      <button key={t.label} onClick={() => setForm({ ...form, tag: t.label, tagColor: t.color })}
-                        className="text-xs px-2 py-1 rounded-md transition-all"
-                        style={{ background: form.tag === t.label ? `${t.color}20` : '#DDE1EA', color: form.tag === t.label ? t.color : '#6B7280', border: `1px solid ${form.tag === t.label ? t.color + '40' : 'transparent'}`, fontFamily: 'DM Sans,sans-serif' }}>
-                        {t.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+              <div>
+                <label className="mb-2 block font-semibold" style={{ color: '#374151', fontFamily: 'IBM Plex Sans,sans-serif' }}>Tags — pick as many as you like, or add your own with “Other / Custom”</label>
+                <TagPicker kind="blogTags" value={form.tags} onChange={(v) => setForm((f) => ({ ...f, tags: v }))} />
+              </div>
 
-                {/* Read time */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                  <label className="text-xs mb-2 block" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>Read Time</label>
-                  <input type="text" placeholder="5 min read" value={form.readTime}
-                    onChange={(e) => up('readTime')(e.target.value)} className="input" />
+                  <label className="mb-2 block font-semibold" style={{ color: '#374151', fontFamily: 'IBM Plex Sans,sans-serif' }}>Read Time</label>
+                  <input type="text" placeholder="5 min read" value={form.readTime} onChange={(e) => up('readTime')(e.target.value)} className="input" />
                 </div>
-
-                {/* Cover image */}
                 <div>
-                  <label className="text-xs mb-2 block" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>Cover Image</label>
-                  <label className="flex items-center gap-2 px-3 py-2.5 rounded-xl cursor-pointer text-xs"
-                    style={{ background: '#F0EFF2', border: '1px solid #1A2236', color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
-                    <Image size={13} />
-                    {imgUploading ? 'Uploading...' : form.coverImage ? 'Change Image' : 'Upload Cover'}
-                    <input type="file" accept="image/*" onChange={uploadImage} className="hidden" />
-                  </label>
-                  {form.coverImage && <img src={form.coverImage} alt="" className="mt-2 rounded-lg w-full h-16 object-cover" />}
+                  <label className="mb-2 block font-semibold" style={{ color: '#374151', fontFamily: 'IBM Plex Sans,sans-serif' }}>Cover Image</label>
+                  {form.coverImage ? (
+                    <div>
+                      <div className="relative">
+                        <img src={form.coverImage} alt={form.coverAlt} className="rounded-lg w-full" style={{ maxHeight: 160, objectFit: 'cover' }} />
+                        <button type="button" onClick={() => setForm((f) => ({ ...f, coverImage: '', coverAlt: '' }))} className="absolute top-2 right-2 p-1.5 rounded-lg" style={{ background: 'rgba(239,68,68,0.95)', color: '#fff' }}><X size={14} /></button>
+                      </div>
+                      <input className="input mt-2" placeholder="Alt text (describe the picture)" value={form.coverAlt} onChange={(e) => up('coverAlt')(e.target.value)} />
+                    </div>
+                  ) : (
+                    <ImageUploader defaultAlt={form.title ? `${form.title} – stackaura.cc blog` : ''} buttonLabel="Upload cover" onUploaded={(img) => setForm((f) => ({ ...f, coverImage: img.src, coverAlt: img.alt }))} />
+                  )}
                 </div>
               </div>
 
               {/* Excerpt */}
               <div>
-                <label className="text-xs mb-1.5 block" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>Excerpt (used for SEO + card preview)</label>
+                <label className="text-xs mb-1.5 block" style={{ color: '#6B7280', fontFamily: 'IBM Plex Sans,sans-serif' }}>Excerpt (used for SEO + card preview)</label>
                 <textarea rows={2} placeholder="Short summary of this post..." value={form.excerpt}
                   onChange={(e) => up('excerpt')(e.target.value)} className="input resize-none" />
               </div>
@@ -180,13 +160,14 @@ export default function BlogEditor() {
               {/* Content */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>Content (HTML)</label>
-                  <span className="text-xs" style={{ color: '#DDE1EA', fontFamily: 'JetBrains Mono,monospace' }}>html</span>
+                  <label className="text-xs" style={{ color: '#6B7280', fontFamily: 'IBM Plex Sans,sans-serif' }}>Content (HTML)</label>
+                  <button type="button" onClick={() => setShowInsert(!showInsert)} className="px-3 py-1.5 rounded-lg text-sm" style={{ background: '#E5E7EE', color: '#374151' }}>{showInsert ? 'Close' : '+ Add image to article'}</button>
                 </div>
-                <textarea rows={22} value={form.content} onChange={(e) => up('content')(e.target.value)}
+                {showInsert && <div className="mb-3"><ImageUploader defaultAlt={form.title} buttonLabel="Upload & insert at cursor" onUploaded={insertIntoContent} /></div>}
+                <textarea ref={contentRef} rows={22} value={form.content} onChange={(e) => up('content')(e.target.value)}
                   placeholder={'<h2>Introduction</h2>\n<p>Your article content here...</p>\n\n<h2>Section 2</h2>\n<p>More content...</p>'}
                   className="input resize-y"
-                  style={{ fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', lineHeight: 1.7 }} />
+                  style={{ fontFamily: 'IBM Plex Mono,monospace', fontSize: '0.8rem', lineHeight: 1.7 }} />
               </div>
             </div>
           )}

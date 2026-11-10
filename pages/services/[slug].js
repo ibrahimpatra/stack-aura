@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Navbar from '../../components/ui/Navbar';
 import Footer from '../../components/ui/Footer';
 import SEOHead from '../../components/ui/SEOHead';
+import TechPill from '../../components/ui/TechPill';
 import SiteImage from '../../components/ui/SiteImage';
 import ContactSection from '../../components/sections/ContactSection';
 import { useScrollReveal } from '../../lib/useScrollReveal';
@@ -15,11 +16,11 @@ const SERVICE_DATA = {
     description: 'We build your business website from start to finish. It works perfectly on phones, tablets and computers, loads quickly, and is set up so Google can find it. Whether you need a simple company website, an online store or a custom web application, we build it to grow with your business.',
     color: '#DB333D',
     keywords: ['custom website development', 'web development kuwait', 'next.js developer', 'react developer kuwait', 'professional web development', 'build your website', 'website development company'],
-    features: ['Modern, good-looking design', 'Works on phones and computers', 'Easy for Google to find (SEO)', 'Online store and payments', 'Admin area to update your content', 'Contact forms and WhatsApp button', 'Visitor statistics (Google Analytics)', 'Fast loading speed'],
+    features: ['Modern, good-looking design', 'Works on phones and computers', 'Easy for Google to find (SEO)', 'Online store and payments', 'Easy dashboard to update your content', 'Contact forms and WhatsApp button', 'Visitor statistics (Google Analytics)', 'Fast loading speed'],
     process: ['We talk about your business and goals', 'We plan the pages and design', 'We build your website', 'We add your content and set up Google', 'We test everything carefully', 'We launch your website', 'We train you and stay available for help'],
     faq: [
       { q: 'How long does a website take?', a: 'Most websites are ready in 2–4 weeks, depending on how many pages and features you need.' },
-      { q: 'Can I update the website myself?', a: 'Yes. We can add an easy admin area so you can change text, photos and products without any technical skills.' },
+      { q: 'Can I update the website myself?', a: 'Yes. We can add an easy dashboard so you can change text, photos and products without any technical skills.' },
       { q: 'Will my website show on Google?', a: 'Yes. Every website we build is set up for Google from day one, so people can find you.' },
     ],
   },
@@ -27,7 +28,7 @@ const SERVICE_DATA = {
     headline: 'Mobile App Development in Kuwait',
     subheadline: 'One app that works on both iPhone and Android, built for your business.',
     description: 'We build mobile apps for iPhone and Android at the same time, which saves you money and time. Your customers can order, book, chat or shop right from their phone, and we help you publish the app on the App Store and Google Play.',
-    color: '#000129',
+    color: '#F3F4FA',
     keywords: ['mobile app development kuwait', 'ios app developer', 'android app developer', 'react native developer', 'cross platform app development'],
     features: ['Works on iPhone and Android', 'Simple, easy-to-use screens', 'Notifications to your customers', 'Customer accounts and login', 'Online payments', 'Works even with weak internet', 'We publish it on the App Store and Google Play', 'Usage statistics'],
     process: ['We talk about your app idea', 'We design the screens', 'We build the app', 'We connect it to your data', 'We test it on real phones', 'We publish it in the app stores', 'We support you after launch'],
@@ -40,7 +41,7 @@ const SERVICE_DATA = {
     headline: 'SEO – Rank Higher on Google in Kuwait',
     subheadline: 'Help more customers find your business when they search on Google.',
     description: 'SEO means making your website easier for Google to understand, so it shows higher in search results. We check your website, find what is holding it back, fix it, and choose the right words your customers type into Google.',
-    color: '#000129',
+    color: '#F3F4FA',
     keywords: ['seo optimisation kuwait', 'google ranking kuwait', 'local seo kuwait', 'seo expert kuwait', 'technical seo', 'website seo service'],
     features: ['Full check of your website', 'Finding the words customers search', 'Fixing problems that hurt your ranking', 'Better page titles and descriptions', 'Images that appear in Google Images', 'Google Search Console setup', 'Google Business Profile setup', 'Monthly progress reports'],
     process: ['We check your current website', 'We research what customers search for', 'We fix the technical problems', 'We improve your pages and images', 'We submit your website to Google', 'We track results every month'],
@@ -66,7 +67,7 @@ const SERVICE_DATA = {
     headline: 'UI/UX Design in Kuwait',
     subheadline: 'Simple, beautiful design that turns visitors into customers.',
     description: 'Good design is not only about looks. It makes your website easy to understand and guides visitors to contact you or buy. We design clean, modern pages that match your brand, show you how it will look first, and then build it.',
-    color: '#B45309',
+    color: '#DB333D',
     keywords: ['ui ux design kuwait', 'web design kuwait', 'figma design', 'website design', 'app design kuwait', 'user interface design'],
     features: ['Modern design that fits your brand', 'Easy menus and clear pages', 'Designs for phone and computer', 'You see everything before we build', 'Colors, fonts and style guide', 'Clear buttons that get more enquiries', 'Design files given to you', 'We can build it too'],
     process: ['We learn your brand and goals', 'We sketch the pages', 'We create the full design', 'You review and we adjust', 'We prepare the files for building', 'We help while it is built'],
@@ -79,7 +80,7 @@ const SERVICE_DATA = {
     headline: 'Website Care & Support',
     subheadline: 'We keep your website safe, fast and working, so you can focus on your business.',
     description: 'A website needs regular care, just like a car. We update it, protect it from security problems, watch that it stays online, and fix issues quickly. You get peace of mind and a website that always works.',
-    color: '#B91C1C',
+    color: '#DB333D',
     keywords: ['website maintenance kuwait', 'web support services', 'site updates kuwait', 'website care plan', 'technical support web'],
     features: ['Regular updates', 'Security protection', 'We watch that your site stays online', 'Backups of your website', 'Text and photo changes', 'Fixing bugs and errors', 'Monthly report', 'Fast support when you need help'],
     process: ['We check your website', 'We set up monitoring and backups', 'We update it every month', 'We scan for security problems', 'We send you a monthly report', 'We fix any issue quickly'],
@@ -90,22 +91,22 @@ const SERVICE_DATA = {
   },
 };
 
-export default function ServicePage({ slug }) {
+export default function ServicePage({ slug, technologies = [] }) {
   useScrollReveal();
   const service = SERVICES.find((s) => s.slug === slug);
   const data = SERVICE_DATA[slug];
 
   if (!service || !data) return (
-    <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ background: '#000129', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div className="text-center">
-        <p className="text-xl mb-4" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>Service not found</p>
+        <p className="text-xl mb-4" style={{ fontFamily: 'Syne,sans-serif', color: '#F3F4FA' }}>Service not found</p>
         <Link href="/services" style={{ color: '#DB333D' }}>← All Services</Link>
       </div>
     </div>
   );
 
   const seo = pageSEO({
-    title: `${data.headline} | Stackaura Digital Kuwait`,
+    title: `${data.headline} | stackaura.cc Kuwait`,
     description: data.description.slice(0, 160),
     path: `/services/${slug}`,
     extraKeywords: data.keywords,
@@ -116,14 +117,14 @@ export default function ServicePage({ slug }) {
   return (
     <>
       <SEOHead {...seo} />
-      <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
+      <div style={{ background: '#000129', minHeight: '100vh' }}>
         <Navbar />
 
         {/* Hero */}
         <section className="pt-32 pb-16 px-6 grid-bg" style={{ borderBottom: '1px solid #DDE1EA' }}>
           <div className="max-w-4xl mx-auto">
             <Link href="/services" className="inline-flex items-center gap-2 text-sm mb-8 reveal"
-              style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>
+              style={{ color: '#C3C7DB', fontFamily: 'IBM Plex Sans,sans-serif' }}>
               <ArrowLeft size={15} /> All Services
             </Link>
             <div className="flex items-center gap-3 mb-5 reveal">
@@ -131,12 +132,12 @@ export default function ServicePage({ slug }) {
                 style={{ background: `${data.color}15`, color: data.color }}>
                 {service.icon}
               </div>
-              <span className="text-sm font-medium" style={{ color: data.color, fontFamily: 'DM Sans,sans-serif' }}>{service.label}</span>
+              <span className="text-sm font-medium" style={{ color: data.color, fontFamily: 'IBM Plex Sans,sans-serif' }}>{service.label}</span>
             </div>
-            <h1 className="font-bold mb-4 reveal delay-1" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(2.2rem,5vw,3.5rem)', color: '#000129', lineHeight: 1.15 }}>
+            <h1 className="font-bold mb-4 reveal delay-1" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(2.2rem,5vw,3.5rem)', color: '#F3F4FA', lineHeight: 1.15 }}>
               {data.headline}
             </h1>
-            <p className="text-lg mb-6 reveal delay-2" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif', maxWidth: 560 }}>
+            <p className="text-lg mb-6 reveal delay-2" style={{ color: '#C3C7DB', fontFamily: 'IBM Plex Sans,sans-serif', maxWidth: 560 }}>
               {data.subheadline}
             </p>
             <div className="flex flex-wrap gap-3 reveal delay-3">
@@ -151,41 +152,48 @@ export default function ServicePage({ slug }) {
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Main */}
             <div className="lg:col-span-2">
-              <SiteImage id={slug} rounded={20} style={{ marginBottom: 28 }} />
-              <p className="text-base leading-relaxed mb-10 reveal" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif', fontSize: '1.2rem' }}>
+              <SiteImage id={slug} rounded={6} fallback style={{ marginBottom: 28 }} />
+              <p className="text-base leading-relaxed mb-10 reveal" style={{ color: '#C3C7DB', fontFamily: 'IBM Plex Sans,sans-serif', fontSize: '1.2rem' }}>
                 {data.description}
               </p>
 
+              {technologies.length > 0 && (
+                <div className="mb-10 reveal">
+                  <h2 className="font-bold mb-4" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#F3F4FA' }}>Technologies We Use</h2>
+                  <div className="flex flex-wrap gap-3">{technologies.map((t) => <TechPill key={t} name={t} big />)}</div>
+                </div>
+              )}
+
               {/* Features */}
-              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#000129' }}>What You Get</h2>
+              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#F3F4FA' }}>What You Get</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-12 reveal delay-1">
                 {data.features.map((f) => (
-                  <div key={f} className="flex items-start gap-2.5 p-3 rounded-xl" style={{ background: '#F0EFF2', border: '1px solid #DDE1EA' }}>
+                  <div key={f} className="flex items-start gap-2.5 p-3 rounded-xl" style={{ background: '#14172E', border: '1px solid #DDE1EA' }}>
                     <CheckCircle2 size={20} style={{ color: data.color, flexShrink: 0, marginTop: 1 }} />
-                    <span className="text-sm" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>{f}</span>
+                    <span className="text-sm" style={{ color: '#C3C7DB', fontFamily: 'IBM Plex Sans,sans-serif' }}>{f}</span>
                   </div>
                 ))}
               </div>
 
               {/* Process */}
-              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#000129' }}>How It Works</h2>
+              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#F3F4FA' }}>How It Works</h2>
               <div className="space-y-3 mb-12 reveal delay-1">
                 {data.process.map((step, i) => (
-                  <div key={step} className="flex items-center gap-4 p-4 rounded-xl" style={{ background: '#F0EFF2', border: '1px solid #DDE1EA' }}>
+                  <div key={step} className="flex items-center gap-4 p-4 rounded-xl" style={{ background: '#14172E', border: '1px solid #DDE1EA' }}>
                     <div className="w-9 h-9 rounded-full text-sm font-bold flex items-center justify-center flex-shrink-0"
-                      style={{ background: `${data.color}20`, color: data.color, fontFamily: 'DM Sans,sans-serif' }}>{i + 1}</div>
-                    <span className="text-sm" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>{step}</span>
+                      style={{ background: `${data.color}20`, color: data.color, fontFamily: 'IBM Plex Sans,sans-serif' }}>{i + 1}</div>
+                    <span className="text-sm" style={{ color: '#C3C7DB', fontFamily: 'IBM Plex Sans,sans-serif' }}>{step}</span>
                   </div>
                 ))}
               </div>
 
               {/* FAQ */}
-              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#000129' }}>Common Questions</h2>
+              <h2 className="font-bold mb-5 reveal" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.5rem', color: '#F3F4FA' }}>Common Questions</h2>
               <div className="space-y-4 reveal delay-1">
                 {data.faq.map((f) => (
-                  <div key={f.q} className="p-5 rounded-xl" style={{ background: '#F0EFF2', border: '1px solid #DDE1EA' }}>
-                    <h3 className="font-bold text-sm mb-2" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>{f.q}</h3>
-                    <p className="text-sm" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>{f.a}</p>
+                  <div key={f.q} className="p-5 rounded-xl" style={{ background: '#14172E', border: '1px solid #DDE1EA' }}>
+                    <h3 className="font-bold text-sm mb-2" style={{ fontFamily: 'Syne,sans-serif', color: '#F3F4FA' }}>{f.q}</h3>
+                    <p className="text-sm" style={{ color: '#C3C7DB', fontFamily: 'IBM Plex Sans,sans-serif' }}>{f.a}</p>
                   </div>
                 ))}
               </div>
@@ -195,24 +203,24 @@ export default function ServicePage({ slug }) {
             <div>
               {/* CTA Card */}
               <div className="card p-6 mb-6 reveal" style={{ position: 'sticky', top: '100px' }}>
-                <h3 className="font-bold mb-2" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>Ready to Start?</h3>
-                <p className="text-sm mb-5" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>Get a free chat and a clear price for your project.</p>
+                <h3 className="font-bold mb-2" style={{ fontFamily: 'Syne,sans-serif', color: '#F3F4FA' }}>Ready to Start?</h3>
+                <p className="text-sm mb-5" style={{ color: '#C3C7DB', fontFamily: 'IBM Plex Sans,sans-serif' }}>Get a free chat and a clear price for your project.</p>
                 <Link href="/contact" className="btn-primary w-full justify-center mb-3">Get a Free Quote</Link>
                 <Link href="/projects" className="btn-ghost w-full justify-center">See Our Work</Link>
               </div>
 
               {/* Other services */}
               <div className="reveal delay-2">
-                <h4 className="font-bold text-sm mb-4" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>Other Services</h4>
+                <h4 className="font-bold text-sm mb-4" style={{ fontFamily: 'Syne,sans-serif', color: '#F3F4FA' }}>Other Services</h4>
                 <div className="space-y-2">
                   {otherServices.map((s) => (
                     <Link key={s.slug} href={`/services/${s.slug}`}
                       className="flex items-center gap-3 p-3 rounded-xl transition-colors block"
-                      style={{ background: '#F0EFF2', border: '1px solid #DDE1EA' }}
+                      style={{ background: '#14172E', border: '1px solid #DDE1EA' }}
                       onMouseEnter={(e) => e.currentTarget.style.borderColor = '#DB333D'}
-                      onMouseLeave={(e) => e.currentTarget.style.borderColor = '#DDE1EA'}>
+                      onMouseLeave={(e) => e.currentTarget.style.borderColor = '#2A2F57'}>
                       <span className="text-lg">{s.icon}</span>
-                      <span className="text-sm" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>{s.label}</span>
+                      <span className="text-sm" style={{ color: '#C3C7DB', fontFamily: 'IBM Plex Sans,sans-serif' }}>{s.label}</span>
                     </Link>
                   ))}
                 </div>
@@ -231,5 +239,7 @@ export default function ServicePage({ slug }) {
 export async function getServerSideProps({ params }) {
   const { slug } = params;
   if (!SERVICE_DATA[slug]) return { notFound: true };
-  return { props: { slug } };
+  let technologies = [];
+  try { const { getServiceTech } = await import('../../lib/taxonomy'); technologies = await getServiceTech(slug); } catch {}
+  return { props: { slug, technologies } };
 }

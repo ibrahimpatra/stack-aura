@@ -1,59 +1,64 @@
 import Link from 'next/link';
-import { CheckCircle2, ArrowRight } from 'lucide-react';
+import { CheckCircle2, ArrowRight, MessageCircle } from 'lucide-react';
 import SiteImage from '../ui/SiteImage';
+import { SITE } from '../../lib/seo';
 
 const WHY = [
   'Your website is built to be found on Google from day one',
-  'Clean, simple work with no extra mess or hidden costs',
-  'Based in Kuwait and happy to work with clients worldwide',
-  'Fast delivery: most websites go live in 2–4 weeks',
-  'You own everything: your website, your code and your accounts',
+  'Clean, honest work with no hidden costs',
+  'We are in Kuwait and reply on WhatsApp',
+  'Most websites go live in 2–4 weeks',
+  'You own everything: your website, your code, your accounts',
 ];
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-24 px-6" style={{ background: '#F0EFF2' }}>
+    <section id="about" className="py-24 px-6 relative z-10" style={{ background: '#000129' }}>
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div>
-          <div className="section-label mb-4 reveal" style={{ background: 'rgba(0,1,41,0.06)', border: '1px solid rgba(0,1,41,0.12)', color: '#000129' }}>
-            <span style={{ fontFamily: 'DM Sans,sans-serif' }}>About us</span>
-          </div>
-          <h2 className="font-bold mb-5 reveal delay-1" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(1.8rem,4vw,2.8rem)', color: '#000129' }}>
-            A Small Team That Delivers Real Results.
+        <div className="reveal-left">
+          <div className="section-label mb-5">Who we are</div>
+          <h2 className="font-extrabold mb-6" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(2.1rem,4.4vw,3.4rem)', color: '#F3F4FA', letterSpacing: '-0.02em' }}>
+            A team that <span className="scribble" style={{ color: '#DB333D' }}>gets it done.</span>
           </h2>
-          <p className="text-base mb-4 leading-relaxed reveal delay-2" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>
-            Stackaura Digital is a web development company in Kuwait. We build websites, mobile apps and Google ranking plans that actually work, not just look nice.
+          <p className="mb-8" style={{ color: '#C3C7DB', fontSize: '1.25rem', lineHeight: 1.7 }}>
+            We build websites and mobile apps, and we help businesses get found on Google. Every website we make is ready for Google from the very first day, not as an extra later.
           </p>
-          <p className="text-base mb-8 leading-relaxed reveal delay-3" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>
-            Every website we build is ready for Google from the very first day. We don’t add it later as an extra.
-          </p>
-          <div className="space-y-3 mb-8 reveal delay-4">
+          <ul className="space-y-4 mb-10">
             {WHY.map((w) => (
-              <div key={w} className="flex items-start gap-3">
-                <CheckCircle2 size={16} style={{ color: '#DB333D', flexShrink: 0, marginTop: 2 }} />
-                <span className="text-sm" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>{w}</span>
-              </div>
+              <li key={w} className="flex items-start gap-3" style={{ color: '#E4E6F2', fontSize: '1.15rem' }}>
+                <CheckCircle2 size={24} className="flex-shrink-0 mt-0.5" style={{ color: '#DB333D' }} /> {w}
+              </li>
             ))}
-          </div>
-          <div className="flex gap-3 reveal delay-5">
-            <Link href="/about" className="btn-primary">About Us <ArrowRight size={15} /></Link>
-            <Link href="/contact" className="btn-ghost">Get in Touch</Link>
+          </ul>
+          <div className="flex flex-wrap gap-4">
+            <Link href="/about" className="btn-primary">More about us <ArrowRight size={20} /></Link>
+            <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn-ghost"><MessageCircle size={20} /> WhatsApp us</a>
           </div>
         </div>
 
-        <div className="reveal-right">
-          <SiteImage id="about-team" rounded={20} style={{ marginBottom: 24 }} />
-          <div className="card p-8">
-            <div className="font-bold mb-5" style={{ color: '#000129', fontFamily: 'Syne,sans-serif', fontSize: '1.3rem' }}>How a project goes</div>
-            {['Talk about your idea', 'Design it', 'Build and test it', 'Launch it on Google', 'Support you after launch'].map((step, i) => (
-              <div key={step} className="flex items-center gap-4 mb-4">
-                <div className="w-9 h-9 rounded-full font-bold flex items-center justify-center flex-shrink-0"
-                  style={{ background: 'rgba(219,51,61,0.12)', color: '#B91C26', fontFamily: 'DM Sans,sans-serif', fontSize: '1.05rem' }}>{i + 1}</div>
-                <span style={{ color: '#1F2937', fontFamily: 'DM Sans,sans-serif', fontSize: '1.15rem' }}>{step}</span>
-              </div>
-            ))}
+        <div className="reveal-right relative">
+          <div style={{ transform: 'rotate(1.6deg)', border: '3px solid #F3F4FA', background: '#14172E', boxShadow: '12px 12px 0 #DB333D', borderRadius: 4, overflow: 'hidden' }}>
+            <SiteImage id="about-team" rounded={0} fallback />
+          </div>
+          <div className="absolute flex items-center justify-center text-center"
+            style={{ right: -10, bottom: -26, width: 118, height: 118, borderRadius: '50%', background: '#DB333D', color: '#fff', transform: 'rotate(-12deg)', border: '3px dashed #fff', fontFamily: 'Syne,sans-serif', fontWeight: 800, lineHeight: 1.1, fontSize: '1.05rem' }}>
+            Made in<br />Kuwait
           </div>
         </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto mt-20 grid grid-cols-2 md:grid-cols-4 gap-px reveal" style={{ background: '#2A2F57', border: '1px solid #2A2F57' }}>
+        {[
+          { v: '20+', l: 'Projects finished' },
+          { v: '100%', l: 'Happy clients' },
+          { v: '2–4 wks', l: 'Typical time to launch' },
+          { v: '24 hrs', l: 'We reply within' },
+        ].map((s) => (
+          <div key={s.l} className="p-7 text-center" style={{ background: '#000129' }}>
+            <div className="font-extrabold" style={{ fontFamily: 'Syne,sans-serif', color: '#DB333D', fontSize: '2.4rem', lineHeight: 1.1 }}>{s.v}</div>
+            <div className="mt-2" style={{ color: '#C3C7DB', fontSize: '1.05rem' }}>{s.l}</div>
+          </div>
+        ))}
       </div>
     </section>
   );

@@ -23,7 +23,7 @@ export default function SEOHead({ title, description, keywords, canonical, ogIma
       <meta property="og:image" content={img} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="Stackaura Digital – websites, mobile apps and SEO in Kuwait" />
+      <meta property="og:image:alt" content="stackaura.cc – websites, mobile apps and SEO in Kuwait" />
       {canonical && <meta property="og:url" content={canonical} />}
 
       {/* Twitter */}

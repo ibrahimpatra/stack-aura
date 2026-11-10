@@ -70,8 +70,8 @@ export default function Admin() {
 
   return (
     <>
-      <Head><title>Admin | Stackaura Digital</title><meta name="robots" content="noindex" /></Head>
-      <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
+      <Head><title>Admin | stackaura.cc</title><meta name="robots" content="noindex" /></Head>
+      <div className="light-ui" style={{ background: '#FFFFFF', minHeight: '100vh' }}>
         {/* Top bar */}
         <div className="px-6 py-4 flex items-center justify-between" style={{ background: '#F0EFF2', borderBottom: '1px solid #1A2236' }}>
           <div className="flex items-center gap-3">
@@ -81,8 +81,9 @@ export default function Admin() {
             <span className="font-semibold text-sm" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>Admin Panel</span>
           </div>
           <div className="flex items-center gap-3">
-            <Link href="/" className="text-xs" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>← View Site</Link>
-            <button onClick={logout} className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg" style={{ background: '#DDE1EA', color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>
+            <Link href="/admin/tags" className="text-xs font-semibold" style={{ color: '#DB333D', fontFamily: 'IBM Plex Sans,sans-serif' }}>Tags &amp; Technologies</Link>
+            <Link href="/" className="text-xs" style={{ color: '#6B7280', fontFamily: 'IBM Plex Sans,sans-serif' }}>← View Site</Link>
+            <button onClick={logout} className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg" style={{ background: '#DDE1EA', color: '#4B5563', fontFamily: 'IBM Plex Sans,sans-serif' }}>
               <LogOut size={13} /> Logout
             </button>
           </div>
@@ -100,7 +101,7 @@ export default function Admin() {
               <div key={s.label} className="card p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: `${s.color}15`, color: s.color }}>{s.icon}</div>
-                  <span className="text-xs" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>{s.label}</span>
+                  <span className="text-xs" style={{ color: '#6B7280', fontFamily: 'IBM Plex Sans,sans-serif' }}>{s.label}</span>
                 </div>
                 <div className="font-bold text-2xl" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>{s.value}</div>
               </div>
@@ -115,7 +116,7 @@ export default function Admin() {
             ].map((t) => (
               <button key={t.key} onClick={() => setTab(t.key)}
                 className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm transition-all"
-                style={{ background: tab === t.key ? 'rgba(219,51,61,0.15)' : '#F0EFF2', border: `1px solid ${tab === t.key ? '#DB333D' : '#DDE1EA'}`, color: tab === t.key ? '#DB333D' : '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
+                style={{ background: tab === t.key ? 'rgba(219,51,61,0.15)' : '#F0EFF2', border: `1px solid ${tab === t.key ? '#DB333D' : '#DDE1EA'}`, color: tab === t.key ? '#DB333D' : '#6B7280', fontFamily: 'IBM Plex Sans,sans-serif' }}>
                 {t.icon} {t.label}
               </button>
             ))}
@@ -136,8 +137,8 @@ export default function Admin() {
                 </div>
               ) : projects.length === 0 ? (
                 <div className="text-center py-12" style={{ background: '#FFFFFF' }}>
-                  <p style={{ color: '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}>No projects yet.</p>
-                  <Link href="/admin/project-editor" className="mt-2 inline-block text-sm" style={{ color: '#DB333D', fontFamily: 'DM Sans,sans-serif' }}>Add your first project →</Link>
+                  <p style={{ color: '#9CA3AF', fontFamily: 'IBM Plex Sans,sans-serif' }}>No projects yet.</p>
+                  <Link href="/admin/project-editor" className="mt-2 inline-block text-sm" style={{ color: '#DB333D', fontFamily: 'IBM Plex Sans,sans-serif' }}>Add your first project →</Link>
                 </div>
               ) : (
                 <div style={{ background: '#FFFFFF' }}>
@@ -146,13 +147,13 @@ export default function Admin() {
                       onMouseEnter={(e) => e.currentTarget.style.background = '#0A0F1A'}
                       onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
                       {p.images?.[0] && (
-                        <img src={p.images[0]} alt={p.title} className="w-12 h-8 rounded-lg object-cover flex-shrink-0"
+                        <img src={p.images[0].src || p.images[0]} alt={p.title} className="w-12 h-8 rounded-lg object-cover flex-shrink-0"
                           onError={(e) => { e.target.style.display = 'none'; }} />
                       )}
                       <div className="flex-1 min-w-0">
                         <div className="font-medium text-sm truncate" style={{ color: '#000129', fontFamily: 'Syne,sans-serif' }}>{p.title}</div>
-                        {p.client && <div className="text-xs" style={{ color: '#DB333D', fontFamily: 'DM Sans,sans-serif' }}>{p.client}</div>}
-                        <div className="text-xs" style={{ color: '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}>{formatDate(p.createdAt)}</div>
+                        {p.client && <div className="text-xs" style={{ color: '#DB333D', fontFamily: 'IBM Plex Sans,sans-serif' }}>{p.client}</div>}
+                        <div className="text-xs" style={{ color: '#9CA3AF', fontFamily: 'IBM Plex Sans,sans-serif' }}>{formatDate(p.createdAt)}</div>
                       </div>
                       <div className="flex items-center gap-2">
                         <button onClick={() => toggleFeatured(p)} className="p-2 rounded-lg" title="Toggle featured"
@@ -197,8 +198,8 @@ export default function Admin() {
                 </div>
               ) : posts.length === 0 ? (
                 <div className="text-center py-12" style={{ background: '#FFFFFF' }}>
-                  <p style={{ color: '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}>No posts yet.</p>
-                  <Link href="/admin/editor" className="mt-2 inline-block text-sm" style={{ color: '#DB333D', fontFamily: 'DM Sans,sans-serif' }}>Write your first post →</Link>
+                  <p style={{ color: '#9CA3AF', fontFamily: 'IBM Plex Sans,sans-serif' }}>No posts yet.</p>
+                  <Link href="/admin/editor" className="mt-2 inline-block text-sm" style={{ color: '#DB333D', fontFamily: 'IBM Plex Sans,sans-serif' }}>Write your first post →</Link>
                 </div>
               ) : (
                 <div style={{ background: '#FFFFFF' }}>
@@ -208,7 +209,7 @@ export default function Admin() {
                       onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
                       <div className="flex-1 min-w-0">
                         <div className="font-medium text-sm truncate" style={{ color: '#000129', fontFamily: 'Syne,sans-serif' }}>{p.title}</div>
-                        <div className="text-xs" style={{ color: '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}>{formatDate(p.createdAt)}</div>
+                        <div className="text-xs" style={{ color: '#9CA3AF', fontFamily: 'IBM Plex Sans,sans-serif' }}>{formatDate(p.createdAt)}</div>
                       </div>
                       <div className="flex items-center gap-2 ml-4">
                         <Link href={`/blog/${p.slug}`} target="_blank" className="p-2 rounded-lg" style={{ color: '#6B7280' }}

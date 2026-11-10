@@ -1,9 +1,24 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /login
+Disallow: /api/
+
+# Googlebot-Image
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /media/
+Allow: /tech/
+Allow: /og/
+
+# facebookexternalhit
+User-agent: facebookexternalhit
+Allow: /
 
 # Host
-Host: https://stackaura.cc
+Host: https://www.stackaura.cc
 
 # Sitemaps
-Sitemap: https://stackaura.cc/sitemap.xml
+Sitemap: https://www.stackaura.cc/sitemap.xml
+Sitemap: https://www.stackaura.cc/server-sitemap.xml

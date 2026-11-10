@@ -3,7 +3,7 @@
     "src": "/images/web-development-agency-kuwait-hero.webp",
     "width": 1600, "height": 900,
     "alt": "Web development agency in Kuwait building a business website and mobile app",
-    "title": "Stackaura Digital – web development agency in Kuwait",
+    "title": "stackaura.cc – web development agency in Kuwait",
     "pages": ["/"]
   },
   "web-development": {
@@ -51,14 +51,14 @@
   "about-team": {
     "src": "/images/stackaura-digital-team-kuwait.webp",
     "width": 1200, "height": 800,
-    "alt": "Stackaura Digital web development team working together in Kuwait",
-    "title": "The Stackaura Digital team in Kuwait",
+    "alt": "stackaura.cc web development team working together in Kuwait",
+    "title": "The stackaura.cc team in Kuwait",
     "pages": ["/", "/about"]
   },
   "kuwait": {
     "src": "/images/web-design-company-kuwait-city.webp",
     "width": 1600, "height": 600,
-    "alt": "Kuwait City skyline with Kuwait Towers, home of Stackaura Digital web design company",
+    "alt": "Kuwait City skyline with Kuwait Towers, home of stackaura.cc web design company",
     "title": "Web design company in Kuwait City",
     "pages": ["/about"]
   },
@@ -66,14 +66,14 @@
     "src": "/images/contact-web-developer-kuwait.webp",
     "width": 1200, "height": 600,
     "alt": "Contact a web developer in Kuwait for a free website quote",
-    "title": "Contact Stackaura Digital for a free quote",
+    "title": "Contact stackaura.cc for a free quote",
     "pages": ["/contact"]
   },
   "blog-cover": {
     "src": "/images/blog-cover-web-development-tips.webp",
     "width": 1200, "height": 630,
-    "alt": "Web development and SEO tips from Stackaura Digital",
-    "title": "Stackaura Digital blog – web development and SEO tips",
+    "alt": "Web development and SEO tips from stackaura.cc",
+    "title": "stackaura.cc blog – web development and SEO tips",
     "pages": ["/blog"]
   }
 }

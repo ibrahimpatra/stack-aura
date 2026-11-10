@@ -3,20 +3,21 @@ import { Github, Twitter, Linkedin, Mail, ArrowUpRight, MessageCircle, MapPin } 
 import { SITE, SERVICES } from '../../lib/seo';
 import Logo from './Logo';
 
-const LINK = { color: '#B4BAD6', fontFamily: 'DM Sans,sans-serif', fontSize: '1.05rem' };
+const LINK = { color: '#B4BAD6', fontFamily: 'IBM Plex Sans,sans-serif', fontSize: '1.05rem' };
 
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer style={{ background: '#000129', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+    <footer style={{ background: '#00001A', borderTop: '6px solid #DB333D', position: 'relative', zIndex: 2 }}>
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-2">
             <div className="mb-5"><Logo dark /></div>
-            <p className="leading-relaxed mb-5" style={{ color: '#B4BAD6', maxWidth: '380px', fontFamily: 'DM Sans,sans-serif', fontSize: '1.05rem' }}>
+            <p className="ar mb-3" style={{ color: '#FF5A63', fontSize: '1.3rem' }}><span lang="ar" dir="rtl">مرحباً بك، نبني لك موقعاً يجلب العملاء</span></p>
+            <p className="leading-relaxed mb-5" style={{ color: '#B4BAD6', maxWidth: '380px', fontFamily: 'IBM Plex Sans,sans-serif', fontSize: '1.05rem' }}>
               We build websites and mobile apps, and help your business show up on Google. Based in Kuwait, working with clients worldwide.
             </p>
-            <div className="space-y-2 mb-6" style={{ fontFamily: 'DM Sans,sans-serif', fontSize: '1.05rem' }}>
+            <div className="space-y-2 mb-6" style={{ fontFamily: 'IBM Plex Sans,sans-serif', fontSize: '1.05rem' }}>
               <a href={`mailto:${SITE.email}`} className="flex items-center gap-2" style={{ color: '#FFFFFF' }}><Mail size={17} style={{ color: '#DB333D' }} /> {SITE.email}</a>
               <a href={`https://wa.me/${SITE.whatsapp}`} className="flex items-center gap-2" style={{ color: '#FFFFFF' }}><MessageCircle size={17} style={{ color: '#DB333D' }} /> WhatsApp: +{SITE.whatsapp}</a>
               <span className="flex items-center gap-2" style={{ color: '#FFFFFF' }}><MapPin size={17} style={{ color: '#DB333D' }} /> {SITE.location}</span>
@@ -78,13 +79,9 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 gap-3" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-          <p style={{ color: '#9AA1C4', fontFamily: 'DM Sans,sans-serif', fontSize: '0.95rem' }}>
-            © {year} Stackaura Digital. All rights reserved. | Kuwait & Worldwide
+          <p style={{ color: '#9AA1C4', fontFamily: 'IBM Plex Sans,sans-serif', fontSize: '0.95rem' }}>
+            © {year} stackaura.cc · Kuwait, working worldwide
           </p>
-          <a href={SITE.url} className="flex items-center gap-1" style={{ color: '#9AA1C4', fontFamily: 'DM Sans,sans-serif', fontSize: '0.95rem' }}>
-            Developed by <span style={{ color: '#FF6B73' }} className="ml-1">Stackaura Digital</span>
-            <ArrowUpRight size={14} style={{ color: '#FF6B73' }} />
-          </a>
         </div>
       </div>
     </footer>
