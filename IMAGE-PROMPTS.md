@@ -1,10 +1,12 @@
-# Stackaura Digital — SEO Image Prompts
+# stackaura.cc — SEO Image Prompts
 
 11 images for the website. Each one already has a slot in the code, so you only have to
 **generate → save with the exact filename → put it in `/public/images/`**. That's all.
 The page shows the image automatically, with the right alt text and size already set (see `lib/images.json`).
 
 ---
+
+> **Good to know:** until you add these images, the site automatically shows the branded default picture (logo on navy) wherever an image is missing, so nothing looks empty or broken. The site is now dark navy, so the prompts below ask for navy backgrounds.
 
 ## 1. Rules (so Google Images can find them)
 
@@ -20,7 +22,7 @@ The page shows the image automatically, with the right alt text and size already
 
 ## 2. Style line — paste at the END of every prompt
 
-> Clean modern flat illustration with soft 3D depth, brand colors deep navy (#000129), vivid red (#DB333D) and light grey (#F0EFF2) on a bright white background, minimal, lots of empty space, professional tech-agency look, sharp, high quality, no text, no letters, no logos, no watermark
+> Clean modern flat illustration with soft 3D depth, on a deep navy (#000129) background with vivid red (#DB333D) and cool grey accents, subtle grid texture, minimal, lots of empty space, professional tech-agency look, sharp, high quality, no text, no letters, no logos, no watermark
 
 Keeping this the same on all 11 images makes the website look like one brand.
 Works in ChatGPT/DALL·E, Midjourney, Gemini/Imagen, Ideogram, Firefly. In Midjourney add `--ar 16:9` (or the ratio listed).
@@ -59,12 +61,12 @@ Works in ChatGPT/DALL·E, Midjourney, Gemini/Imagen, Ideogram, Firefly. In Midjo
 
 ### 8) About / Team — `stackaura-digital-team-kuwait.webp` — 1200×800 (3:2)
 **Prompt:** A bright modern small-agency office with two or three developers (stylized illustrated people, faces simple and abstract) collaborating at desks with laptops, whiteboard with sticky notes and a plant, friendly and professional. + *style line*
-**Alt text:** Stackaura Digital web development team working together in Kuwait
+**Alt text:** stackaura.cc web development team working together in Kuwait
 *(Tip: a real photo of you/your team is even better for trust. Save it with this same filename.)*
 
 ### 9) Kuwait location banner — `web-design-company-kuwait-city.webp` — 1600×600 (8:3 wide)
 **Prompt:** A wide stylized skyline of Kuwait City featuring the Kuwait Towers and modern skyscrapers along the Gulf waterfront at sunrise, with a subtle network of glowing dots and lines above it suggesting digital connection worldwide. + *style line*
-**Alt text:** Kuwait City skyline with Kuwait Towers, home of Stackaura Digital web design company
+**Alt text:** Kuwait City skyline with Kuwait Towers, home of stackaura.cc web design company
 *(Helps local SEO for "Kuwait" searches.)*
 
 ### 10) Contact — `contact-web-developer-kuwait.webp` — 1200×600 (2:1)
@@ -73,7 +75,7 @@ Works in ChatGPT/DALL·E, Midjourney, Gemini/Imagen, Ideogram, Firefly. In Midjo
 
 ### 11) Blog cover template — `blog-cover-web-development-tips.webp` — 1200×630 (1.91:1)
 **Prompt:** An abstract tech scene with floating browser windows, code brackets turned into simple shapes, a lightbulb and a rising chart, arranged with plenty of empty space on the left. + *style line*
-**Alt text:** Web development and SEO tips from Stackaura Digital
+**Alt text:** Web development and SEO tips from stackaura.cc
 *(Use as the default cover; for each new blog post, make one new image with a topic-specific filename like `firebase-vs-supabase-comparison.webp`.)*
 
 ---
@@ -82,7 +84,7 @@ Works in ChatGPT/DALL·E, Midjourney, Gemini/Imagen, Ideogram, Firefly. In Midjo
 
 For every project you add in the admin panel, upload **real screenshots** (1280×720). Google Images loves these.
 - Filename: `client-name-website-project-kuwait.webp` (example: `alshaya-ecommerce-website-kuwait.webp`)
-- Alt text pattern: `[Client] website built by Stackaura Digital – [what it does]`
+- Alt text pattern: `[Client] website built by stackaura.cc – [what it does]`
 
 ## 5. How to add a new image slot later
 

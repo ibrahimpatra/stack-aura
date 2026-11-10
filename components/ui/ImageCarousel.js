@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight, Maximize2, X } from 'lucide-react';
+import { normImages } from '../../lib/media';
 
-export default function ImageCarousel({ images = [], title = '' }) {
+export default function ImageCarousel({ images: rawImages = [], title = '' }) {
+  const images = normImages(rawImages);
   const [current, setCurrent] = useState(0);
   const [lightbox, setLightbox] = useState(false);
 
@@ -16,11 +18,12 @@ export default function ImageCarousel({ images = [], title = '' }) {
         {/* Main image */}
         <div className="relative" style={{ paddingBottom: '56.25%' }}>
           <img
-            src={images[current]}
-            alt={`${title} screenshot ${current + 1}`}
+            src={images[current].src}
+            alt={images[current].alt || `${title} – website screenshot ${current + 1} by stackaura.cc`}
+            title={images[current].title || undefined}
             className="absolute inset-0 w-full h-full object-cover cursor-zoom-in"
             onClick={() => setLightbox(true)}
-            onError={(e) => { e.target.src = 'https://via.placeholder.com/1280x720/0D1220/3B82F6?text=Screenshot'; }}
+            onError={(e) => { e.target.onerror = null; e.target.src = '/default-image.png'; }}
           />
           {/* Expand btn */}
           <button onClick={() => setLightbox(true)}
@@ -65,8 +68,8 @@ export default function ImageCarousel({ images = [], title = '' }) {
               <button key={i} onClick={() => setCurrent(i)}
                 className="flex-shrink-0 rounded-lg overflow-hidden transition-all"
                 style={{ width: '72px', height: '48px', border: `2px solid ${i === current ? '#DB333D' : 'rgba(255,255,255,0.15)'}` }}>
-                <img src={img} alt={`thumb ${i + 1}`} className="w-full h-full object-cover"
-                  onError={(e) => { e.target.src = 'https://via.placeholder.com/72x48/0D1220/3B82F6?text=img'; }} />
+                <img src={img.src} alt={img.alt || `${title} thumbnail ${i + 1}`} className="w-full h-full object-cover"
+                  onError={(e) => { e.target.onerror = null; e.target.src = '/default-image.png'; }} />
               </button>
             ))}
           </div>
@@ -82,7 +85,7 @@ export default function ImageCarousel({ images = [], title = '' }) {
           <button className="absolute top-4 right-4 p-2 rounded-lg" style={{ background: 'rgba(255,255,255,0.15)', color: '#FFFFFF' }}>
             <X size={20} />
           </button>
-          <img src={images[current]} alt={title}
+          <img src={images[current].src} alt={images[current].alt || title}
             className="max-w-full max-h-full rounded-xl object-contain"
             style={{ maxHeight: '90vh' }}
             onClick={(e) => e.stopPropagation()} />

@@ -1,91 +1,51 @@
-# Stackaura Digital — Next.js Website
+# stackaura.cc — website
 
-Full agency website with blog CMS, project portfolio, and admin panel.
-
-## Pages
-- `/` — Homepage (SSR, all sections)
-- `/about` — About page
-- `/contact` — Contact page
-- `/services` — Services overview
-- `/services/[slug]` — 6 service detail pages
-- `/projects` — All projects with filter
-- `/projects/[slug]` — Project detail + image carousel
-- `/blog` — Blog listing with search
-- `/blog/[slug]` — Blog post detail
-- `/admin` — Dashboard (projects + blog tabs)
-- `/admin/project-editor` — Add/edit projects
-- `/admin/editor` — Add/edit blog posts
-- `/login` — Admin login (triple-click logo)
+Customer-facing website + private admin panel. Next.js · Firebase · Tailwind.
+Brand: **stackaura.cc** · Canonical address: **https://www.stackaura.cc** (change in one place: `NEXT_PUBLIC_SITE_URL`).
 
 ## Setup
-
 ```bash
 npm install
-cp .env.local.example .env.local
-# Fill in Firebase keys
+cp .env.local.example .env.local      # fill in Firebase keys, WhatsApp number, site URL
 npm run dev
 ```
+`npm run build` also generates `sitemap.xml`, `robots.txt` (via next-sitemap).
 
-## Firebase Setup
-1. Firestore: create `posts` and `projects` collections
-2. Auth: enable Email/Password, create admin user
-3. Firestore rules:
-```
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read: if true;
-      allow write: if request.auth != null;
-    }
-  }
-}
-```
+## Admin (private)
+Triple-click the logo, or open `/login`.
+- **Projects / Blog** — add and edit. Nothing is shown on the public site until you add it (no sample content).
+- **Tags & Technologies** (`/admin/tags`) — your saved library.
+  - In any editor, pick from the list or press **“+ Other / Custom”**, type a name → it is saved for every future project/post.
+  - Choose which technologies appear as pills on each **service page**.
+  - The home-page logo strip shows every technology in the library. A new technology gets its logo when you drop `public/tech/<name>.svg` (lowercase, no spaces); otherwise a letter badge is shown.
 
-## Deploy to Firebase Hosting (web.app)
-```bash
-npm install -g firebase-tools
-firebase login
-firebase init hosting
-# Public dir: out, SPA: yes
-# Add to next.config.js: output: 'export'
-npm run build
-firebase deploy --only hosting
-```
+## Images & Google Images
+Where images live:
+| What | Where | Why |
+|---|---|---|
+| Fixed brand/SEO images (the 11 in `IMAGE-PROMPTS.md`) | `public/images/` | fastest, part of the site, own domain |
+| Anything you upload in the admin (projects, blog) | **Firebase Storage**, served at `https://www.stackaura.cc/media/<keyword-name>.webp` | unlimited growth, no redeploy, own domain |
+| ImgBB | fallback only (if Storage upload fails) | third-party domain, random file names — weaker for SEO |
 
-> Note: Static export = blog/projects update only on redeploy.
-> Use Vercel for live SSR updates.
+Every admin upload is automatically: resized + converted to WebP, named from your alt text, given alt/title/caption, cached for a year, added to the image sitemap and to the page's structured data.
+A missing picture is replaced by the branded default tile (`public/default-image.png`).
 
-## Deploy to Vercel (Recommended)
-1. Push to GitHub
-2. Import on vercel.com
-3. Add all env vars in Vercel dashboard
-4. Deploy
+### One-time Firebase setup
+1. Firebase Console → **Storage → Get started** (needs the pay-as-you-go *Blaze* plan; a small site normally stays inside the free quota — check current pricing).
+2. Publish the rules: `firebase deploy --only firestore:rules,storage` (files `firestore.rules`, `storage.rules`).
+3. Make sure `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET` is set.
 
-## Admin Access
-- Triple-click the S logo → goes to /login
-- Or visit /login directly
-- Star icon on projects = toggle featured (shows on homepage)
-- Featured projects appear in homepage Projects section
+## Sitemaps (Google Search Console)
+- `https://www.stackaura.cc/sitemap.xml` — **submit only this one** (it lists the others).
+- `…/sitemap-0.xml` — static pages (+ their SEO images that exist).
+- `…/server-sitemap.xml` — live: every project, blog post and image with alt text.
 
-## Adding Your First Project
-1. Go to /admin → Projects tab → New Project
-2. Fill title, client name, slug, description
-3. Upload screenshots (they show in carousel on project page)
-4. Toggle "Feature on homepage" to show on homepage
-5. Add features and results for the project page
-6. Save
+## Custom domain
+Firebase Hosting → add both `www.stackaura.cc` and `stackaura.cc`; set the one you don't use as a **redirect** to the main one. Use a *Domain* property in Search Console.
 
-## SEO Notes
-- Every page has unique meta title, description, keywords
-- Client/company names from projects are auto-injected into keywords
-- So if you add "Kuwait India Driving School" as a client, searches for that name will surface your site
-- All pages use SSR (getServerSideProps) for Google indexing
-- Sitemap auto-generated on build via next-sitemap
-- JSON-LD structured data on homepage and project pages
-
-## Customization
-- Update WhatsApp number: `lib/seo.js` → SITE.whatsapp
-- Update email: `lib/seo.js` → SITE.email  
-- Update site URL: `lib/seo.js` → SITE.url and `next-sitemap.config.js`
-- Add OG image: place `og-default.png` (1200x630) in `public/og/`
+## Before launch checklist
+- [ ] `NEXT_PUBLIC_WHATSAPP` = your real number
+- [ ] `hello@stackaura.cc` mailbox exists (or change `SITE.email` in `lib/seo.js`)
+- [ ] Social links in `lib/seo.js` / `pages/_document.js`
+- [ ] The 11 images in `public/images/`
+- [ ] Storage enabled + rules published

@@ -47,33 +47,33 @@ export default function Login() {
 
   return (
     <>
-      <Head><title>Admin Login | Stackaura Digital</title><meta name="robots" content="noindex" /></Head>
-      <div className="min-h-screen flex items-center justify-center px-6" style={{ background: '#F0EFF2' }}>
+      <Head><title>Admin Login | stackaura.cc</title><meta name="robots" content="noindex" /></Head>
+      <div className="light-ui min-h-screen flex items-center justify-center px-6" style={{ background: '#F0EFF2' }}>
         <div className="w-full max-w-sm">
           <div className="flex items-center justify-center gap-2 mb-10">
             <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: '#DB333D' }}>
               <span className="text-white font-bold text-sm" style={{ fontFamily: 'Syne,sans-serif' }}>S</span>
             </div>
-            <span className="font-bold" style={{ color: '#000129', fontFamily: 'Syne,sans-serif' }}>Stackaura Digital</span>
+            <span className="font-bold" style={{ color: '#000129', fontFamily: 'Syne,sans-serif' }}>stackaura.cc</span>
           </div>
           <div className="card p-8">
             <h1 className="font-bold text-xl mb-2 text-center" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>Admin Login</h1>
-            <p className="text-xs text-center mb-6" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
+            <p className="text-xs text-center mb-6" style={{ color: '#6B7280', fontFamily: 'IBM Plex Sans,sans-serif' }}>
               Use the email & password you created in Firebase Auth
             </p>
             {error && (
-              <div className="mb-4 p-3 rounded-xl text-sm" style={{ background: 'rgba(219,51,61,0.06)', border: '1px solid rgba(219,51,61,0.2)', color: '#DB333D', fontFamily: 'DM Sans,sans-serif', lineHeight: 1.5 }}>
+              <div className="mb-4 p-3 rounded-xl text-sm" style={{ background: 'rgba(219,51,61,0.06)', border: '1px solid rgba(219,51,61,0.2)', color: '#DB333D', fontFamily: 'IBM Plex Sans,sans-serif', lineHeight: 1.5 }}>
                 {error}
               </div>
             )}
             <form onSubmit={submit} className="space-y-4">
               <div>
-                <label className="text-xs mb-1.5 block" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>Email</label>
+                <label className="text-xs mb-1.5 block" style={{ color: '#4B5563', fontFamily: 'IBM Plex Sans,sans-serif' }}>Email</label>
                 <input type="email" required className="input" placeholder="admin@stackaura.com"
                   value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
               </div>
               <div className="relative">
-                <label className="text-xs mb-1.5 block" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>Password</label>
+                <label className="text-xs mb-1.5 block" style={{ color: '#4B5563', fontFamily: 'IBM Plex Sans,sans-serif' }}>Password</label>
                 <input type={show ? 'text' : 'password'} required className="input pr-10" placeholder="••••••••"
                   value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
                 <button type="button" onClick={() => setShow(!show)} className="absolute right-3 bottom-3" style={{ color: '#6B7280' }}>
@@ -85,7 +85,7 @@ export default function Login() {
               </button>
             </form>
             <div className="mt-6 p-3 rounded-xl" style={{ background: '#F0EFF2', border: '1px solid #DDE1EA' }}>
-              <p className="text-xs" style={{ color: '#4B5563', fontFamily: 'JetBrains Mono,monospace', lineHeight: 1.6 }}>
+              <p className="text-xs" style={{ color: '#4B5563', fontFamily: 'IBM Plex Mono,monospace', lineHeight: 1.6 }}>
                 Also set in .env.local:<br />
                 NEXT_PUBLIC_ADMIN_EMAIL=your@email.com
               </p>
