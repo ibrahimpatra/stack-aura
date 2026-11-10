@@ -1,0 +1,79 @@
+{
+  "hero": {
+    "src": "/images/web-development-agency-kuwait-hero.webp",
+    "width": 1600, "height": 900,
+    "alt": "Web development agency in Kuwait building a business website and mobile app",
+    "title": "Stackaura Digital – web development agency in Kuwait",
+    "pages": ["/"]
+  },
+  "web-development": {
+    "src": "/images/website-development-services-kuwait.webp",
+    "width": 1200, "height": 800,
+    "alt": "Custom website development services in Kuwait on laptop and phone",
+    "title": "Website development services in Kuwait",
+    "pages": ["/services", "/services/web-development"]
+  },
+  "mobile-apps": {
+    "src": "/images/mobile-app-development-kuwait.webp",
+    "width": 1200, "height": 800,
+    "alt": "Mobile app development in Kuwait for iPhone and Android",
+    "title": "Mobile app development in Kuwait",
+    "pages": ["/services", "/services/mobile-apps"]
+  },
+  "seo-optimisation": {
+    "src": "/images/seo-services-google-ranking-kuwait.webp",
+    "width": 1200, "height": 800,
+    "alt": "SEO services in Kuwait to rank higher on Google search results",
+    "title": "SEO services to rank higher on Google in Kuwait",
+    "pages": ["/services", "/services/seo-optimisation"]
+  },
+  "custom-development": {
+    "src": "/images/custom-software-development-services.webp",
+    "width": 1200, "height": 800,
+    "alt": "Custom software development connecting business tools, payments and dashboards",
+    "title": "Custom software development services",
+    "pages": ["/services", "/services/custom-development"]
+  },
+  "ui-ux-design": {
+    "src": "/images/ui-ux-design-services-kuwait.webp",
+    "width": 1200, "height": 800,
+    "alt": "UI UX design services in Kuwait showing website and app design sketches",
+    "title": "UI/UX design services in Kuwait",
+    "pages": ["/services", "/services/ui-ux-design"]
+  },
+  "maintenance": {
+    "src": "/images/website-maintenance-support-services.webp",
+    "width": 1200, "height": 800,
+    "alt": "Website maintenance and support services keeping a website secure and online",
+    "title": "Website maintenance and support services",
+    "pages": ["/services", "/services/maintenance"]
+  },
+  "about-team": {
+    "src": "/images/stackaura-digital-team-kuwait.webp",
+    "width": 1200, "height": 800,
+    "alt": "Stackaura Digital web development team working together in Kuwait",
+    "title": "The Stackaura Digital team in Kuwait",
+    "pages": ["/", "/about"]
+  },
+  "kuwait": {
+    "src": "/images/web-design-company-kuwait-city.webp",
+    "width": 1600, "height": 600,
+    "alt": "Kuwait City skyline with Kuwait Towers, home of Stackaura Digital web design company",
+    "title": "Web design company in Kuwait City",
+    "pages": ["/about"]
+  },
+  "contact": {
+    "src": "/images/contact-web-developer-kuwait.webp",
+    "width": 1200, "height": 600,
+    "alt": "Contact a web developer in Kuwait for a free website quote",
+    "title": "Contact Stackaura Digital for a free quote",
+    "pages": ["/contact"]
+  },
+  "blog-cover": {
+    "src": "/images/blog-cover-web-development-tips.webp",
+    "width": 1200, "height": 630,
+    "alt": "Web development and SEO tips from Stackaura Digital",
+    "title": "Stackaura Digital blog – web development and SEO tips",
+    "pages": ["/blog"]
+  }
+}

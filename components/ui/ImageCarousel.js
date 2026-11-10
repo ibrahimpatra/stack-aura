@@ -12,7 +12,7 @@ export default function ImageCarousel({ images = [], title = '' }) {
 
   return (
     <>
-      <div className="relative rounded-2xl overflow-hidden" style={{ border: '1px solid #1A2236', background: '#000129' }}>
+      <div className="relative rounded-2xl overflow-hidden" style={{ border: '1px solid #DDE1EA', background: '#000129' }}>
         {/* Main image */}
         <div className="relative" style={{ paddingBottom: '56.25%' }}>
           <img

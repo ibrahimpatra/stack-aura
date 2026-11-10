@@ -4,16 +4,25 @@ import Footer from '../../components/ui/Footer';
 import SEOHead from '../../components/ui/SEOHead';
 import { useScrollReveal } from '../../lib/useScrollReveal';
 import { pageSEO, SERVICES } from '../../lib/seo';
+import SiteImage from '../../components/ui/SiteImage';
 import { Globe, Smartphone, Search, Code2, Palette, Shield, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 const ICONS = { 'web-development': <Globe size={24} />, 'mobile-apps': <Smartphone size={24} />, 'seo-optimisation': <Search size={24} />, 'custom-development': <Code2 size={24} />, 'ui-ux-design': <Palette size={24} />, maintenance: <Shield size={24} /> };
 const DETAILS = {
-  'web-development': { points: ['Next.js & React', 'Firebase backend', 'SSR for SEO', 'Responsive design'], color: '#DB333D' },
-  'mobile-apps': { points: ['iOS & Android', 'React Native', 'Expo framework', 'App Store ready'], color: '#06B6D4' },
-  'seo-optimisation': { points: ['Technical SEO', 'Structured data', 'Sitemap & robots', 'Google Analytics'], color: '#8B5CF6' },
-  'custom-development': { points: ['API integrations', 'Payment gateways', 'Custom backends', 'Automation'], color: '#10B981' },
-  'ui-ux-design': { points: ['Figma design', 'Prototyping', 'Design systems', 'User testing'], color: '#F59E0B' },
-  maintenance: { points: ['Monthly updates', 'Security patches', 'Uptime monitoring', 'Feature additions'], color: '#EF4444' },
+  'web-development': { points: ['A modern, good-looking website', 'Works on phones and computers', 'Easy for Google to find', 'You can update it yourself'], color: '#DB333D' },
+  'mobile-apps': { points: ['One app for iPhone and Android', 'Put on App Store and Google Play', 'Notifications to your customers', 'Fast and easy to use'], color: '#0E7490' },
+  'seo-optimisation': { points: ['Check what is stopping you ranking', 'Choose the words customers search', 'Fix your website for Google', 'Monthly progress report'], color: '#7C3AED' },
+  'custom-development': { points: ['Online payments', 'Booking and ordering systems', 'Connect your business tools', 'Save time with automation'], color: '#047857' },
+  'ui-ux-design': { points: ['Clean, modern look', 'Easy to understand and use', 'Matches your brand', 'See it before we build it'], color: '#B45309' },
+  maintenance: { points: ['Regular updates and backups', 'Security protection', 'We watch that your site stays online', 'Quick help when you need it'], color: '#B91C1C' },
+};
+const PLAIN = {
+  'web-development': 'A professional website for your business',
+  'mobile-apps': 'Your own app for iPhone and Android',
+  'seo-optimisation': 'Get found by more customers on Google',
+  'custom-development': 'Special tools built for your business',
+  'ui-ux-design': 'Simple, beautiful design that people like',
+  maintenance: 'We look after your website for you',
 };
 
 export default function ServicesPage() {
@@ -31,16 +40,16 @@ export default function ServicesPage() {
       <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
         <Navbar />
 
-        <section className="pt-32 pb-16 px-6 grid-bg" style={{ borderBottom: '1px solid #1A2236' }}>
+        <section className="pt-32 pb-16 px-6 grid-bg" style={{ borderBottom: '1px solid #DDE1EA' }}>
           <div className="max-w-4xl mx-auto text-center">
             <div className="section-label mb-5 reveal" style={{ background: 'rgba(219,51,61,0.08)', border: '1px solid rgba(219,51,61,0.15)', color: '#DB333D' }}>
-              <span style={{ fontFamily: 'JetBrains Mono,monospace' }}>// what we offer</span>
+              <span style={{ fontFamily: 'DM Sans,sans-serif' }}>What we offer</span>
             </div>
             <h1 className="font-bold mb-4 reveal delay-1" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(2.5rem,6vw,4rem)', color: '#000129', lineHeight: 1.1 }}>
-              Professional Development<br /><span className="grad">Services Worldwide</span>
+              Everything You Need<br /><span className="grad">To Grow Online</span>
             </h1>
-            <p className="text-lg reveal delay-2" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif', maxWidth: 520, margin: '0 auto' }}>
-              From custom website development to mobile apps and SEO — everything your business needs to grow online.
+            <p className="text-lg reveal delay-2" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif', maxWidth: 520, margin: '0 auto' }}>
+              Websites, mobile apps, Google ranking and more. Pick what you need and we will take care of it.
             </p>
           </div>
         </section>
@@ -52,16 +61,17 @@ export default function ServicesPage() {
               return (
                 <Link href={`/services/${s.slug}`} key={s.slug}
                   className={`card p-7 block reveal delay-${(i % 3) + 1}`}>
+                  <SiteImage id={s.slug} rounded={12} style={{ marginBottom: 20 }} />
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
                     style={{ background: `${detail.color}15`, color: detail.color }}>
                     {ICONS[s.slug]}
                   </div>
                   <h2 className="font-bold text-lg mb-2" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>{s.label}</h2>
-                  <p className="text-sm mb-5 leading-relaxed" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>{s.short}</p>
+                  <p className="text-sm mb-5 leading-relaxed" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>{PLAIN[s.slug]}</p>
                   <ul className="space-y-2 mb-5">
                     {detail.points.map((p) => (
                       <li key={p} className="flex items-center gap-2 text-sm" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>
-                        <CheckCircle2 size={13} style={{ color: detail.color, flexShrink: 0 }} /> {p}
+                        <CheckCircle2 size={18} style={{ color: detail.color, flexShrink: 0 }} /> {p}
                       </li>
                     ))}
                   </ul>
@@ -77,8 +87,8 @@ export default function ServicesPage() {
         {/* CTA */}
         <section className="py-16 px-6 text-center" style={{ background: '#F0EFF2' }}>
           <div className="max-w-2xl mx-auto reveal">
-            <h2 className="font-bold mb-4" style={{ fontFamily: 'Syne,sans-serif', fontSize: '2rem', color: '#000129' }}>Not Sure Which Service You Need?</h2>
-            <p className="mb-8" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>Tell us your goal and we'll figure out the best approach together — free consultation.</p>
+            <h2 className="font-bold mb-4" style={{ fontFamily: 'Syne,sans-serif', fontSize: '2rem', color: '#000129' }}>Not Sure What You Need?</h2>
+            <p className="mb-8" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>Just tell us what you want to achieve. We will suggest the best way, and the first chat is free.</p>
             <Link href="/contact" className="btn-primary mx-auto inline-flex">Get a Free Consultation <ArrowRight size={15} /></Link>
           </div>
         </section>

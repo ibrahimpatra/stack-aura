@@ -1,6 +1,7 @@
 import Navbar from '../components/ui/Navbar';
 import Footer from '../components/ui/Footer';
 import SEOHead from '../components/ui/SEOHead';
+import SiteImage from '../components/ui/SiteImage';
 import ContactSection from '../components/sections/ContactSection';
 import { useScrollReveal } from '../lib/useScrollReveal';
 import { pageSEO, SITE } from '../lib/seo';
@@ -21,32 +22,33 @@ export default function Contact() {
       <div style={{ background: '#FFFFFF', minHeight: '100vh' }}>
         <Navbar />
 
-        <section className="pt-32 pb-16 px-6 grid-bg" style={{ borderBottom: '1px solid #1A2236' }}>
+        <section className="pt-32 pb-16 px-6 grid-bg" style={{ borderBottom: '1px solid #DDE1EA' }}>
           <div className="max-w-4xl mx-auto text-center">
             <div className="section-label mb-5 reveal" style={{ background: 'rgba(219,51,61,0.08)', border: '1px solid rgba(219,51,61,0.15)', color: '#DB333D' }}>
-              <span style={{ fontFamily: 'JetBrains Mono,monospace' }}>// contact us</span>
+              <span style={{ fontFamily: 'DM Sans,sans-serif' }}>Contact us</span>
             </div>
             <h1 className="font-bold mb-4 reveal delay-1" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(2.5rem,6vw,4rem)', color: '#000129', lineHeight: 1.1 }}>
-              Start Your Project Today
+              Let’s Talk About Your Project
             </h1>
-            <p className="text-lg reveal delay-2" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif', maxWidth: 500, margin: '0 auto' }}>
-              Tell us what you need. We'll get back to you within 24 hours with a plan and a quote.
+            <p className="text-lg reveal delay-2" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif', maxWidth: 500, margin: '0 auto' }}>
+              Tell us what you need. We reply within 24 hours with a clear plan and price.
             </p>
           </div>
         </section>
 
         {/* Quick info cards */}
         <div className="max-w-7xl mx-auto px-6 py-12">
+          <SiteImage id="contact" rounded={24} style={{ marginBottom: 28 }} />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
             {[
-              { icon: <Clock size={18} />, title: '24hr Response', desc: 'We reply to all inquiries within one business day.', color: '#DB333D' },
-              { icon: <MessageCircle size={18} />, title: 'WhatsApp Available', desc: 'Prefer to chat? Reach us directly on WhatsApp.', color: '#DB333D' },
-              { icon: <Mail size={18} />, title: 'Free Consultation', desc: 'First call is free — we\'ll scope your project together.', color: '#000129' },
+              { icon: <Clock size={24} />, title: '24hr Response', desc: 'We reply to all inquiries within one business day.', color: '#DB333D' },
+              { icon: <MessageCircle size={24} />, title: 'WhatsApp Available', desc: 'Prefer to chat? Reach us directly on WhatsApp.', color: '#DB333D' },
+              { icon: <Mail size={24} />, title: 'Free First Chat', desc: 'Your first call is free. We listen and suggest the best plan.', color: '#000129' },
             ].map((c, i) => (
               <div key={c.title} className={`card p-5 reveal delay-${i + 1}`}>
                 <div className="w-9 h-9 rounded-lg flex items-center justify-center mb-3" style={{ background: `${c.color}15`, color: c.color }}>{c.icon}</div>
-                <h3 className="font-bold text-sm mb-1" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>{c.title}</h3>
-                <p className="text-xs" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>{c.desc}</p>
+                <h3 className="font-bold text-lg mb-1" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>{c.title}</h3>
+                <p className="text-sm" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>{c.desc}</p>
               </div>
             ))}
           </div>

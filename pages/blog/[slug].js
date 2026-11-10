@@ -43,7 +43,7 @@ export default function BlogPost({ post }) {
         <Navbar />
         <div className="max-w-3xl mx-auto px-6 pt-28 pb-16">
           <Link href="/blog" className="inline-flex items-center gap-2 text-sm mb-8"
-            style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
+            style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>
             <ArrowLeft size={15} /> All Articles
           </Link>
 
@@ -54,16 +54,16 @@ export default function BlogPost({ post }) {
                 {post.tag}
               </span>
             )}
-            <span className="flex items-center gap-1 text-xs" style={{ color: '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}>
+            <span className="flex items-center gap-1 text-xs" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
               <Calendar size={11} /> {formatDate(post.createdAt)}
             </span>
             {post.readTime && (
-              <span className="flex items-center gap-1 text-xs" style={{ color: '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}>
+              <span className="flex items-center gap-1 text-xs" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
                 <Clock size={11} /> {post.readTime}
               </span>
             )}
             <button onClick={copy} className="ml-auto flex items-center gap-1 text-xs"
-              style={{ color: copied ? '#DB333D' : '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}>
+              style={{ color: copied ? '#DB333D' : '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
               <Share2 size={11} /> {copied ? 'Copied!' : 'Share'}
             </button>
           </div>
@@ -71,19 +71,19 @@ export default function BlogPost({ post }) {
           <h1 className="font-bold mb-4" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(1.8rem,4vw,2.8rem)', color: '#000129', lineHeight: 1.2 }}>
             {post.title}
           </h1>
-          {post.excerpt && <p className="text-lg mb-6" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif', lineHeight: 1.7 }}>{post.excerpt}</p>}
+          {post.excerpt && <p className="text-lg mb-6" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif', lineHeight: 1.7 }}>{post.excerpt}</p>}
 
           <div className="h-px mb-8" style={{ background: 'linear-gradient(90deg,#3B82F6,transparent)' }} />
 
           {post.coverImage && (
-            <div className="rounded-2xl overflow-hidden mb-10" style={{ border: '1px solid #1A2236' }}>
+            <div className="rounded-2xl overflow-hidden mb-10" style={{ border: '1px solid #DDE1EA' }}>
               <img src={post.coverImage} alt={post.title} className="w-full object-cover" style={{ maxHeight: '400px' }} />
             </div>
           )}
 
           <div className="prose-custom" dangerouslySetInnerHTML={{ __html: post.content || '<p>Content coming soon.</p>' }} />
 
-          <div className="mt-16 pt-8 flex items-center justify-between" style={{ borderTop: '1px solid #1A2236' }}>
+          <div className="mt-16 pt-8 flex items-center justify-between" style={{ borderTop: '1px solid #DDE1EA' }}>
             <Link href="/blog" className="btn-ghost text-sm px-4 py-2"><ArrowLeft size={14} /> All Articles</Link>
             <Link href="/contact" className="btn-primary text-sm px-4 py-2">Work With Us</Link>
           </div>

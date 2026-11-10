@@ -1,6 +1,9 @@
 import Link from 'next/link';
-import { Github, Twitter, Linkedin, Mail, ArrowUpRight, MessageCircle } from 'lucide-react';
+import { Github, Twitter, Linkedin, Mail, ArrowUpRight, MessageCircle, MapPin } from 'lucide-react';
 import { SITE, SERVICES } from '../../lib/seo';
+import Logo from './Logo';
+
+const LINK = { color: '#B4BAD6', fontFamily: 'DM Sans,sans-serif', fontSize: '1.05rem' };
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -9,28 +12,28 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: '#DB333D' }}>
-                <span className="text-white font-bold text-sm" style={{ fontFamily: 'Syne,sans-serif' }}>S</span>
-              </div>
-              <span className="font-bold text-base text-white" style={{ fontFamily: 'Syne,sans-serif' }}>Stackaura <span style={{ color: '#DB333D' }}>Digital</span></span>
-            </div>
-            <p className="text-sm leading-relaxed mb-5" style={{ color: '#8B93B8', maxWidth: '300px', fontFamily: 'DM Sans,sans-serif' }}>
-              Professional web development, mobile apps, and SEO services. Building digital products that perform worldwide.
+            <div className="mb-5"><Logo dark /></div>
+            <p className="leading-relaxed mb-5" style={{ color: '#B4BAD6', maxWidth: '380px', fontFamily: 'DM Sans,sans-serif', fontSize: '1.05rem' }}>
+              We build websites and mobile apps, and help your business show up on Google. Based in Kuwait, working with clients worldwide.
             </p>
+            <div className="space-y-2 mb-6" style={{ fontFamily: 'DM Sans,sans-serif', fontSize: '1.05rem' }}>
+              <a href={`mailto:${SITE.email}`} className="flex items-center gap-2" style={{ color: '#FFFFFF' }}><Mail size={17} style={{ color: '#DB333D' }} /> {SITE.email}</a>
+              <a href={`https://wa.me/${SITE.whatsapp}`} className="flex items-center gap-2" style={{ color: '#FFFFFF' }}><MessageCircle size={17} style={{ color: '#DB333D' }} /> WhatsApp: +{SITE.whatsapp}</a>
+              <span className="flex items-center gap-2" style={{ color: '#FFFFFF' }}><MapPin size={17} style={{ color: '#DB333D' }} /> {SITE.location}</span>
+            </div>
             <div className="flex gap-3">
               {[
-                { icon: <Github size={16} />, href: '#' },
-                { icon: <Twitter size={16} />, href: '#' },
-                { icon: <Linkedin size={16} />, href: '#' },
-                { icon: <Mail size={16} />, href: `mailto:${SITE.email}` },
-                { icon: <MessageCircle size={16} />, href: `https://wa.me/${SITE.whatsapp}` },
-              ].map((s, i) => (
-                <a key={i} href={s.href}
-                  className="w-9 h-9 rounded-lg flex items-center justify-center transition-all"
-                  style={{ background: 'rgba(255,255,255,0.07)', color: '#8B93B8' }}
+                { icon: <Github size={20} />, href: '#', label: 'GitHub' },
+                { icon: <Twitter size={20} />, href: '#', label: 'Twitter' },
+                { icon: <Linkedin size={20} />, href: '#', label: 'LinkedIn' },
+                { icon: <Mail size={20} />, href: `mailto:${SITE.email}`, label: 'Email' },
+                { icon: <MessageCircle size={20} />, href: `https://wa.me/${SITE.whatsapp}`, label: 'WhatsApp' },
+              ].map((s) => (
+                <a key={s.label} href={s.href} aria-label={s.label}
+                  className="w-11 h-11 rounded-lg flex items-center justify-center transition-all"
+                  style={{ background: 'rgba(255,255,255,0.08)', color: '#B4BAD6' }}
                   onMouseEnter={(e) => { e.currentTarget.style.background = '#DB333D'; e.currentTarget.style.color = '#FFFFFF'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.07)'; e.currentTarget.style.color = '#8B93B8'; }}>
+                  onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; e.currentTarget.style.color = '#B4BAD6'; }}>
                   {s.icon}
                 </a>
               ))}
@@ -38,13 +41,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold text-sm mb-4 text-white" style={{ fontFamily: 'Syne,sans-serif' }}>Services</h4>
-            <ul className="space-y-2.5">
+            <h4 className="font-bold mb-4 text-white" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.15rem' }}>Our Services</h4>
+            <ul className="space-y-3">
               {SERVICES.map((s) => (
                 <li key={s.slug}>
-                  <Link href={`/services/${s.slug}`} className="text-sm transition-colors" style={{ color: '#8B93B8', fontFamily: 'DM Sans,sans-serif' }}
+                  <Link href={`/services/${s.slug}`} className="transition-colors" style={LINK}
                     onMouseEnter={(e) => (e.target.style.color = '#FFFFFF')}
-                    onMouseLeave={(e) => (e.target.style.color = '#8B93B8')}>
+                    onMouseLeave={(e) => (e.target.style.color = '#B4BAD6')}>
                     {s.label}
                   </Link>
                 </li>
@@ -53,19 +56,19 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold text-sm mb-4 text-white" style={{ fontFamily: 'Syne,sans-serif' }}>Company</h4>
-            <ul className="space-y-2.5">
+            <h4 className="font-bold mb-4 text-white" style={{ fontFamily: 'Syne,sans-serif', fontSize: '1.15rem' }}>Quick Links</h4>
+            <ul className="space-y-3">
               {[
+                { label: 'Home', href: '/' },
                 { label: 'About Us', href: '/about' },
-                { label: 'Projects', href: '/projects' },
+                { label: 'Our Work', href: '/projects' },
                 { label: 'Blog', href: '/blog' },
-                { label: 'Contact', href: '/contact' },
-                { label: 'Get a Quote', href: '/contact' },
+                { label: 'Contact Us', href: '/contact' },
               ].map((l) => (
                 <li key={l.label}>
-                  <Link href={l.href} className="text-sm transition-colors" style={{ color: '#8B93B8', fontFamily: 'DM Sans,sans-serif' }}
+                  <Link href={l.href} className="transition-colors" style={LINK}
                     onMouseEnter={(e) => (e.target.style.color = '#FFFFFF')}
-                    onMouseLeave={(e) => (e.target.style.color = '#8B93B8')}>
+                    onMouseLeave={(e) => (e.target.style.color = '#B4BAD6')}>
                     {l.label}
                   </Link>
                 </li>
@@ -74,13 +77,13 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 gap-3" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-          <p className="text-xs" style={{ color: '#4B5573', fontFamily: 'DM Sans,sans-serif' }}>
+        <div className="flex flex-col md:flex-row items-center justify-between pt-8 gap-3" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+          <p style={{ color: '#9AA1C4', fontFamily: 'DM Sans,sans-serif', fontSize: '0.95rem' }}>
             © {year} Stackaura Digital. All rights reserved. | Kuwait & Worldwide
           </p>
-          <a href={SITE.url} className="text-xs flex items-center gap-1" style={{ color: '#4B5573', fontFamily: 'DM Sans,sans-serif' }}>
-            Developed by <span style={{ color: '#DB333D' }} className="ml-1">Stackaura Digital</span>
-            <ArrowUpRight size={11} style={{ color: '#DB333D' }} />
+          <a href={SITE.url} className="flex items-center gap-1" style={{ color: '#9AA1C4', fontFamily: 'DM Sans,sans-serif', fontSize: '0.95rem' }}>
+            Developed by <span style={{ color: '#FF6B73' }} className="ml-1">Stackaura Digital</span>
+            <ArrowUpRight size={14} style={{ color: '#FF6B73' }} />
           </a>
         </div>
       </div>

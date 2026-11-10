@@ -7,7 +7,7 @@ export default function ProjectsSection({ projects = [] }) {
   if (!display.length) return (
     <section id="projects" className="py-24 px-6" style={{ background: '#FFFFFF' }}>
       <div className="max-w-7xl mx-auto text-center">
-        <p style={{ color: '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}>Projects coming soon. Add them from the admin panel.</p>
+        <p style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>Projects coming soon. Add them from the admin panel.</p>
       </div>
     </section>
   );
@@ -18,12 +18,12 @@ export default function ProjectsSection({ projects = [] }) {
         <div className="flex items-end justify-between mb-14">
           <div className="reveal">
             <div className="section-label mb-4" style={{ background: 'rgba(0,1,41,0.06)', border: '1px solid rgba(0,1,41,0.12)', color: '#000129' }}>
-              <span style={{ fontFamily: 'JetBrains Mono,monospace' }}>// projects</span>
+              <span style={{ fontFamily: 'DM Sans,sans-serif' }}>Projects</span>
             </div>
             <h2 className="font-bold mb-2" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(1.8rem,4vw,2.8rem)', color: '#000129' }}>
               Our Work
             </h2>
-            <p className="text-base" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
+            <p className="text-base" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>
               Real projects, real results, real clients.
             </p>
           </div>
@@ -57,7 +57,7 @@ export default function ProjectsSection({ projects = [] }) {
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     {p.client && (
-                      <span className="text-xs mb-1 block" style={{ color: '#9CA3AF', fontFamily: 'DM Sans,sans-serif' }}>
+                      <span className="text-xs mb-1 block" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
                         Client: <span style={{ color: '#DB333D' }}>{p.client}</span>
                       </span>
                     )}
@@ -66,7 +66,7 @@ export default function ProjectsSection({ projects = [] }) {
                   <ArrowUpRight size={16} style={{ color: '#DB333D', flexShrink: 0 }} className="mt-1" />
                 </div>
 
-                <p className="text-sm mb-4 leading-relaxed" style={{ color: '#6B7280', fontFamily: 'DM Sans,sans-serif' }}>
+                <p className="text-sm mb-4 leading-relaxed" style={{ color: '#4B5563', fontFamily: 'DM Sans,sans-serif' }}>
                   {p.excerpt || p.description?.slice(0, 120)}
                 </p>
 
