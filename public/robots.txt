@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://stackauradigital.web.app
+Host: https://stackaura.cc
 
 # Sitemaps
-Sitemap: https://stackauradigital.web.app/sitemap.xml
+Sitemap: https://stackaura.cc/sitemap.xml
