@@ -1,12 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
 import IMAGES from '../../lib/images.json';
 import { BrandTile } from './BrandImage';
+import { useRouter } from 'next/router';
 
 // Shows an SEO image defined in lib/images.json (filename, alt text, size).
 // If the file hasn't been added to /public/images yet it renders nothing — or, with `fallback`,
 // the branded stackaura.cc default tile — so the site never shows a broken-image icon.
 export default function SiteImage({ id, className = '', style = {}, eager = false, rounded = 6, fit = 'cover', fallback = false }) {
   const img = IMAGES[id];
+  const isAr = useRouter().locale === 'ar';
   const [failed, setFailed] = useState(false);
   const ref = useRef(null);
 
@@ -22,8 +24,8 @@ export default function SiteImage({ id, className = '', style = {}, eager = fals
     <img
       ref={ref}
       src={img.src}
-      alt={img.alt}
-      title={img.title}
+      alt={isAr && img.alt_ar ? img.alt_ar : img.alt}
+      title={isAr && img.title_ar ? img.title_ar : img.title}
       width={img.width}
       height={img.height}
       loading={eager ? 'eager' : 'lazy'}

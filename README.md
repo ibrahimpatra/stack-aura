@@ -1,51 +1,59 @@
 # stackaura.cc — website
 
-Customer-facing website + private admin panel. Next.js · Firebase · Tailwind.
-Brand: **stackaura.cc** · Canonical address: **https://www.stackaura.cc** (change in one place: `NEXT_PUBLIC_SITE_URL`).
+Customer-facing site (English + Arabic) + private admin panel + AI assistant.
+Next.js · Firebase · Tailwind. Brand: **stackaura.cc**. Canonical host: **https://www.stackaura.cc** (change with `NEXT_PUBLIC_SITE_URL`).
 
 ## Setup
 ```bash
 npm install
-cp .env.local.example .env.local      # fill in Firebase keys, WhatsApp number, site URL
+cp .env.local.example .env.local     # fill in Firebase keys, WhatsApp number, Gemini key
 npm run dev
 ```
-`npm run build` also generates `sitemap.xml`, `robots.txt` (via next-sitemap).
+`npm run build` also generates `sitemap.xml` and `robots.txt` (next-sitemap).
+
+## Languages (English + Arabic)
+- English at `/…`, Arabic at `/ar/…` — same domain, so both languages build the same SEO strength.
+- Every page automatically gets `canonical`, `hreflang` (en / ar / x-default), `og:locale`, RTL layout and Arabic fonts.
+- All site copy lives in **`lib/lang/en.js`** and **`lib/lang/ar.js`** (Arabic is in friendly Kuwaiti dialect; headlines/meta keep the standard search words people actually type so it can rank).
+- Projects and blog posts: use the **“Arabic version”** box in the admin editors. If empty, Arabic visitors see the English text.
+- Marketing tone: edit the sentences in those two files. Nothing else needs touching.
+
+## AI assistant (chat widget)
+- Powered by **Google Gemini**. In `.env.local`:
+  `GEMINI_API_KEY=...` (get one at aistudio.google.com/apikey — keep it server-side, no `NEXT_PUBLIC_`) and optionally `GEMINI_MODEL` (default `gemini-2.5-flash`).
+- It answers from: your site copy, your **real projects and blog posts** (read live from Firestore), and the answers you teach it.
+- **Admin → AI Assistant**: see leads (name + phone), see questions it could not answer, write the answer once → it remembers it. This is how it “learns” (it retrieves what you taught; it does not retrain a model).
+- Safety: it only answers from the knowledge, never invents prices or facts, never talks about who works here (“we”), and has a per-visitor rate limit. Set a spending cap on your Google AI key.
+- Without a key the widget shows a polite message with a WhatsApp button.
 
 ## Admin (private)
 Triple-click the logo, or open `/login`.
-- **Projects / Blog** — add and edit. Nothing is shown on the public site until you add it (no sample content).
-- **Tags & Technologies** (`/admin/tags`) — your saved library.
-  - In any editor, pick from the list or press **“+ Other / Custom”**, type a name → it is saved for every future project/post.
-  - Choose which technologies appear as pills on each **service page**.
-  - The home-page logo strip shows every technology in the library. A new technology gets its logo when you drop `public/tech/<name>.svg` (lowercase, no spaces); otherwise a letter badge is shown.
+- **Projects / Blog**: add and edit. Nothing shows on the public site until you add it (no sample content).
+- **Tags & Technologies**: your saved library. In any editor press **“+ Other / Custom”** to add a new one — it is kept for next time. Also choose which technologies appear on each service page. New technology logo: drop `public/tech/<name>.svg`.
+- **AI Assistant**: leads, unanswered questions, taught answers.
 
 ## Images & Google Images
-Where images live:
-| What | Where | Why |
-|---|---|---|
-| Fixed brand/SEO images (the 11 in `IMAGE-PROMPTS.md`) | `public/images/` | fastest, part of the site, own domain |
-| Anything you upload in the admin (projects, blog) | **Firebase Storage**, served at `https://www.stackaura.cc/media/<keyword-name>.webp` | unlimited growth, no redeploy, own domain |
-| ImgBB | fallback only (if Storage upload fails) | third-party domain, random file names — weaker for SEO |
+| What | Where |
+|---|---|
+| 17 fixed SEO/brand images (`IMAGE-PROMPTS.md`) incl. **5 hero banner backgrounds** | `public/images/` |
+| Admin uploads (projects, blog) | **Firebase Storage**, served from `https://www.stackaura.cc/media/<keyword-name>.webp` |
+| ImgBB | fallback only |
 
-Every admin upload is automatically: resized + converted to WebP, named from your alt text, given alt/title/caption, cached for a year, added to the image sitemap and to the page's structured data.
-A missing picture is replaced by the branded default tile (`public/default-image.png`).
+Uploads are auto-compressed to WebP, named from the alt text, cached for a year, and added to the live image sitemap + structured data. Missing pictures show the branded default tile (`public/default-image.png`).
 
 ### One-time Firebase setup
-1. Firebase Console → **Storage → Get started** (needs the pay-as-you-go *Blaze* plan; a small site normally stays inside the free quota — check current pricing).
-2. Publish the rules: `firebase deploy --only firestore:rules,storage` (files `firestore.rules`, `storage.rules`).
-3. Make sure `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET` is set.
+1. Console → **Storage → Get started** (needs the pay-as-you-go plan; a small site normally stays in the free quota — check current pricing).
+2. `firebase deploy --only firestore:rules,storage` (files `firestore.rules`, `storage.rules`). **Important:** these rules also keep leads and chat logs private.
+3. `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET` set.
 
-## Sitemaps (Google Search Console)
-- `https://www.stackaura.cc/sitemap.xml` — **submit only this one** (it lists the others).
-- `…/sitemap-0.xml` — static pages (+ their SEO images that exist).
-- `…/server-sitemap.xml` — live: every project, blog post and image with alt text.
+## Sitemaps
+Submit only `https://www.stackaura.cc/sitemap.xml` in Search Console. It lists `sitemap-0.xml` (static pages, both languages, images that exist) and `server-sitemap.xml` (live projects, posts and images, both languages).
+Add the non-www domain as a redirect to `www` in Firebase Hosting and use a *Domain* property in Search Console.
 
-## Custom domain
-Firebase Hosting → add both `www.stackaura.cc` and `stackaura.cc`; set the one you don't use as a **redirect** to the main one. Use a *Domain* property in Search Console.
-
-## Before launch checklist
-- [ ] `NEXT_PUBLIC_WHATSAPP` = your real number
+## Before launch
+- [ ] `NEXT_PUBLIC_WHATSAPP` = real number (currently a placeholder!)
 - [ ] `hello@stackaura.cc` mailbox exists (or change `SITE.email` in `lib/seo.js`)
-- [ ] Social links in `lib/seo.js` / `pages/_document.js`
-- [ ] The 11 images in `public/images/`
+- [ ] `GEMINI_API_KEY` set on the server
 - [ ] Storage enabled + rules published
+- [ ] Images added to `public/images/`
+- [ ] Social links in `components/ui/Footer.js` and `pages/_document.js`

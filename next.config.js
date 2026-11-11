@@ -2,6 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   trailingSlash: false,
+  // English at /, Arabic at /ar  (one domain = shared SEO strength). No automatic redirects by browser language.
+  i18n: { locales: ['en', 'ar'], defaultLocale: 'en', localeDetection: false },
   images: {
     domains: ['i.ibb.co', 'images.unsplash.com', 'firebasestorage.googleapis.com', 'i.imgur.com'],
   },

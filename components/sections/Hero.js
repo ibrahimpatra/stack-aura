@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowRight, ArrowLeft, MessageCircle } from 'lucide-react';
 import { SITE } from '../../lib/seo';
+import { useT } from '../../lib/i18n';
+import IMAGES from '../../lib/images.json';
 
 /* ───────── simple flat illustrations (drawn in code: no image downloads, always sharp) ───────── */
 const S = { fill: '#0A0F45', stroke: '#3A4073', strokeWidth: 3 };
@@ -63,6 +65,23 @@ function ArtSearch() {
   );
 }
 
+function ArtAI() {
+  return (
+    <svg viewBox="0 0 480 380" className="w-full floaty" role="img" aria-label="An AI assistant chatting with a customer" style={{ '--r': '1deg' }}>
+      <rect x="60" y="48" width="380" height="290" rx="10" fill="#DB333D" opacity="0.9" transform="translate(10 10)" />
+      <rect x="50" y="38" width="380" height="290" rx="10" {...S} />
+      <path d="M50 48 a10 10 0 0 1 10 -10 h360 a10 10 0 0 1 10 10 v34 h-380 z" fill="#14172E" />
+      <circle cx="82" cy="60" r="12" fill="#DB333D" /><rect x="104" y="53" width="90" height="10" fill="#F3F4FA" /><rect x="104" y="68" width="56" height="6" fill="#8D93B5" />
+      <rect x="76" y="104" width="190" height="44" rx="6" fill="#14172E" stroke="#3A4073" strokeWidth="2" /><rect x="92" y="118" width="150" height="8" fill="#C3C7DB" /><rect x="92" y="132" width="100" height="8" fill="#8D93B5" />
+      <rect x="196" y="162" width="206" height="44" rx="6" fill="#DB333D" /><rect x="212" y="176" width="150" height="8" fill="#fff" /><rect x="212" y="190" width="110" height="8" fill="#fff" opacity=".7" />
+      <rect x="76" y="220" width="230" height="58" rx="6" fill="#14172E" stroke="#3A4073" strokeWidth="2" /><rect x="92" y="234" width="190" height="8" fill="#C3C7DB" /><rect x="92" y="248" width="170" height="8" fill="#8D93B5" /><rect x="92" y="262" width="120" height="8" fill="#8D93B5" />
+      <rect x="70" y="292" width="290" height="26" rx="13" fill="#00001A" stroke="#3A4073" strokeWidth="2" /><circle cx="338" cy="305" r="10" fill="#DB333D" />
+      <path d="M418 66 l8 -22 l8 22 l22 8 l-22 8 l-8 22 l-8 -22 l-22 -8 z" fill="#fff" transform="translate(-6 -14) scale(.8)" />
+      <circle cx="456" cy="140" r="7" fill="#DB333D" /><circle cx="34" cy="300" r="9" fill="none" stroke="#8D93B5" strokeWidth="3" />
+    </svg>
+  );
+}
+
 function ArtShield() {
   return (
     <svg viewBox="0 0 480 380" className="w-full" role="img" aria-label="A shield protecting your website">
@@ -77,80 +96,94 @@ function ArtShield() {
   );
 }
 
-const SLIDES = [
-  { key: 'web', kicker: 'Websites', l1: 'Your business,', l2: 'online.', text: 'We design and build websites that look sharp, load fast and bring you customers.', cta: { label: 'See website services', href: '/services/web-development' }, Art: ArtBrowser },
-  { key: 'app', kicker: 'Mobile apps', l1: 'Your app,', l2: 'in every pocket.', text: 'One app that works on iPhone and Android, made for your business.', cta: { label: 'See mobile app services', href: '/services/mobile-apps' }, Art: ArtPhone },
-  { key: 'seo', kicker: 'Google ranking', l1: 'Get found', l2: 'on Google.', text: 'We help the customers who are searching for you find you first.', cta: { label: 'See Google ranking help', href: '/services/seo-optimisation' }, Art: ArtSearch },
-  { key: 'care', kicker: 'Care & support', l1: 'We stay with you', l2: 'after launch.', text: 'Updates, security and quick fixes, so your website keeps working while you run your business.', cta: { label: 'See care & support', href: '/services/maintenance' }, Art: ArtShield },
-];
+const ARTS = [ArtBrowser, ArtPhone, ArtSearch, ArtAI, ArtShield];
+const BG = ['hero-banner-1', 'hero-banner-2', 'hero-banner-3', 'hero-banner-4', 'hero-banner-5'];
 const DELAY = 7000;
 
+// Optional background banner per slide (your hero banner 1–5). Sits BEHIND everything with a dark overlay,
+// so the text and illustration stay readable. If the file isn't there yet, nothing is shown.
+function Banner({ id, active, eager, isAr }) {
+  const img = IMAGES[id];
+  const [failed, setFailed] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => { const el = ref.current; if (el && el.complete && el.naturalWidth === 0) setFailed(true); }, []);
+  if (!img || failed) return null;
+  return (
+    <img ref={ref} src={img.src} alt={isAr && img.alt_ar ? img.alt_ar : img.alt} title={isAr && img.title_ar ? img.title_ar : img.title}
+      width={img.width} height={img.height} loading={eager ? 'eager' : 'lazy'} fetchPriority={eager ? 'high' : 'auto'} decoding="async" onError={() => setFailed(true)}
+      className="absolute inset-0 w-full h-full" aria-hidden={!active}
+      style={{ objectFit: 'cover', opacity: active ? 1 : 0, transition: 'opacity 0.9s ease', zIndex: 0 }} />
+  );
+}
+
 export default function Hero() {
+  const { t, isAr } = useT();
+  const slides = t('hero.slides');
+  const n = slides.length;
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [resume, setResume] = useState(0);   // restarts the progress bar + timer together after a pause
+  const [resume, setResume] = useState(0);
   const touchX = useRef(null);
-  const n = SLIDES.length;
 
   useEffect(() => {
     if (paused) return undefined;
-    const t = setTimeout(() => setI((p) => (p + 1) % n), DELAY);
-    return () => clearTimeout(t);
+    const tm = setTimeout(() => setI((p) => (p + 1) % n), DELAY);
+    return () => clearTimeout(tm);
   }, [i, paused, resume, n]);
 
-  const s = SLIDES[i];
+  const s = slides[i];
+  const Art = ARTS[i];
   const go = (d) => setI((p) => (p + d + n) % n);
+  const dirSign = isAr ? -1 : 1;
 
   return (
     <section className="relative overflow-hidden" style={{ background: '#000129', minHeight: '100vh' }}
       onMouseEnter={() => setPaused(true)} onMouseLeave={() => { setPaused(false); setResume((r) => r + 1); }}
       onTouchStart={(e) => { touchX.current = e.touches[0].clientX; setPaused(true); }}
-      onTouchEnd={(e) => { const dx = e.changedTouches[0].clientX - (touchX.current ?? 0); if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1); setPaused(false); setResume((r) => r + 1); }}>
-      {/* moving stripes + big red disc */}
-      <div className="absolute inset-0 stripes pointer-events-none" />
-      <div className="absolute pointer-events-none" style={{ width: 720, height: 720, borderRadius: '50%', background: '#DB333D', opacity: 0.16, right: '-12%', bottom: '-34%' }} />
-      <div className="absolute pointer-events-none hidden lg:block" style={{ width: '42%', top: 0, bottom: 0, right: 0, background: 'linear-gradient(110deg, transparent 0, transparent 14%, #14172E 14.1%)', opacity: 0.85 }} />
+      onTouchEnd={(e) => { const dx = e.changedTouches[0].clientX - (touchX.current ?? 0); if (Math.abs(dx) > 50) go(dx < 0 ? dirSign : -dirSign); setPaused(false); setResume((r) => r + 1); }}>
+      {/* banner images (background only) */}
+      {BG.slice(0, n).map((id, idx) => <Banner key={id} id={id} active={idx === i} eager={idx === 0} isAr={isAr} />)}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1, background: `linear-gradient(${isAr ? 'to left' : 'to right'}, rgba(0,1,41,0.93) 0%, rgba(0,1,41,0.78) 48%, rgba(0,1,41,0.5) 100%)` }} />
+      <div className="absolute inset-0 stripes pointer-events-none" style={{ zIndex: 1 }} />
+      <div className="absolute pointer-events-none" style={{ zIndex: 1, width: 720, height: 720, borderRadius: '50%', background: '#DB333D', opacity: 0.16, insetInlineEnd: '-12%', bottom: '-34%' }} />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center" style={{ minHeight: '100vh', paddingTop: 120, paddingBottom: 130 }}>
+      <div className="relative max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center" style={{ zIndex: 2, minHeight: '100vh', paddingTop: 120, paddingBottom: 130 }}>
         <div>
-          <h1 className="flex items-center gap-3 mb-6" style={{ fontFamily: 'IBM Plex Sans,sans-serif', fontSize: '1rem', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#C3C7DB' }}>
-            <span className="ar" lang="ar" style={{ fontSize: '1.4rem', color: '#FF5A63', letterSpacing: 0, textTransform: 'none' }}>مرحباً</span>
-            Web development company · Kuwait
+          <h1 className="flex items-center gap-3 mb-6" style={{ fontFamily: 'IBM Plex Sans,sans-serif', fontSize: '1rem', fontWeight: 600, letterSpacing: isAr ? 0 : '0.16em', textTransform: 'uppercase', color: '#C3C7DB' }}>
+            <span className="ar" style={{ fontSize: '1.4rem', color: '#FF5A63', letterSpacing: 0, textTransform: 'none' }}>{isAr ? t('hero.hello') : 'مرحباً'}</span>
+            {t('hero.eyebrow')}
           </h1>
 
-          <div key={s.key} className="slide-in">
-            <div className="mb-3" style={{ fontFamily: 'IBM Plex Mono,monospace', color: '#FF5A63', fontSize: '1.05rem' }}>
-              0{i + 1} / 0{n} — {s.kicker}
+          <div key={`${i}-${isAr}`} className="slide-in">
+            <div className="mb-3 flex items-center gap-3" style={{ color: '#FF5A63', fontSize: '1.05rem' }}>
+              <span className="mono-num">0{i + 1} / 0{n}</span><span style={{ width: 24, height: 2, background: '#FF5A63', display: 'inline-block' }} /><span>{s.kicker}</span>
             </div>
-            <h2 className="font-extrabold" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(2.6rem,6.2vw,5rem)', lineHeight: 1.05, color: '#F3F4FA', letterSpacing: '-0.02em' }}>
+            <h2 className="font-extrabold" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(2.5rem,6vw,4.8rem)', lineHeight: isAr ? 1.45 : 1.08, color: '#F3F4FA', letterSpacing: '-0.02em' }}>
               {s.l1}<br /><span className="scribble" style={{ color: '#DB333D' }}>{s.l2}</span>
             </h2>
-            <p className="mt-6 mb-9" style={{ color: '#C3C7DB', fontSize: '1.3rem', lineHeight: 1.6, maxWidth: 520 }}>{s.text}</p>
+            <p className="mt-6 mb-9" style={{ color: '#D5D8E8', fontSize: '1.3rem', lineHeight: 1.65, maxWidth: 540 }}>{s.text}</p>
             <div className="flex flex-wrap gap-4">
-              <Link href={s.cta.href} className="btn-primary">{s.cta.label} <ArrowRight size={20} /></Link>
-              <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn-ghost"><MessageCircle size={20} /> WhatsApp us</a>
+              <Link href={s.href} className="btn-primary">{s.cta} <ArrowRight size={20} className="flip-rtl" /></Link>
+              <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn-ghost"><MessageCircle size={20} /> {t('hero.whatsapp')}</a>
             </div>
           </div>
         </div>
 
-        <div key={`${s.key}-art`} className="slide-in hidden lg:block" style={{ animationDelay: '0.12s' }}>
-          <s.Art />
-        </div>
+        <div key={`${i}-art`} className="slide-in hidden lg:block" style={{ animationDelay: '0.12s' }}><Art /></div>
       </div>
 
-      {/* controls: timeline + arrows */}
-      <div className="absolute left-0 right-0 z-20" style={{ bottom: 86 }}>
+      <div className="absolute left-0 right-0" style={{ bottom: 86, zIndex: 3 }}>
         <div className="max-w-7xl mx-auto px-6 flex items-center gap-4">
-          <div className="flex gap-2 flex-1" style={{ maxWidth: 420 }}>
-            {SLIDES.map((sl, idx) => (
-              <button key={sl.key} onClick={() => setI(idx)} aria-label={`Show slide ${idx + 1}: ${sl.kicker}`} className="flex-1 relative" style={{ height: 6, background: '#2A2F57' }}>
-                <span key={idx === i ? `a${i}-${resume}` : `b${idx}`} className="absolute left-0 top-0 bottom-0"
-                  style={{ background: '#DB333D', width: idx < i ? '100%' : 0, ...(idx === i ? { width: 0, animation: `progress ${DELAY}ms linear forwards`, animationPlayState: paused ? 'paused' : 'running' } : {}) }} />
+          <div className="flex gap-2 flex-1" style={{ maxWidth: 440 }}>
+            {slides.map((sl, idx) => (
+              <button key={idx} onClick={() => setI(idx)} aria-label={`${idx + 1}: ${sl.kicker}`} className="flex-1 relative" style={{ height: 6, background: '#2A2F57' }}>
+                <span key={idx === i ? `a${i}-${resume}` : `b${idx}`} className="absolute top-0 bottom-0"
+                  style={{ insetInlineStart: 0, background: '#DB333D', width: idx < i ? '100%' : 0, ...(idx === i ? { width: 0, animation: `progress ${DELAY}ms linear forwards`, animationPlayState: paused ? 'paused' : 'running' } : {}) }} />
               </button>
             ))}
           </div>
-          <button onClick={() => go(-1)} aria-label="Previous slide" className="w-11 h-11 flex items-center justify-center" style={{ border: '2px solid #5B6290', color: '#F3F4FA', borderRadius: 4 }}><ArrowLeft size={20} /></button>
-          <button onClick={() => go(1)} aria-label="Next slide" className="w-11 h-11 flex items-center justify-center" style={{ border: '2px solid #5B6290', color: '#F3F4FA', borderRadius: 4 }}><ArrowRight size={20} /></button>
+          <button onClick={() => go(-1)} aria-label={t('hero.prev')} className="w-11 h-11 flex items-center justify-center" style={{ border: '2px solid #5B6290', color: '#F3F4FA', borderRadius: 4 }}><ArrowLeft size={20} className="flip-rtl" /></button>
+          <button onClick={() => go(1)} aria-label={t('hero.next')} className="w-11 h-11 flex items-center justify-center" style={{ border: '2px solid #5B6290', color: '#F3F4FA', borderRadius: 4 }}><ArrowRight size={20} className="flip-rtl" /></button>
         </div>
       </div>
     </section>

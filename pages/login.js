@@ -29,7 +29,7 @@ export default function Login() {
     } catch (err) {
       // Provide helpful error messages based on Firebase error codes
       if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
-        setError('Invalid email or password. Make sure you created this account in Firebase Auth → Email/Password.');
+        setError('Invalid email or password. Make sure you created this account in Firebase Authentication (Email/Password sign-in).');
       } else if (err.code === 'auth/invalid-email') {
         setError('Please enter a valid email address.');
       } else if (err.code === 'auth/too-many-requests') {
@@ -48,7 +48,7 @@ export default function Login() {
   return (
     <>
       <Head><title>Admin Login | stackaura.cc</title><meta name="robots" content="noindex" /></Head>
-      <div className="light-ui min-h-screen flex items-center justify-center px-6" style={{ background: '#F0EFF2' }}>
+      <div dir="ltr" className="light-ui min-h-screen flex items-center justify-center px-6" style={{ background: '#F0EFF2' }}>
         <div className="w-full max-w-sm">
           <div className="flex items-center justify-center gap-2 mb-10">
             <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: '#DB333D' }}>

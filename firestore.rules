@@ -1,10 +1,27 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Everyone can read (the public website needs it). Only the logged-in admin can write.
-    match /{document=**} {
-      allow read: if true;
+
+    // Public website content: everyone can read, only the logged-in admin can write.
+    match /{col}/{id} {
+      allow read: if col in ['projects', 'posts', 'taxonomy', 'serviceTech', 'media', 'knowledge'];
       allow write: if request.auth != null;
+    }
+
+    // Leads from the chat widget: anyone can SUBMIT one (with limits), only the admin can read/manage them.
+    match /leads/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['name', 'phone', 'message', 'locale', 'page', 'createdAt'])
+                    && request.resource.data.name is string && request.resource.data.name.size() < 100
+                    && request.resource.data.phone is string && request.resource.data.phone.size() < 30;
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // Chat history (used to find questions the assistant could not answer): server writes, admin reads.
+    match /chatLogs/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['q', 'a', 'unsure', 'locale', 'resolved', 'createdAt'])
+                    && request.resource.data.q is string && request.resource.data.q.size() < 700
+                    && request.resource.data.a is string && request.resource.data.a.size() < 2500;
+      allow read, update, delete: if request.auth != null;
     }
   }
 }

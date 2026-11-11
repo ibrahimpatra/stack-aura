@@ -3,105 +3,74 @@ import Link from 'next/link';
 import Navbar from '../../components/ui/Navbar';
 import Footer from '../../components/ui/Footer';
 import SEOHead from '../../components/ui/SEOHead';
+import PageHero from '../../components/ui/PageHero';
 import BrandImage from '../../components/ui/BrandImage';
 import TechPill from '../../components/ui/TechPill';
 import { normImage, imgAlt } from '../../lib/media';
 import { useScrollReveal } from '../../lib/useScrollReveal';
 import { pageSEO } from '../../lib/seo';
+import { useT, loc } from '../../lib/i18n';
 import { ExternalLink, ArrowUpRight } from 'lucide-react';
 
 export default function Projects({ projects, projectClients }) {
   useScrollReveal();
-  const [filter, setFilter] = useState('All');
-
-  const allTags = ['All', ...new Set(projects.flatMap((p) => p.tags || []))];
-  const filtered = filter === 'All' ? projects : projects.filter((p) => (p.tags || []).includes(filter));
-
-  const seo = pageSEO({
-    title: 'Our Projects | Web Development Portfolio Kuwait',
-    description: `stackaura.cc's project portfolio — custom websites, mobile apps, and SEO results for clients in Kuwait and worldwide. See our work.`,
-    path: '/projects',
-    extraKeywords: ['web development portfolio', 'kuwait web projects', 'website portfolio', 'our work'],
-    projectClients,
-  });
+  const { t, locale } = useT();
+  const [filter, setFilter] = useState('__all');
+  const allTags = [...new Set(projects.flatMap((p) => p.tags || []))];
+  const filtered = filter === '__all' ? projects : projects.filter((p) => (p.tags || []).includes(filter));
+  const seo = pageSEO({ title: t('meta.projects.title'), description: t('meta.projects.description'), locale, projectClients });
 
   return (
     <>
       <SEOHead {...seo} />
-      <div style={{ background: '#000129', minHeight: '100vh' }}>
+      <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
         <Navbar />
+        <PageHero label={t('projects.label')} t1={t('projects.pageT1')} t2={t('projects.pageT2')} sub={t('projects.pageSub')} />
 
-        <section className="pt-32 pb-16 px-6 grid-bg" style={{ borderBottom: '1px solid #DDE1EA' }}>
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="section-label mb-5 reveal" style={{ background: 'rgba(219,51,61,0.08)', border: '1px solid rgba(219,51,61,0.15)', color: '#DB333D' }}>
-              <span style={{ fontFamily: 'IBM Plex Sans,sans-serif' }}>Our work</span>
-            </div>
-            <h1 className="font-bold mb-4 reveal delay-1" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(2.5rem,6vw,4rem)', color: '#F3F4FA', lineHeight: 1.1 }}>
-              Projects We've Built
-            </h1>
-            <p className="text-lg reveal delay-2" style={{ color: '#C3C7DB', fontFamily: 'IBM Plex Sans,sans-serif', maxWidth: 500, margin: '0 auto' }}>
-              Real products, real clients, measurable results.
-            </p>
+        <section className="light py-16 px-6" style={{ background: 'var(--bg)', minHeight: 360 }}>
+          <div className="max-w-7xl mx-auto">
+            {allTags.length > 1 && (
+              <div className="flex flex-wrap gap-2 mb-10 reveal">
+                {['__all', ...allTags.slice(0, 10)].map((tag) => (
+                  <button key={tag} onClick={() => setFilter(tag)} className="px-4 py-2 transition-all"
+                    style={{ borderRadius: 4, background: filter === tag ? '#DB333D' : 'var(--card)', border: `2px solid ${filter === tag ? '#DB333D' : 'var(--line)'}`, color: filter === tag ? '#fff' : 'var(--ink2)', fontWeight: 600, fontSize: '1rem' }}>
+                    {tag === '__all' ? t('projects.filterAll') : tag}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {filtered.length === 0 ? (
+              <div className="text-center py-16 reveal">
+                <p className="font-extrabold mb-3" style={{ fontFamily: 'Syne,sans-serif', color: 'var(--ink)', fontSize: '1.8rem' }}>{t('projects.emptyTitle')}</p>
+                <p className="mb-7" style={{ color: 'var(--body)', fontSize: '1.2rem' }}>{t('projects.empty')}</p>
+                <Link href="/contact" className="btn-primary">{t('common.quote')}</Link>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+                {filtered.map((p, i) => {
+                  const cover = normImage(p.images?.[0]); const title = loc(p, 'title', locale);
+                  const ex = (loc(p, 'excerpt', locale) || loc(p, 'description', locale) || '').replace(/<[^>]+>/g, '').slice(0, 110);
+                  return (
+                    <Link href={`/projects/${p.slug}`} key={p.id} className={`card block overflow-hidden reveal delay-${(i % 3) + 1}`}>
+                      <BrandImage src={cover?.src} alt={imgAlt(cover, `${title}${p.client ? ' – ' + p.client : ''} | stackaura.cc`)} width={1280} height={720} rounded={0} />
+                      <div className="p-5">
+                        {p.client && <span className="block mb-1" style={{ color: 'var(--mute)', fontSize: '0.95rem' }}>{t('common.clientLabel')}: <span style={{ color: 'var(--red-hi)' }}>{p.client}</span></span>}
+                        <div className="flex items-start justify-between gap-2 mb-2">
+                          <h2 className="font-bold" style={{ fontFamily: 'Syne,sans-serif', color: 'var(--ink)', fontSize: '1.2rem' }}>{title}</h2>
+                          <ArrowUpRight size={18} className="flip-rtl" style={{ color: 'var(--mute)', flexShrink: 0 }} />
+                        </div>
+                        <p className="mb-3" style={{ color: 'var(--body)', fontSize: '1.02rem' }}>{ex}{ex.length >= 110 ? '…' : ''}</p>
+                        <div className="flex flex-wrap gap-1.5">{(p.tags || []).slice(0, 4).map((tg) => <TechPill key={tg} name={tg} />)}</div>
+                        {p.liveUrl && <a href={p.liveUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 mt-3 font-semibold" style={{ color: 'var(--red-hi)', fontSize: '0.98rem' }} onClick={(e) => e.stopPropagation()}><ExternalLink size={14} /> {t('projects.visit')}</a>}
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </section>
-
-        <div className="max-w-7xl mx-auto px-6 py-16">
-          {/* Filter tags */}
-          {allTags.length > 1 && (
-            <div className="flex flex-wrap gap-2 mb-10 reveal">
-              {allTags.slice(0, 10).map((tag) => (
-                <button key={tag} onClick={() => setFilter(tag)}
-                  className="px-4 py-2 rounded-xl text-sm transition-all"
-                  style={{
-                    background: filter === tag ? 'rgba(219,51,61,0.15)' : '#F0EFF2',
-                    border: `1px solid ${filter === tag ? '#DB333D' : '#2A2F57'}`,
-                    color: filter === tag ? '#DB333D' : '#C3C7DB',
-                    fontFamily: 'IBM Plex Sans,sans-serif',
-                  }}>
-                  {tag}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {filtered.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="text-lg mb-2" style={{ color: '#8D93B5', fontFamily: 'Syne,sans-serif' }}>No projects yet.</p>
-              <p style={{ color: '#C3C7DB', fontSize: '1.15rem', marginBottom: 20 }}>Our new projects are being added right now. Meanwhile, tell us about yours.</p><Link href="/contact" className="btn-primary">Get a Free Quote</Link>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filtered.map((p, i) => (
-                <Link href={`/projects/${p.slug}`} key={p.id}
-                  className={`card block overflow-hidden reveal delay-${(i % 3) + 1}`}>
-                  <BrandImage src={normImage(p.images?.[0])?.src} alt={imgAlt(normImage(p.images?.[0]), `${p.title}${p.client ? ' – ' + p.client : ''} website by stackaura.cc`)} width={1280} height={720} rounded={0} />
-                  <div className="p-5">
-                    {p.client && <span className="text-xs block mb-1" style={{ color: '#8D93B5', fontFamily: 'IBM Plex Sans,sans-serif' }}>Client: <span style={{ color: '#DB333D' }}>{p.client}</span></span>}
-                    <div className="flex items-start justify-between mb-2">
-                      <h2 className="font-bold" style={{ fontFamily: 'Syne,sans-serif', color: '#F3F4FA', fontSize: '1rem' }}>{p.title}</h2>
-                      <ArrowUpRight size={15} style={{ color: '#8D93B5', flexShrink: 0 }} />
-                    </div>
-                    <p className="text-xs mb-3 leading-relaxed" style={{ color: '#C3C7DB', fontFamily: 'IBM Plex Sans,sans-serif' }}>
-                      {(p.excerpt || p.description || '').slice(0, 100)}...
-                    </p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {(p.tags || []).slice(0, 4).map((t) => <TechPill key={t} name={t} />)}
-                    </div>
-                    {p.liveUrl && (
-                      <a href={p.liveUrl} target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-xs mt-3 transition-colors"
-                        style={{ color: '#DB333D', fontFamily: 'IBM Plex Sans,sans-serif' }}
-                        onClick={(e) => e.stopPropagation()}>
-                        <ExternalLink size={11} /> Visit Live Site
-                      </a>
-                    )}
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-
         <Footer />
       </div>
     </>
@@ -116,8 +85,8 @@ export async function getServerSideProps() {
       const { collection, getDocs, orderBy, query } = await import('firebase/firestore');
       const snap = await getDocs(query(collection(db, 'projects'), orderBy('createdAt', 'desc')));
       projects = snap.docs.map((d) => {
-        const data = d.data();
-        return { id: d.id, title: data.title || '', slug: data.slug || d.id, client: data.client || '', excerpt: data.excerpt || '', description: data.description || '', images: data.images || [], tags: data.tags || [], liveUrl: data.liveUrl || '', featured: data.featured || false };
+        const x = d.data();
+        return { id: d.id, title: x.title || '', title_ar: x.title_ar || '', slug: x.slug || d.id, client: x.client || '', excerpt: x.excerpt || '', excerpt_ar: x.excerpt_ar || '', description: x.description || '', description_ar: x.description_ar || '', images: x.images || [], tags: x.tags || [], liveUrl: x.liveUrl || '' };
       });
       projectClients = projects.map((p) => p.client).filter(Boolean);
     }

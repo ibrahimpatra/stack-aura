@@ -71,7 +71,7 @@ export default function Admin() {
   return (
     <>
       <Head><title>Admin | stackaura.cc</title><meta name="robots" content="noindex" /></Head>
-      <div className="light-ui" style={{ background: '#FFFFFF', minHeight: '100vh' }}>
+      <div className="light-ui" dir="ltr" style={{ background: '#FFFFFF', minHeight: '100vh' }}>
         {/* Top bar */}
         <div className="px-6 py-4 flex items-center justify-between" style={{ background: '#F0EFF2', borderBottom: '1px solid #1A2236' }}>
           <div className="flex items-center gap-3">
@@ -81,8 +81,9 @@ export default function Admin() {
             <span className="font-semibold text-sm" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>Admin Panel</span>
           </div>
           <div className="flex items-center gap-3">
+            <Link href="/admin/assistant" className="text-xs font-semibold" style={{ color: '#DB333D', fontFamily: 'IBM Plex Sans,sans-serif' }}>AI Assistant</Link>
             <Link href="/admin/tags" className="text-xs font-semibold" style={{ color: '#DB333D', fontFamily: 'IBM Plex Sans,sans-serif' }}>Tags &amp; Technologies</Link>
-            <Link href="/" className="text-xs" style={{ color: '#6B7280', fontFamily: 'IBM Plex Sans,sans-serif' }}>← View Site</Link>
+            <Link href="/" className="text-xs" style={{ color: '#6B7280', fontFamily: 'IBM Plex Sans,sans-serif' }}>View Site</Link>
             <button onClick={logout} className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg" style={{ background: '#DDE1EA', color: '#4B5563', fontFamily: 'IBM Plex Sans,sans-serif' }}>
               <LogOut size={13} /> Logout
             </button>
@@ -138,7 +139,7 @@ export default function Admin() {
               ) : projects.length === 0 ? (
                 <div className="text-center py-12" style={{ background: '#FFFFFF' }}>
                   <p style={{ color: '#9CA3AF', fontFamily: 'IBM Plex Sans,sans-serif' }}>No projects yet.</p>
-                  <Link href="/admin/project-editor" className="mt-2 inline-block text-sm" style={{ color: '#DB333D', fontFamily: 'IBM Plex Sans,sans-serif' }}>Add your first project →</Link>
+                  <Link href="/admin/project-editor" className="mt-2 inline-block text-sm" style={{ color: '#DB333D', fontFamily: 'IBM Plex Sans,sans-serif' }}>Add your first project </Link>
                 </div>
               ) : (
                 <div style={{ background: '#FFFFFF' }}>
@@ -199,7 +200,7 @@ export default function Admin() {
               ) : posts.length === 0 ? (
                 <div className="text-center py-12" style={{ background: '#FFFFFF' }}>
                   <p style={{ color: '#9CA3AF', fontFamily: 'IBM Plex Sans,sans-serif' }}>No posts yet.</p>
-                  <Link href="/admin/editor" className="mt-2 inline-block text-sm" style={{ color: '#DB333D', fontFamily: 'IBM Plex Sans,sans-serif' }}>Write your first post →</Link>
+                  <Link href="/admin/editor" className="mt-2 inline-block text-sm" style={{ color: '#DB333D', fontFamily: 'IBM Plex Sans,sans-serif' }}>Write your first post </Link>
                 </div>
               ) : (
                 <div style={{ background: '#FFFFFF' }}>

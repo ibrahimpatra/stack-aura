@@ -60,7 +60,7 @@ export default function TagsAdmin() {
   return (
     <>
       <Head><title>Tags & Technologies | stackaura.cc Admin</title><meta name="robots" content="noindex" /></Head>
-      <div className="light-ui" style={{ background: '#FFFFFF', minHeight: '100vh' }}>
+      <div className="light-ui" dir="ltr" style={{ background: '#FFFFFF', minHeight: '100vh' }}>
         <div className="px-6 py-4 flex items-center gap-3" style={{ background: '#F0EFF2', borderBottom: '1px solid #DDE1EA' }}>
           <Link href="/admin" className="flex items-center gap-1.5" style={{ color: '#4B5563', fontSize: '1rem' }}><ArrowLeft size={16} /> Dashboard</Link>
           <span style={{ color: '#9CA3AF' }}>|</span>
@@ -78,7 +78,7 @@ export default function TagsAdmin() {
                 <div key={s.slug} className="pb-6" style={{ borderBottom: '1px solid #E5E7EE' }}>
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="font-bold" style={{ fontFamily: 'Syne,sans-serif', color: '#000129', fontSize: '1.1rem' }}>{s.label}</h3>
-                    <button onClick={() => saveSvc(s.slug)} className="btn-primary" style={{ padding: '8px 18px', fontSize: '0.95rem' }}><Save size={16} /> {saved === s.slug ? 'Saved ✓' : 'Save'}</button>
+                    <button onClick={() => saveSvc(s.slug)} className="btn-primary" style={{ padding: '8px 18px', fontSize: '0.95rem' }}><Save size={16} /> {saved === s.slug ? 'Saved' : 'Save'}</button>
                   </div>
                   <TagPicker kind="technologies" showLogos value={svc[s.slug] || []} onChange={(v) => setSvc((o) => ({ ...o, [s.slug]: v }))} />
                 </div>
