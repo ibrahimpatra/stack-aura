@@ -11,8 +11,13 @@ const imageTag = (im, fallback) =>
   `<image:title>${esc(im.title || im.alt || fallback)}</image:title>` +
   `<image:caption>${esc(im.caption || im.alt || fallback)}</image:caption></image:image>`;
 
-const urlTag = (path, lastmod, images = [], priority = '0.7') =>
-  `<url><loc>${SITE.url}${path}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}<changefreq>weekly</changefreq><priority>${priority}</priority>${images.slice(0, 100).join('')}</url>`;
+// one <url> per language, each pointing at the other with hreflang
+const urlTag = (path, lastmod, images = [], priority = '0.7') => ['en', 'ar'].map((l) => {
+  const self = `${SITE.url}${l === 'ar' ? '/ar' : ''}${path}`;
+  return `<url><loc>${self}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}<changefreq>weekly</changefreq><priority>${priority}</priority>` +
+    `<xhtml:link rel="alternate" hreflang="en" href="${SITE.url}${path}"/><xhtml:link rel="alternate" hreflang="ar" href="${SITE.url}/ar${path}"/><xhtml:link rel="alternate" hreflang="x-default" href="${SITE.url}${path}"/>` +
+    `${images.slice(0, 100).join('')}</url>`;
+}).join('');
 
 // pull <img src alt> out of a blog post's HTML
 function contentImages(html = '') {
@@ -51,7 +56,7 @@ export async function getServerSideProps({ res }) {
     }
   } catch {}
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls.join('\n')}\n</urlset>`;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}\n</urlset>`;
   res.setHeader('Content-Type', 'application/xml; charset=utf-8');
   res.setHeader('Cache-Control', 'public, s-maxage=1800, stale-while-revalidate=86400');
   res.write(xml); res.end();

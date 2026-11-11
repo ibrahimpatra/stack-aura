@@ -2,86 +2,78 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Send, Mail, MessageSquare, Globe, ArrowRight } from 'lucide-react';
 import { SITE, SERVICES } from '../../lib/seo';
+import { useT } from '../../lib/i18n';
 
+// Dark section with a LIGHT form card (strong contrast). `full` = used on the /contact page (no "more ways" button).
 export default function ContactSection({ full = false }) {
+  const { t, isAr } = useT();
   const [form, setForm] = useState({ name: '', email: '', service: '', message: '' });
   const up = (k) => (v) => setForm((f) => ({ ...f, [k]: v }));
 
   const send = (e) => {
     e.preventDefault();
-    const msg = encodeURIComponent(`Hi stackaura.cc!\n\nName: ${form.name}\nEmail: ${form.email}\nService: ${form.service}\n\nMessage:\n${form.message}`);
+    const msg = encodeURIComponent(`${isAr ? 'هلا stackaura.cc!' : 'Hi stackaura.cc!'}\n\n${t('contact.name')}: ${form.name}\n${t('contact.emailField')}: ${form.email}\n${t('contact.service')}: ${form.service}\n\n${t('contact.message')}:\n${form.message}`);
     window.open(`https://wa.me/${SITE.whatsapp}?text=${msg}`, '_blank');
   };
 
-  return (
-    <section id="contact" className="py-24 px-6" style={{ background: full ? '#000129' : '#000129' }}>
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          <div>
-            <div className="section-label mb-4 reveal" style={full ? { background: 'rgba(219,51,61,0.08)', border: '1px solid rgba(219,51,61,0.15)', color: '#DB333D' } : { background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)', color: '#FFFFFF' }}>
-              <span style={{ fontFamily: 'IBM Plex Sans,sans-serif' }}>Contact</span>
-            </div>
-            <h2 className="font-bold mb-5 reveal delay-1" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(1.8rem,4vw,2.8rem)', color: full ? '#000129' : '#FFFFFF' }}>
-              Ready to Start? <span style={{ color: '#DB333D' }}>Contact Us.</span>
-            </h2>
-            <p className="text-base mb-8 leading-relaxed reveal delay-2" style={{ color: full ? '#C3C7DB' : '#C9CEE8', fontFamily: 'IBM Plex Sans,sans-serif' }}>
-              Tell us what you need. We reply within 24 hours. You can also write to us directly on WhatsApp.
-            </p>
-            <div className="space-y-3 mb-8 reveal delay-3">
-              {[
-                { icon: <Mail size={20} />, l: 'Email', v: SITE.email, href: `mailto:${SITE.email}` },
-                { icon: <MessageSquare size={20} />, l: 'WhatsApp', v: `+${SITE.whatsapp}`, href: `https://wa.me/${SITE.whatsapp}` },
-                { icon: <Globe size={20} />, l: 'Based in', v: SITE.location },
-              ].map((item) => (
-                <a key={item.l} href={item.href} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-4 rounded-xl transition-all block"
-                  style={{ background: full ? '#F0EFF2' : 'rgba(255,255,255,0.05)', border: `1px solid ${full ? '#2A2F57' : 'rgba(255,255,255,0.08)'}` }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#DB333D'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = full ? '#2A2F57' : 'rgba(255,255,255,0.08)'; }}>
-                  <div className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: 'rgba(219,51,61,0.1)', color: '#DB333D' }}>{item.icon}</div>
-                  <div>
-                    <div className="mb-0.5 text-sm" style={{ color: full ? '#8D93B5' : '#B4BAD6', fontFamily: 'IBM Plex Sans,sans-serif' }}>{item.l}</div>
-                    <div className="text-sm" style={{ color: full ? '#000129' : '#C3C7DB', fontFamily: 'IBM Plex Sans,sans-serif' }}>{item.v}</div>
-                  </div>
-                </a>
-              ))}
-            </div>
-            {!full && (
-              <Link href="/contact" className="btn-primary reveal delay-4">
-                More Ways to Contact Us <ArrowRight size={15} />
-              </Link>
-            )}
-          </div>
+  const items = [
+    { icon: <Mail size={20} />, l: t('contact.email'), v: SITE.email, href: `mailto:${SITE.email}`, ltr: true },
+    { icon: <MessageSquare size={20} />, l: t('contact.whatsapp'), v: `+${SITE.whatsapp}`, href: `https://wa.me/${SITE.whatsapp}`, ltr: true },
+    { icon: <Globe size={20} />, l: t('contact.basedIn'), v: t('contact.location') },
+  ];
 
-          <div className="reveal-right">
-            <form onSubmit={send} className="p-7 space-y-4 rounded-2xl" style={{ background: '#000129', border: '1px solid #DDE1EA', boxShadow: '0 4px 40px rgba(0,0,0,0.08)' }}>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="mb-1.5 block font-semibold" style={{ color: '#C3C7DB', fontFamily: 'IBM Plex Sans,sans-serif' }}>Name *</label>
-                  <input required className="input" placeholder="Your name" value={form.name} onChange={(e) => up('name')(e.target.value)} />
-                </div>
-                <div>
-                  <label className="mb-1.5 block font-semibold" style={{ color: '#C3C7DB', fontFamily: 'IBM Plex Sans,sans-serif' }}>Email *</label>
-                  <input required type="email" className="input" placeholder="you@email.com" value={form.email} onChange={(e) => up('email')(e.target.value)} />
-                </div>
-              </div>
-              <div>
-                <label className="mb-1.5 block font-semibold" style={{ color: '#C3C7DB', fontFamily: 'IBM Plex Sans,sans-serif' }}>Service</label>
-                <select className="input" value={form.service} onChange={(e) => up('service')(e.target.value)}>
-                  <option value="">Choose a service</option>
-                  {SERVICES.map((s) => <option key={s.slug} value={s.label}>{s.label}</option>)}
-                </select>
-              </div>
-              <div>
-                <label className="mb-1.5 block font-semibold" style={{ color: '#C3C7DB', fontFamily: 'IBM Plex Sans,sans-serif' }}>Message *</label>
-                <textarea required rows={4} className="input resize-none" placeholder="Tell us about your project in a few words..." value={form.message} onChange={(e) => up('message')(e.target.value)} />
-              </div>
-              <button type="submit" className="btn-primary w-full justify-center">
-                <Send size={19} /> Send Message on WhatsApp
-              </button>
-            </form>
+  return (
+    <section id="contact" className="py-24 px-6 relative z-10" style={{ background: 'var(--bg)' }}>
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div>
+          <div className="section-label mb-4 reveal">{t('contact.label')}</div>
+          <h2 className="font-extrabold mb-5 reveal delay-1" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(2rem,4.2vw,3.2rem)', color: 'var(--ink)', letterSpacing: '-0.02em' }}>
+            {t('contact.t1')} <span style={{ color: '#DB333D' }}>{t('contact.t2')}</span>
+          </h2>
+          <p className="mb-8 reveal delay-2" style={{ color: 'var(--body)', fontSize: '1.2rem', lineHeight: 1.7 }}>{t('contact.text')}</p>
+          <div className="space-y-3 mb-8 reveal delay-3">
+            {items.map((item) => {
+              const Tag = item.href ? 'a' : 'div';
+              return (
+                <Tag key={item.l} href={item.href} target={item.href?.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-4 transition-all" style={{ background: 'var(--tint)', border: '1px solid var(--line)', borderRadius: 6 }}>
+                  <div className="w-12 h-12 flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(219,51,61,0.14)', color: '#FF5A63', borderRadius: 4 }}>{item.icon}</div>
+                  <div>
+                    <div style={{ color: 'var(--mute)', fontSize: '0.98rem' }}>{item.l}</div>
+                    <div style={{ color: 'var(--ink)', fontSize: '1.1rem', fontWeight: 600 }} dir={item.ltr ? 'ltr' : undefined}>{item.v}</div>
+                  </div>
+                </Tag>
+              );
+            })}
           </div>
+          {!full && <Link href="/contact" className="btn-primary reveal delay-4">{t('contact.more')} <ArrowRight size={18} className="flip-rtl" /></Link>}
+        </div>
+
+        <div className="reveal-right">
+          <form onSubmit={send} className="light p-8 space-y-5" style={{ background: '#F2F3F8', border: '3px solid #F2F3F8', borderRadius: 6, boxShadow: '10px 10px 0 #DB333D' }}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="mb-1.5 block font-semibold" style={{ color: 'var(--ink)' }}>{t('contact.name')} *</label>
+                <input required className="input" value={form.name} onChange={(e) => up('name')(e.target.value)} />
+              </div>
+              <div>
+                <label className="mb-1.5 block font-semibold" style={{ color: 'var(--ink)' }}>{t('contact.emailField')} *</label>
+                <input required type="email" dir="ltr" className="input" placeholder="you@email.com" value={form.email} onChange={(e) => up('email')(e.target.value)} />
+              </div>
+            </div>
+            <div>
+              <label className="mb-1.5 block font-semibold" style={{ color: 'var(--ink)' }}>{t('contact.service')}</label>
+              <select className="input" value={form.service} onChange={(e) => up('service')(e.target.value)}>
+                <option value="">{t('contact.choose')}</option>
+                {SERVICES.map((s) => { const l = t(`services.items.${s.slug}.label`); return <option key={s.slug} value={l}>{l}</option>; })}
+              </select>
+            </div>
+            <div>
+              <label className="mb-1.5 block font-semibold" style={{ color: 'var(--ink)' }}>{t('contact.message')} *</label>
+              <textarea required rows={4} className="input resize-none" placeholder={t('contact.placeholder')} value={form.message} onChange={(e) => up('message')(e.target.value)} />
+            </div>
+            <button type="submit" className="btn-primary w-full"><Send size={19} className="flip-rtl" /> {t('contact.send')}</button>
+          </form>
         </div>
       </div>
     </section>

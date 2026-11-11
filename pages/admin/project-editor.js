@@ -16,7 +16,7 @@ export default function ProjectEditor() {
   const { id } = router.query;
 
   const [form, setForm] = useState({
-    title: '', slug: '', client: '', excerpt: '', description: '',
+    title: '', slug: '', client: '', excerpt: '', description: '', title_ar: '', excerpt_ar: '', description_ar: '',
     images: [], tags: [], features: [], results: [],
     liveUrl: '', githubUrl: '', featured: false, order: 0,
   });
@@ -77,7 +77,7 @@ export default function ProjectEditor() {
   return (
     <>
       <Head><title>{id ? 'Edit Project' : 'New Project'} | stackaura.cc Admin</title><meta name="robots" content="noindex" /></Head>
-      <div className="light-ui" style={{ background: '#FFFFFF', minHeight: '100vh' }}>
+      <div className="light-ui" dir="ltr" style={{ background: '#FFFFFF', minHeight: '100vh' }}>
         {/* Top bar */}
         <div className="px-6 py-4 flex items-center justify-between sticky top-0 z-50" style={{ background: '#F0EFF2', borderBottom: '1px solid #1A2236' }}>
           <div className="flex items-center gap-3">
@@ -167,6 +167,15 @@ export default function ProjectEditor() {
                 ))}
               </div>
             )}
+          </div>
+
+          {/* Arabic version */}
+          <div className="card p-6">
+            <h2 className="font-bold text-sm mb-1" style={{ fontFamily: 'Syne,sans-serif', color: '#000129' }}>Arabic version (optional)</h2>
+            <p className="text-xs mb-4" style={{ color: '#6B7280' }}>Shown on the Arabic site (/ar). Leave empty to show the English text.</p>
+            <input className="input mb-3" dir="rtl" placeholder="اسم المشروع" value={form.title_ar} onChange={(e) => up('title_ar')(e.target.value)} />
+            <textarea rows={2} className="input resize-none mb-3" dir="rtl" placeholder="ملخص قصير" value={form.excerpt_ar} onChange={(e) => up('excerpt_ar')(e.target.value)} />
+            <textarea rows={5} className="input" dir="rtl" placeholder="وصف المشروع" value={form.description_ar} onChange={(e) => up('description_ar')(e.target.value)} />
           </div>
 
           {/* Description */}

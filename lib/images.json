@@ -1,79 +1,215 @@
 {
-  "hero": {
-    "src": "/images/web-development-agency-kuwait-hero.webp",
-    "width": 1600, "height": 900,
-    "alt": "Web development agency in Kuwait building a business website and mobile app",
-    "title": "stackaura.cc – web development agency in Kuwait",
-    "pages": ["/"]
-  },
-  "web-development": {
-    "src": "/images/website-development-services-kuwait.webp",
-    "width": 1200, "height": 800,
-    "alt": "Custom website development services in Kuwait on laptop and phone",
-    "title": "Website development services in Kuwait",
-    "pages": ["/services", "/services/web-development"]
-  },
-  "mobile-apps": {
-    "src": "/images/mobile-app-development-kuwait.webp",
-    "width": 1200, "height": 800,
-    "alt": "Mobile app development in Kuwait for iPhone and Android",
-    "title": "Mobile app development in Kuwait",
-    "pages": ["/services", "/services/mobile-apps"]
-  },
-  "seo-optimisation": {
-    "src": "/images/seo-services-google-ranking-kuwait.webp",
-    "width": 1200, "height": 800,
-    "alt": "SEO services in Kuwait to rank higher on Google search results",
-    "title": "SEO services to rank higher on Google in Kuwait",
-    "pages": ["/services", "/services/seo-optimisation"]
-  },
-  "custom-development": {
-    "src": "/images/custom-software-development-services.webp",
-    "width": 1200, "height": 800,
-    "alt": "Custom software development connecting business tools, payments and dashboards",
-    "title": "Custom software development services",
-    "pages": ["/services", "/services/custom-development"]
-  },
-  "ui-ux-design": {
-    "src": "/images/ui-ux-design-services-kuwait.webp",
-    "width": 1200, "height": 800,
-    "alt": "UI UX design services in Kuwait showing website and app design sketches",
-    "title": "UI/UX design services in Kuwait",
-    "pages": ["/services", "/services/ui-ux-design"]
-  },
-  "maintenance": {
-    "src": "/images/website-maintenance-support-services.webp",
-    "width": 1200, "height": 800,
-    "alt": "Website maintenance and support services keeping a website secure and online",
-    "title": "Website maintenance and support services",
-    "pages": ["/services", "/services/maintenance"]
-  },
-  "about-team": {
-    "src": "/images/stackaura-digital-team-kuwait.webp",
-    "width": 1200, "height": 800,
-    "alt": "stackaura.cc web development team working together in Kuwait",
-    "title": "The stackaura.cc team in Kuwait",
-    "pages": ["/", "/about"]
-  },
-  "kuwait": {
-    "src": "/images/web-design-company-kuwait-city.webp",
-    "width": 1600, "height": 600,
-    "alt": "Kuwait City skyline with Kuwait Towers, home of stackaura.cc web design company",
-    "title": "Web design company in Kuwait City",
-    "pages": ["/about"]
-  },
-  "contact": {
-    "src": "/images/contact-web-developer-kuwait.webp",
-    "width": 1200, "height": 600,
-    "alt": "Contact a web developer in Kuwait for a free website quote",
-    "title": "Contact stackaura.cc for a free quote",
-    "pages": ["/contact"]
-  },
-  "blog-cover": {
-    "src": "/images/blog-cover-web-development-tips.webp",
-    "width": 1200, "height": 630,
-    "alt": "Web development and SEO tips from stackaura.cc",
-    "title": "stackaura.cc blog – web development and SEO tips",
-    "pages": ["/blog"]
-  }
+ "hero-banner-1": {
+  "src": "/images/web-development-company-kuwait-banner.webp",
+  "width": 1920,
+  "height": 1080,
+  "alt": "Web development company in Kuwait building a business website and mobile app",
+  "alt_ar": "شركة تصميم مواقع في الكويت تبني موقع شركة وتطبيق جوال",
+  "title": "stackaura.cc – web development company in Kuwait",
+  "title_ar": "stackaura.cc – شركة تصميم مواقع في الكويت",
+  "pages": [
+   "/"
+  ]
+ },
+ "hero-banner-2": {
+  "src": "/images/mobile-app-development-kuwait-banner.webp",
+  "width": 1920,
+  "height": 1080,
+  "alt": "Mobile app development in Kuwait for iPhone and Android",
+  "alt_ar": "برمجة تطبيقات جوال في الكويت للآيفون والأندرويد",
+  "title": "Mobile app development in Kuwait",
+  "title_ar": "برمجة تطبيقات جوال في الكويت",
+  "pages": [
+   "/"
+  ]
+ },
+ "hero-banner-3": {
+  "src": "/images/seo-google-ranking-kuwait-banner.webp",
+  "width": 1920,
+  "height": 1080,
+  "alt": "SEO services in Kuwait to rank first on Google",
+  "alt_ar": "خدمات تحسين محركات البحث SEO في الكويت للظهور الأول في قوقل",
+  "title": "SEO and Google ranking in Kuwait",
+  "title_ar": "تحسين الظهور في قوقل في الكويت",
+  "pages": [
+   "/"
+  ]
+ },
+ "hero-banner-4": {
+  "src": "/images/ai-assistant-chatbot-development-kuwait-banner.webp",
+  "width": 1920,
+  "height": 1080,
+  "alt": "AI assistant and chatbot development for businesses in Kuwait",
+  "alt_ar": "مساعد ذكاء اصطناعي وشات بوت لشركات في الكويت",
+  "title": "AI assistants and AI apps in Kuwait",
+  "title_ar": "مساعد ذكاء اصطناعي في الكويت",
+  "pages": [
+   "/"
+  ]
+ },
+ "hero-banner-5": {
+  "src": "/images/website-support-maintenance-kuwait-banner.webp",
+  "width": 1920,
+  "height": 1080,
+  "alt": "Website support and maintenance in Kuwait",
+  "alt_ar": "صيانة ودعم المواقع في الكويت",
+  "title": "Website support and maintenance in Kuwait",
+  "title_ar": "صيانة ودعم المواقع في الكويت",
+  "pages": [
+   "/"
+  ]
+ },
+ "web-development": {
+  "src": "/images/website-development-services-kuwait.webp",
+  "width": 1200,
+  "height": 800,
+  "alt": "Custom website development services in Kuwait on laptop and phone",
+  "alt_ar": "خدمة تصميم وتطوير مواقع الكويت على لابتوب وجوال",
+  "title": "Website development services in Kuwait",
+  "title_ar": "خدمات تصميم مواقع في الكويت",
+  "pages": [
+   "/services",
+   "/services/web-development"
+  ]
+ },
+ "mobile-apps": {
+  "src": "/images/mobile-app-development-kuwait.webp",
+  "width": 1200,
+  "height": 800,
+  "alt": "Mobile app development in Kuwait for iPhone and Android",
+  "alt_ar": "برمجة تطبيقات جوال في الكويت للآيفون والأندرويد",
+  "title": "Mobile app development in Kuwait",
+  "title_ar": "برمجة تطبيقات جوال في الكويت",
+  "pages": [
+   "/services",
+   "/services/mobile-apps"
+  ]
+ },
+ "ai-solutions": {
+  "src": "/images/ai-assistant-chatbot-development-kuwait.webp",
+  "width": 1200,
+  "height": 800,
+  "alt": "AI assistant and AI-powered apps for businesses in Kuwait",
+  "alt_ar": "مساعد ذكاء اصطناعي وتطبيقات ذكية لشركات في الكويت",
+  "title": "AI assistants and AI apps in Kuwait",
+  "title_ar": "مساعد ذكاء اصطناعي وتطبيقات ذكية في الكويت",
+  "pages": [
+   "/services",
+   "/services/ai-solutions"
+  ]
+ },
+ "seo-optimisation": {
+  "src": "/images/seo-services-google-ranking-kuwait.webp",
+  "width": 1200,
+  "height": 800,
+  "alt": "SEO services in Kuwait to rank higher on Google search results",
+  "alt_ar": "خدمات SEO في الكويت لتحسين ترتيب موقعك في قوقل",
+  "title": "SEO services to rank higher on Google in Kuwait",
+  "title_ar": "خدمات SEO لتحسين الظهور في قوقل في الكويت",
+  "pages": [
+   "/services",
+   "/services/seo-optimisation"
+  ]
+ },
+ "domain-hosting": {
+  "src": "/images/domain-hosting-business-email-kuwait.webp",
+  "width": 1200,
+  "height": 800,
+  "alt": "Domain, web hosting and business email management in Kuwait",
+  "alt_ar": "إدارة الدومين والاستضافة وإيميل الشركة في الكويت",
+  "title": "Domain, hosting and business email in Kuwait",
+  "title_ar": "دومين واستضافة وإيميل شركة في الكويت",
+  "pages": [
+   "/services",
+   "/services/domain-hosting"
+  ]
+ },
+ "custom-development": {
+  "src": "/images/custom-software-development-services.webp",
+  "width": 1200,
+  "height": 800,
+  "alt": "Custom software connecting payments, bookings and dashboards",
+  "alt_ar": "برمجة أنظمة خاصة تربط الدفع والحجوزات ولوحات التحكم",
+  "title": "Custom software development",
+  "title_ar": "برمجة أنظمة خاصة",
+  "pages": [
+   "/services",
+   "/services/custom-development"
+  ]
+ },
+ "ui-ux-design": {
+  "src": "/images/ui-ux-design-services-kuwait.webp",
+  "width": 1200,
+  "height": 800,
+  "alt": "UI UX design services in Kuwait showing website and app sketches",
+  "alt_ar": "خدمات تصميم واجهات UI UX في الكويت: رسومات مواقع وتطبيقات",
+  "title": "UI/UX design services in Kuwait",
+  "title_ar": "تصميم واجهات UI/UX في الكويت",
+  "pages": [
+   "/services",
+   "/services/ui-ux-design"
+  ]
+ },
+ "maintenance": {
+  "src": "/images/website-maintenance-support-services.webp",
+  "width": 1200,
+  "height": 800,
+  "alt": "Website maintenance and support keeping a website secure and online",
+  "alt_ar": "صيانة ودعم المواقع للحفاظ على موقعك آمن وشغّال",
+  "title": "Website maintenance and support",
+  "title_ar": "صيانة ودعم المواقع",
+  "pages": [
+   "/services",
+   "/services/maintenance"
+  ]
+ },
+ "about-workspace": {
+  "src": "/images/web-developer-workspace-kuwait.webp",
+  "width": 1200,
+  "height": 800,
+  "alt": "Developer workspace with a laptop showing a website design in Kuwait",
+  "alt_ar": "مكتب مطور مواقع في الكويت: لابتوب يعرض تصميم موقع",
+  "title": "Web developer workspace in Kuwait",
+  "title_ar": "مكتب مطور مواقع في الكويت",
+  "pages": [
+   "/",
+   "/about"
+  ]
+ },
+ "kuwait": {
+  "src": "/images/web-design-company-kuwait-city.webp",
+  "width": 1600,
+  "height": 600,
+  "alt": "Kuwait City skyline with Kuwait Towers, home of stackaura.cc web design company",
+  "alt_ar": "أفق مدينة الكويت وأبراج الكويت، شركة تصميم مواقع في الكويت",
+  "title": "Web design company in Kuwait City",
+  "title_ar": "شركة تصميم مواقع في مدينة الكويت",
+  "pages": [
+   "/about"
+  ]
+ },
+ "contact": {
+  "src": "/images/contact-web-developer-kuwait.webp",
+  "width": 1200,
+  "height": 600,
+  "alt": "Contact a web developer in Kuwait for a free website quote",
+  "alt_ar": "تواصل مع مطور مواقع في الكويت للحصول على عرض سعر مجاني",
+  "title": "Contact stackaura.cc for a free quote",
+  "title_ar": "تواصل مع stackaura.cc لعرض سعر مجاني",
+  "pages": [
+   "/contact"
+  ]
+ },
+ "blog-cover": {
+  "src": "/images/blog-cover-web-development-tips.webp",
+  "width": 1200,
+  "height": 630,
+  "alt": "Web development, SEO and AI tips from stackaura.cc",
+  "alt_ar": "نصايح تطوير مواقع وSEO وذكاء اصطناعي من stackaura.cc",
+  "title": "stackaura.cc blog – web, SEO and AI tips",
+  "title_ar": "مدونة stackaura.cc – نصايح مواقع وSEO وذكاء اصطناعي",
+  "pages": [
+   "/blog"
+  ]
+ }
 }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&family=Cairo:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&family=Cairo:wght@600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,26 +6,25 @@
 
 /* ───────── palette: dark blue + red + grey (white only for text) ───────── */
 :root {
-  --navy: #000129;
-  --deep: #00001A;
-  --slate: #14172E;       /* grey-navy band */
-  --slate-2: #1D2140;
-  --card: #070B3B;
-  --line: #2A2F57;
+  --navy: #000129; --deep: #00001A; --slate: #14172E; --slate-2: #1D2140;
   --red: #DB333D;
-  --red-hi: #FF5A63;
-  --ink: #F3F4FA;         /* headings */
-  --body: #C3C7DB;        /* paragraphs */
-  --mute: #8D93B5;
-  --input-bg: #0A0F45;
-  --input-line: #3A4073;
+  /* surface variables: dark by default */
+  --bg: #000129; --bg2: #14172E; --card: #070B3B; --line: #2A2F57;
+  --ink: #F3F4FA; --ink2: #E4E6F2; --body: #C3C7DB; --mute: #8D93B5; --red-hi: #FF5A63;
+  --tint: rgba(255,255,255,0.06); --tint-line: rgba(255,255,255,0.14);
+  --pill-bg: #14172E; --pill-line: #343A6A; --pill-ink: #E4E6F2; --ghost-line: #5B6290;
+  --input-bg: #0A0F45; --input-line: #3A4073;
 }
-/* Admin pages keep a light, easy-on-the-eye working area */
-.light-ui {
-  --card: #FFFFFF; --line: #DDE1EA; --input-bg: #FFFFFF; --input-line: #CBD0DC;
-  --ink: #000129; --body: #374151; --mute: #6B7280;
-  color: #1F2937;
+/* Light surface: add className="light" to any section for a light band (keeps the page from feeling all-dark) */
+.light, .light-ui {
+  --bg: #F2F3F8; --bg2: #E7E9F2; --card: #FFFFFF; --line: #D3D8E6;
+  --ink: #000129; --ink2: #14172E; --body: #3A405F; --mute: #666C8C; --red-hi: #C4222C;
+  --tint: rgba(0,1,41,0.05); --tint-line: rgba(0,1,41,0.14);
+  --pill-bg: #FFFFFF; --pill-line: #CBD0DC; --pill-ink: #14172E; --ghost-line: #9AA0BC;
+  --input-bg: #FFFFFF; --input-line: #CBD0DC;
+  color: var(--body);
 }
+.light-ui { --ink: #000129; --body: #374151; --mute: #6B7280; --red-hi: #B91C26; color: #1F2937; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; overflow-x: clip; }
@@ -41,6 +40,7 @@ body::after {
 }
 h1, h2, h3, h4 { line-height: 1.15; font-family: 'Syne', sans-serif; }
 a { color: inherit; text-decoration: none; }
+section { position: relative; }
 :focus-visible { outline: 3px solid var(--red-hi); outline-offset: 3px; }
 ::selection { background: var(--red); color: #fff; }
 .ar { font-family: 'Cairo', sans-serif; }
@@ -68,16 +68,18 @@ a { color: inherit; text-decoration: none; }
 }
 
 .grid-bg { background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px); background-size: 56px 56px; }
-.light-ui .grid-bg { background-image: none; }
+.light .grid-bg, .light-ui .grid-bg { background-image: linear-gradient(rgba(0,1,41,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,1,41,0.05) 1px, transparent 1px); }
 
 /* ───────── cards: square-ish with a hard offset shadow ───────── */
 .card { background: var(--card); border: 1px solid var(--line); border-radius: 6px; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
 .card:hover { border-color: var(--red); transform: translate(-4px, -4px); box-shadow: 6px 6px 0 var(--red); }
+.light .card { box-shadow: 0 2px 0 rgba(0,1,41,0.05); }
+.light .card:hover { box-shadow: 6px 6px 0 var(--red); }
 .light-ui .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,1,41,0.08); border-color: rgba(219,51,61,0.4); }
 
 .tag, .tech-pill {
   display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 4px;
-  font-size: 0.95rem; font-weight: 500; background: var(--slate); color: #E4E6F2; border: 1px solid #343A6A;
+  font-size: 0.95rem; font-weight: 500; background: var(--pill-bg); color: var(--pill-ink); border: 1px solid var(--pill-line);
 }
 .tech-pill img { display: block; flex-shrink: 0; }
 
@@ -92,8 +94,9 @@ a { color: inherit; text-decoration: none; }
 .btn-primary:active { transform: translate(2px, 2px); box-shadow: 0 0 0 #6E0F17; }
 .btn-navy { background: var(--slate-2); color: #fff; border: 2px solid var(--line); }
 .btn-navy:hover { border-color: var(--red); }
-.btn-ghost { background: transparent; border: 2px solid #5B6290; color: var(--ink); }
+.btn-ghost { background: transparent; border: 2px solid var(--ghost-line); color: var(--ink); }
 .btn-ghost:hover { border-color: var(--red-hi); color: var(--red-hi); }
+.light .btn-ghost:hover { border-color: #000129; color: #000129; }
 .light-ui .btn-ghost { border-color: #CBD0DC; color: #1F2937; }
 .light-ui .btn-ghost:hover { border-color: #000129; color: #000129; background: #F0EFF2; }
 
@@ -104,7 +107,7 @@ a { color: inherit; text-decoration: none; }
   background: none !important; border: none !important; padding: 0 !important; border-radius: 0 !important; color: var(--red-hi) !important;
 }
 .section-label::before { content: ''; width: 36px; height: 3px; background: var(--red); display: inline-block; }
-.light-ui .section-label { color: #B91C26 !important; }
+
 
 .rounded-xl { border-radius: 6px; } .rounded-2xl { border-radius: 8px; } .rounded-lg { border-radius: 4px; }
 
@@ -145,3 +148,18 @@ a { color: inherit; text-decoration: none; }
 .input:focus { border-color: var(--red); box-shadow: 3px 3px 0 rgba(219,51,61,0.45); }
 .input::placeholder { color: var(--mute); }
 .input option { background: var(--input-bg); color: var(--ink); }
+
+/* ───────── Arabic / right-to-left ───────── */
+html[lang='ar'] body, html[lang='ar'] input, html[lang='ar'] textarea, html[lang='ar'] select, html[lang='ar'] button { font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif; }
+html[lang='ar'] h1, html[lang='ar'] h2, html[lang='ar'] h3, html[lang='ar'] h4, html[lang='ar'] [style*='Syne'] { font-family: 'Cairo', 'IBM Plex Sans Arabic', sans-serif !important; letter-spacing: 0 !important; line-height: 1.35; }
+html[lang='ar'] body { line-height: 1.9; }
+html[lang='ar'] .section-label { letter-spacing: 0; font-size: 1.05rem; }
+html[lang='ar'] .scribble { padding-bottom: 14px; }
+[dir='rtl'] .flip-rtl { transform: scaleX(-1); }
+[dir='rtl'] .reveal-left { transform: translateX(32px); }
+[dir='rtl'] .reveal-right { transform: translateX(-32px); }
+[dir='rtl'] .reveal-left.visible, [dir='rtl'] .reveal-right.visible { transform: none; }
+@keyframes slideInRtl { from { opacity: 0; transform: translateX(-48px); } to { opacity: 1; transform: none; } }
+[dir='rtl'] .slide-in { animation-name: slideInRtl; }
+[dir='rtl'] .stripes { background-image: repeating-linear-gradient(65deg, rgba(219,51,61,0.12) 0 2px, transparent 2px 36px); }
+.mono-num { font-family: 'IBM Plex Mono', monospace; direction: ltr; unicode-bidi: isolate; }

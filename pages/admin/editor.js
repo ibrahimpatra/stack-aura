@@ -16,7 +16,7 @@ export default function BlogEditor() {
   const { id } = router.query;
 
   const [form, setForm] = useState({
-    title: '', slug: '', excerpt: '', content: '',
+    title: '', slug: '', excerpt: '', content: '', title_ar: '', excerpt_ar: '', content_ar: '',
     tags: [], tag: '', tagColor: '#DB333D', readTime: '5 min read', coverImage: '', coverAlt: '',
   });
   const [saving, setSaving] = useState(false);
@@ -75,7 +75,7 @@ export default function BlogEditor() {
   return (
     <>
       <Head><title>{id ? 'Edit Post' : 'New Post'} | stackaura.cc Admin</title><meta name="robots" content="noindex" /></Head>
-      <div className="light-ui" style={{ background: '#FFFFFF', minHeight: '100vh' }}>
+      <div className="light-ui" dir="ltr" style={{ background: '#FFFFFF', minHeight: '100vh' }}>
         {/* Top bar */}
         <div className="px-6 py-4 flex items-center justify-between sticky top-0 z-50" style={{ background: '#F0EFF2', borderBottom: '1px solid #1A2236' }}>
           <div className="flex items-center gap-3">
@@ -146,6 +146,15 @@ export default function BlogEditor() {
                     <ImageUploader defaultAlt={form.title ? `${form.title} – stackaura.cc blog` : ''} buttonLabel="Upload cover" onUploaded={(img) => setForm((f) => ({ ...f, coverImage: img.src, coverAlt: img.alt }))} />
                   )}
                 </div>
+              </div>
+
+              {/* Arabic version */}
+              <div className="p-5 rounded-xl" style={{ background: '#F3F4F8', border: '1px solid #DDE1EA' }}>
+                <div className="font-bold mb-1" style={{ color: '#000129', fontFamily: 'Syne,sans-serif' }}>Arabic version (optional)</div>
+                <p className="mb-4" style={{ color: '#6B7280', fontSize: '0.95rem' }}>Fill this in and the Arabic site (/ar) shows it. Leave empty and Arabic visitors see the English post.</p>
+                <input className="input mb-3" dir="rtl" placeholder="العنوان" value={form.title_ar} onChange={(e) => up('title_ar')(e.target.value)} />
+                <textarea rows={2} className="input resize-none mb-3" dir="rtl" placeholder="ملخص قصير" value={form.excerpt_ar} onChange={(e) => up('excerpt_ar')(e.target.value)} />
+                <textarea rows={12} className="input" dir="rtl" placeholder="المحتوى (HTML)" value={form.content_ar} onChange={(e) => up('content_ar')(e.target.value)} style={{ fontFamily: 'IBM Plex Mono,monospace', fontSize: '0.95rem' }} />
               </div>
 
               {/* Excerpt */}

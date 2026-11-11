@@ -9,7 +9,7 @@ module.exports = {
   generateRobotsTxt: true,
   changefreq: 'weekly',
   priority: 0.7,
-  exclude: ['/admin', '/admin/*', '/login', '/server-sitemap.xml', '/api/*'],
+  exclude: ['/admin', '/admin/*', '/ar/admin', '/ar/admin/*', '/login', '/ar/login', '/server-sitemap.xml', '/ar/server-sitemap.xml', '/api/*'],
   robotsTxtOptions: {
     policies: [
       { userAgent: '*', allow: '/', disallow: ['/admin', '/login', '/api/'] },
@@ -20,11 +20,20 @@ module.exports = {
     // Dynamic sitemap: all projects, blog posts and their images (see pages/server-sitemap.xml.js)
     additionalSitemaps: [`${SITE_URL}/server-sitemap.xml`],
   },
+  // Pages next-sitemap can't discover by itself: Arabic versions + the service pages (server-rendered)
+  additionalPaths: async (config) => {
+    const SERVICE_SLUGS = ['web-development', 'mobile-apps', 'ai-solutions', 'seo-optimisation', 'domain-hosting', 'custom-development', 'ui-ux-design', 'maintenance'];
+    const base = ['/', '/about', '/blog', '/contact', '/projects', '/services', ...SERVICE_SLUGS.map((x) => `/services/${x}`)];
+    const extra = [...SERVICE_SLUGS.map((x) => `/services/${x}`), ...base.map((b) => (b === '/' ? '/ar' : `/ar${b}`))];
+    return Promise.all(extra.map((p) => config.transform(config, p)));
+  },
   // Static pages + their SEO images (see lib/images.json)
   transform: async (config, path) => {
+    const isAr = path === '/ar' || path.startsWith('/ar/');
+    const base = isAr ? (path.replace(/^\/ar/, '') || '/') : path;
     const images = Object.values(IMAGES)
-      .filter((img) => img.pages.includes(path) && fs.existsSync(path_.join(__dirname, 'public', img.src))) // only images that really exist
-      .map((img) => ({ loc: new URL(img.src, SITE_URL), title: img.title, caption: img.alt }));
+      .filter((img) => img.pages.includes(base) && fs.existsSync(path_.join(__dirname, 'public', img.src))) // only images that really exist
+      .map((img) => ({ loc: new URL(img.src, SITE_URL), title: isAr ? img.title_ar : img.title, caption: isAr ? img.alt_ar : img.alt }));
     return {
       loc: path,
       changefreq: config.changefreq,

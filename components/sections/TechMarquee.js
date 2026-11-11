@@ -1,5 +1,7 @@
 import { useEffect, useRef, useMemo } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { techLogo, DEFAULT_TECH } from '../../lib/tech';
+import { useT } from '../../lib/i18n';
 
 // Technology logo strip. Moves by itself, and visitors can DRAG it (mouse or finger) or use the trackpad/wheel.
 // The list comes from the technologies you add in the admin panel (Admin → Tags & Technologies).
@@ -19,6 +21,7 @@ function Item({ name }) {
 }
 
 export default function TechMarquee({ technologies }) {
+  const { t } = useT();
   const list = useMemo(() => {
     const base = (technologies?.length ? technologies : DEFAULT_TECH).filter((t) => t.toLowerCase() !== 'seo');
     let out = [...base];
@@ -65,15 +68,15 @@ export default function TechMarquee({ technologies }) {
   const wheel = (e) => { if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { st.current.x -= e.deltaX; e.preventDefault?.(); } };
 
   return (
-    <section className="py-14 relative z-10" style={{ background: '#14172E', borderTop: '1px solid #2A2F57', borderBottom: '1px solid #2A2F57' }} aria-label="Technologies we build with">
+    <section className="light py-14 relative z-10" style={{ background: 'var(--bg2)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }} aria-label={t('tech.label')}>
       <div className="max-w-7xl mx-auto px-6 mb-7 flex items-end justify-between gap-4 flex-wrap">
         <div>
-          <div className="section-label mb-3">Tools we build with</div>
-          <h2 className="font-bold" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(1.7rem,3.4vw,2.4rem)', color: '#F3F4FA' }}>The technology behind your website</h2>
+          <div className="section-label mb-3">{t('tech.label')}</div>
+          <h2 className="font-bold" style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(1.7rem,3.4vw,2.4rem)', color: 'var(--ink)' }}>{t('tech.title')}</h2>
         </div>
-        <span style={{ color: '#8D93B5', fontSize: '1rem' }}>← Drag or swipe to explore →</span>
+        <span className="flex items-center gap-1" style={{ color: 'var(--mute)', fontSize: '1rem' }}><ChevronLeft size={18} /> {t('tech.hint')} <ChevronRight size={18} /></span>
       </div>
-      <div ref={viewport} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} onPointerLeave={(e) => { up(); st.current.hover = false; }}
+      <div ref={viewport} dir="ltr" onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} onPointerLeave={(e) => { up(); st.current.hover = false; }}
         onPointerEnter={(e) => { if (e.pointerType === 'mouse') st.current.hover = true; }} onWheel={wheel}
         style={{ overflow: 'hidden', cursor: 'grab', touchAction: 'pan-y', WebkitMaskImage: 'linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)', maskImage: 'linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)' }}>
         <div ref={track} className="flex gap-4" style={{ width: 'max-content', willChange: 'transform' }}>
